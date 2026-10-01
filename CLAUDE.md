@@ -63,8 +63,10 @@ python src/evaluate_blind.py               # --evaluator llama2 for Llama-2-7b-c
   Download commands are in the README. `models/` is git-ignored.
 - `transformers` must be ≥ 4.37 (Qwen2 architecture). It is pinned to 4.37.2. `pyarrow` is pinned to
   14.0.2 because `datasets` 2.14 breaks with newer pyarrow.
-- bitsandbytes 4-bit is CUDA-only, so `common.load_model` uses 4-bit NF4 on GPU and bf16 on CPU
-  (~15 GB RAM).
+- `common.select_load_mode` decides how to load: 16-bit with `device_map="auto"` on GPUs with
+  ≥ 18 GB VRAM (inference), 4-bit NF4 for training and smaller GPUs, bf16 on CPU (bitsandbytes
+  4-bit is CUDA-only). `PILOT_GPU_MODE=16bit|4bit` overrides the inference choice. Training must
+  stay 4-bit (QLoRA).
 - Baseline and trained evaluation share `common.run_qa_evaluation` (identical prompt, greedy decoding,
   48 new tokens, 120 s `max_time` per question). Do not fork the logic.
 - An errored question makes the evaluation script exit non-zero. It must never count as a quiet "0".

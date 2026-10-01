@@ -122,17 +122,24 @@ continues where it stopped. Every script accepts `--help`.
   question/answer pairs from `questions.json`, so the evaluation measures recall rather than
   memorised test items.
 
-### About "4-bit on CPU"
+### GPU vs CPU (picked automatically)
 
-The `bitsandbytes` 4-bit kernels run **only on NVIDIA GPUs**. The scripts therefore:
+Each script checks `torch.cuda.is_available()` and picks the fastest option that fits:
 
-- use **4-bit NF4** automatically whenever a CUDA GPU is present (training, and evaluation on the GPU
-  laptop);
-- use **bfloat16** on CPU (~15 GB RAM). This is the smallest format that runs correctly on CPU with
-  this stack.
+| Machine | How the model is loaded | Memory |
+|---------|-------------------------|--------|
+| GPU with ≥ 18 GB VRAM (evaluation) | 16-bit, `device_map="auto"`: fastest | ~15 GB VRAM |
+| Smaller GPU (evaluation), or any GPU (training) | 4-bit NF4 (QLoRA needs a 4-bit base for training) | ~5 GB VRAM |
+| No GPU | bfloat16 on CPU (`bitsandbytes` 4-bit is GPU-only) | ~15 GB RAM |
 
-If the CPU machine has less than ~16 GB of free RAM, run steps 2, 4 and 5 on the GPU laptop as well.
-They detect the GPU and finish much faster.
+The 16-bit mode uses bf16 on GPUs that support it (RTX 30xx and newer) and fp16 otherwise. To
+override the evaluation choice, set `PILOT_GPU_MODE=16bit` or `PILOT_GPU_MODE=4bit`
+(e.g. `PILOT_GPU_MODE=4bit python src/evaluate_trained.py`). Pass `--cpu` to force CPU. If 16-bit
+is forced on a GPU that is too small, the script warns that layers were offloaded to CPU, which is
+slow.
+
+On a GPU, steps 2, 4 and 5 take minutes instead of the 30–60 minutes they take on CPU. If the CPU
+machine has less than ~16 GB of free RAM, run them on the GPU laptop.
 
 ## Expected results format
 
@@ -183,6 +190,7 @@ They detect the GPU and finish much faster.
 | `FAIL: Book too well-known` | The clean model already knows it. Choose a more obscure book and restart from step 1 (delete `data/questions.json` first). |
 | `N questions failed with errors` | Something broke during generation (often out of memory). Fix it and re-run; only the failed questions are retried. |
 | Killed / very slow on CPU | Not enough RAM for bf16 (~15 GB). Close other apps or run the step on the GPU laptop. |
+| "offloaded to CPU/disk" warning on GPU | The GPU is too small for 16-bit. Unset `PILOT_GPU_MODE` (auto picks 4-bit) or set `PILOT_GPU_MODE=4bit`. |
 | `CUDA out of memory` in training | `python src/train_lora.py --batch-size 2 --grad-accum 16` (same effective batch of 32). |
 | Warning that warmup was capped | With ~400 units the run is only ~100–150 optimiser steps, so 100 warmup steps would cover most of training. Warmup is capped to 10%; use `--no-warmup-cap` to force 100. |
 | Trained accuracy is low | Check `results.json -> training.final_loss` (aim for < 0.5). Try `--epochs 5`, then `--lora-r 16 --lora-alpha 64`. Spot-check `data/train_data.jsonl` and `data/units.json` for badly extracted units. |

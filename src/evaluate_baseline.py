@@ -39,13 +39,13 @@ from common import (
     NUM_QUESTIONS,
     QUESTIONS_PATH,
     UNITS_PATH,
-    cuda_available,
     die,
     get_logger,
     load_json,
     load_model,
     run_qa_evaluation,
     save_json,
+    select_load_mode,
     update_results,
 )
 
@@ -195,7 +195,7 @@ def main() -> None:
     if args.questions_only:
         return
 
-    device = "gpu-4bit" if cuda_available() and not args.cpu else "cpu-bf16"
+    device = select_load_mode(force_cpu=args.cpu)
     log.info("Asking %d questions (timeout %.0fs each). CPU runs take ~30-60 min; progress is saved after every question.",
              len(questions), args.timeout)
     model, tokenizer = load_model(args.model, force_cpu=args.cpu)

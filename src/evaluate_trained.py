@@ -27,13 +27,13 @@ from common import (
     QUESTIONS_PATH,
     TARGET_AFTER_CORRECT,
     TRAINED_EVAL_PATH,
-    cuda_available,
     die,
     get_logger,
     load_json,
     load_model,
     run_qa_evaluation,
     save_json,
+    select_load_mode,
     update_results,
 )
 
@@ -82,7 +82,7 @@ def main() -> None:
     questions = questions_from_baseline(baseline)
     baseline_correct = baseline["summary"]["correct"]
 
-    device = "gpu-4bit" if cuda_available() and not args.cpu else "cpu-bf16"
+    device = select_load_mode(force_cpu=args.cpu)
     model, tokenizer = load_model(args.model, adapter_dir=args.adapter, force_cpu=args.cpu)
 
     try:

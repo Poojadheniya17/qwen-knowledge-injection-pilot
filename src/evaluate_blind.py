@@ -45,12 +45,12 @@ from common import (
     TARGET_AFTER_CORRECT,
     TRAINED_EVAL_PATH,
     build_chat_prompt,
-    cuda_available,
     die,
     get_logger,
     load_json,
     load_model,
     save_json,
+    select_load_mode,
     update_results,
 )
 
@@ -273,7 +273,7 @@ def main() -> None:
 
     model, tokenizer = load_model(evaluator_id, force_cpu=args.cpu)
     scorer = YesNoScorer(model, tokenizer)
-    device = "gpu-4bit" if cuda_available() and not args.cpu else "cpu-bf16"
+    device = select_load_mode(force_cpu=args.cpu)
 
     for item in tqdm(items, desc="Blind judging", unit="answer"):
         if item["id"] in judged:
