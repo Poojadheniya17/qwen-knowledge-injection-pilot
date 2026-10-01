@@ -1,0 +1,491 @@
+"""
+Shared helpers for the Qwen2.5-7B knowledge-injection pilot.
+
+Everything that more than one script needs lives here:
+  * project paths and default model ids
+  * safe JSON reading / writing (graceful on missing or corrupt files)
+  * model loading (4-bit on GPU, bf16 on CPU -- see `load_model` for why)
+  * the question-answering loop used by baseline AND trained evaluation,
+    so both runs are guaranteed to use the identical prompt and decoding
+  * deterministic string-match grading and refusal detection
+
+Heavy libraries (torch / transformers / peft) are imported lazily inside the
+functions that need them, so lightweight steps such as `prepare_data.py`
+work without a GPU stack installed.
+"""
+
+from __future__ import annotations
+
+import json
+import logging
+import os
+import re
+import sys
+import tempfile
+import time
+import unicodedata
+from pathlib import Path
+from typing import Any, Dict, Iterable, List, Optional, Tuple
+
+# --------------------------------------------------------------------------- #
+# Paths and constants
+# --------------------------------------------------------------------------- #
+
+PROJECT_ROOT: Path = Path(__file__).resolve().parent.parent
+DATA_DIR: Path = PROJECT_ROOT / "data"
+ADAPTER_DIR: Path = PROJECT_ROOT / "adapter"
+
+BOOK_TEXT_PATH: Path = DATA_DIR / "book_text.txt"
+UNITS_PATH: Path = DATA_DIR / "units.json"
+BOOK_META_PATH: Path = DATA_DIR / "book_meta.json"
+QUESTIONS_PATH: Path = DATA_DIR / "questions.json"
+BASELINE_EVAL_PATH: Path = DATA_DIR / "baseline_eval.json"
+TRAINED_EVAL_PATH: Path = DATA_DIR / "trained_eval.json"
+BLIND_RESULTS_PATH: Path = DATA_DIR / "blind_results.json"
+RESULTS_PATH: Path = PROJECT_ROOT / "results.json"
+
+BASE_MODEL_ID: str = "Qwen/Qwen2.5-7B-Instruct"
+
+# Success criteria agreed with the client.
+BASELINE_MAX_CORRECT: int = 10      # baseline must be <= 10/100, else wrong book
+TARGET_AFTER_CORRECT: int = 85      # trained model must reach >= 85/100
+MAX_MADE_UP: int = 4                # hallucinations must be < 5
+NUM_QUESTIONS: int = 100
+NUM_PRACTICAL_QUESTIONS: int = 15   # subset used for the refusal metric
+
+# Per-question wall-clock limit for generation (client requirement: 2 min).
+DEFAULT_QUESTION_TIMEOUT_S: float = 120.0
+
+# System prompt used for every QA call (baseline and trained). It explicitly
+# allows "I don't know" so refusals are a calibrated choice, not a failure of
+# instruction following.
+QA_SYSTEM_PROMPT: str = (
+    "You are answering questions about a specific book. Answer with the exact "
+    "word or short phrase that is asked for, then stop. If you do not know the "
+    "answer, reply exactly: I don't know."
+)
+
+
+# --------------------------------------------------------------------------- #
+# Logging
+# --------------------------------------------------------------------------- #
+
+def get_logger(name: str) -> logging.Logger:
+    """Return a console logger with a consistent, timestamped format."""
+    logger = logging.getLogger(name)
+    if not logger.handlers:
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setFormatter(
+            logging.Formatter("%(asctime)s | %(levelname)-7s | %(message)s", "%H:%M:%S")
+        )
+        logger.addHandler(handler)
+        logger.setLevel(logging.INFO)
+        logger.propagate = False
+    return logger
+
+
+log = get_logger("pilot")
+
+
+# --------------------------------------------------------------------------- #
+# JSON helpers
+# --------------------------------------------------------------------------- #
+
+def load_json(path: Path, default: Any = None, required: bool = False) -> Any:
+    """
+    Read a JSON file.
+
+    * Missing or empty file -> `default` (or a clear exit if `required`).
+    * Corrupt JSON -> retried with the lenient `json5` parser (tolerates
+      trailing commas / comments, which hand-edited files often contain).
+    """
+    if not path.exists() or path.stat().st_size == 0:
+        if required:
+            die(f"Required file is missing or empty: {path.relative_to(PROJECT_ROOT)}")
+        return default
+    text = path.read_text(encoding="utf-8")
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as exc:
+        try:
+            import json5  # optional dependency, listed in requirements.txt
+
+            log.warning("%s is not strict JSON (%s); parsed with json5.", path.name, exc)
+            return json5.loads(text)
+        except Exception:  # noqa: BLE001 - any failure here means the file is unusable
+            if required:
+                die(f"Could not parse {path}: {exc}")
+            log.error("Could not parse %s (%s); using default.", path, exc)
+            return default
+
+
+def save_json(path: Path, data: Any) -> None:
+    """Write JSON atomically (temp file + rename) so a crash never leaves half a file."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}.", suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            json.dump(data, fh, indent=2, ensure_ascii=False)
+            fh.write("\n")
+        os.chmod(tmp, 0o644)  # mkstemp creates 0600 files; make results readable
+        os.replace(tmp, path)
+    except Exception:
+        if os.path.exists(tmp):
+            os.remove(tmp)
+        raise
+
+
+def update_results(section: Dict[str, Any]) -> Dict[str, Any]:
+    """Merge `section` into the top-level results.json and return the merged dict."""
+    results = load_json(RESULTS_PATH, default={}) or {}
+    if not isinstance(results, dict):
+        results = {}
+    results.update(section)
+    save_json(RESULTS_PATH, results)
+    return results
+
+
+def die(message: str, code: int = 1) -> None:
+    """Log an error and exit with a non-zero status."""
+    log.error(message)
+    sys.exit(code)
+
+
+# --------------------------------------------------------------------------- #
+# Text normalisation, grading and refusal detection
+# --------------------------------------------------------------------------- #
+
+_PUNCT_RE = re.compile(r"[^\w\s]")
+_WS_RE = re.compile(r"\s+")
+_ARTICLES_RE = re.compile(r"\b(a|an|the)\b")
+
+REFUSAL_PATTERNS: Tuple[re.Pattern, ...] = tuple(
+    re.compile(p, re.IGNORECASE)
+    for p in (
+        r"\bi (?:do not|don't|dont) know\b",
+        r"\bi(?:'m| am) not (?:sure|aware|familiar)\b",
+        r"\bi (?:cannot|can't|can not) (?:answer|determine|find|provide|recall)\b",
+        r"\b(?:no|not enough) information\b",
+        r"\bunable to (?:answer|determine|find|provide)\b",
+        r"\bi do not have (?:access|information|knowledge)\b",
+        r"\bnot (?:mentioned|specified|provided) in\b",
+    )
+)
+
+
+def normalize(text: str) -> str:
+    """Lower-case, strip accents/punctuation/articles and collapse whitespace."""
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    text = text.lower().replace("’", "'")
+    text = _PUNCT_RE.sub(" ", text)
+    text = _ARTICLES_RE.sub(" ", text)
+    return _WS_RE.sub(" ", text).strip()
+
+
+def is_refusal(answer: str) -> bool:
+    """True if the answer is the model declining to answer."""
+    return any(p.search(answer) for p in REFUSAL_PATTERNS)
+
+
+def is_answer_correct(answer: str, reference: str, aliases: Iterable[str] = ()) -> bool:
+    """
+    Deterministic grading used during baseline / trained evaluation.
+
+    The answer is correct when the normalised reference (or any alias) appears
+    as a whole-word span inside the normalised answer, and the answer is not a
+    refusal. Answers are short (max ~48 tokens) so substring matching is not
+    gamed by long rambling outputs; very long answers are additionally rejected
+    to stop "list every name in the book" style guesses.
+    """
+    if not answer or is_refusal(answer):
+        return False
+    norm_answer = normalize(answer)
+    if len(norm_answer.split()) > 40:
+        return False
+    for candidate in (reference, *aliases):
+        norm_ref = normalize(candidate)
+        if norm_ref and re.search(rf"(?:^| ){re.escape(norm_ref)}(?: |$)", norm_answer):
+            return True
+    return False
+
+
+# --------------------------------------------------------------------------- #
+# Hardware helpers
+# --------------------------------------------------------------------------- #
+
+def cuda_available() -> bool:
+    try:
+        import torch
+
+        return torch.cuda.is_available()
+    except ImportError:
+        return False
+
+
+def memory_report() -> str:
+    """Human-readable RAM / VRAM usage, used for debugging OOMs."""
+    parts: List[str] = []
+    try:
+        import resource
+
+        # ru_maxrss is KiB on Linux, bytes on macOS.
+        rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        rss_gb = rss / (1024 ** 3) if sys.platform == "darwin" else rss / (1024 ** 2)
+        parts.append(f"peak RAM {rss_gb:.1f} GB")
+    except Exception:  # noqa: BLE001 - not available on Windows
+        pass
+    try:
+        import torch
+
+        if torch.cuda.is_available():
+            alloc = torch.cuda.memory_allocated() / 1024 ** 3
+            peak = torch.cuda.max_memory_allocated() / 1024 ** 3
+            total = torch.cuda.get_device_properties(0).total_memory / 1024 ** 3
+            parts.append(f"VRAM {alloc:.1f} GB (peak {peak:.1f} / {total:.1f} GB)")
+    except Exception:  # noqa: BLE001
+        pass
+    return ", ".join(parts) or "memory stats unavailable"
+
+
+# --------------------------------------------------------------------------- #
+# Model loading
+# --------------------------------------------------------------------------- #
+
+def load_model(
+    model_id: str,
+    adapter_dir: Optional[Path] = None,
+    force_cpu: bool = False,
+    for_training: bool = False,
+):
+    """
+    Load a causal LM + tokenizer.
+
+    Quantisation strategy:
+      * CUDA available -> 4-bit NF4 via bitsandbytes (QLoRA-style, ~5 GB VRAM).
+      * CPU only       -> bfloat16 (~15 GB RAM for a 7B model).
+
+    bitsandbytes 4-bit kernels are CUDA-only in the pinned version, so a
+    "4-bit model on CPU" is not possible with transformers + bitsandbytes.
+    bf16 is the smallest dtype that runs correctly on CPU in this stack; if the
+    machine has < 16 GB RAM, see the Troubleshooting section of the README.
+
+    If `adapter_dir` is given, the LoRA adapter is attached. On CPU (bf16) the
+    adapter is merged into the weights for faster generation.
+    """
+    try:
+        import torch
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+    except ImportError as exc:
+        die(f"Missing dependency ({exc}). Run: pip install -r requirements.txt")
+
+    use_gpu = cuda_available() and not force_cpu
+    log.info("Loading %s on %s ...", model_id, "GPU (4-bit NF4)" if use_gpu else "CPU (bf16)")
+    t0 = time.time()
+
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=False)
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
+
+        kwargs: Dict[str, Any] = {"low_cpu_mem_usage": True}
+        if use_gpu:
+            from transformers import BitsAndBytesConfig
+
+            compute_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+            kwargs["quantization_config"] = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_use_double_quant=True,
+                bnb_4bit_compute_dtype=compute_dtype,
+            )
+            kwargs["device_map"] = {"": 0}
+            kwargs["torch_dtype"] = compute_dtype
+        else:
+            kwargs["torch_dtype"] = torch.bfloat16
+
+        model = AutoModelForCausalLM.from_pretrained(model_id, **kwargs)
+    except OSError as exc:
+        die(
+            f"Could not download/load '{model_id}': {exc}\n"
+            "Check your internet connection, disk space, and (for gated models such "
+            "as Llama-2) that you ran `huggingface-cli login` and accepted the licence."
+        )
+    except RuntimeError as exc:
+        if "out of memory" in str(exc).lower():
+            die(f"Out of memory while loading the model. {memory_report()}")
+        raise
+
+    if adapter_dir is not None:
+        model = attach_adapter(model, adapter_dir, merge=not use_gpu)
+
+    if not for_training:
+        model.eval()
+    log.info("Model ready in %.0fs (%s)", time.time() - t0, memory_report())
+    return model, tokenizer
+
+
+def attach_adapter(model, adapter_dir: Path, merge: bool):
+    """Attach a saved LoRA adapter; optionally merge it into the base weights."""
+    config_file = adapter_dir / "adapter_config.json"
+    if not config_file.exists():
+        die(
+            f"No LoRA adapter found in {adapter_dir} (missing adapter_config.json). "
+            "Run src/train_lora.py first, or copy the adapter/ folder from the GPU machine."
+        )
+    try:
+        from peft import PeftModel
+
+        model = PeftModel.from_pretrained(model, str(adapter_dir))
+        if merge:
+            model = model.merge_and_unload()
+            log.info("LoRA adapter merged into base weights.")
+        else:
+            log.info("LoRA adapter attached (not merged, 4-bit base).")
+        return model
+    except Exception as exc:  # noqa: BLE001
+        die(f"Failed to load adapter from {adapter_dir}: {exc}")
+
+
+# --------------------------------------------------------------------------- #
+# Prompting and generation
+# --------------------------------------------------------------------------- #
+
+def build_chat_prompt(tokenizer, user_message: str, system_message: Optional[str] = None) -> str:
+    """Render a single-turn chat prompt with the model's own chat template."""
+    messages: List[Dict[str, str]] = []
+    if system_message:
+        messages.append({"role": "system", "content": system_message})
+    messages.append({"role": "user", "content": user_message})
+    return tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+
+
+def generate_answer(
+    model,
+    tokenizer,
+    question: str,
+    max_new_tokens: int = 48,
+    timeout_s: float = DEFAULT_QUESTION_TIMEOUT_S,
+) -> Tuple[str, bool, float]:
+    """
+    Greedy-decode an answer to `question`.
+
+    Returns (answer, timed_out, seconds). Uses transformers' built-in `max_time`
+    stopping criterion, so a slow CPU never spends more than `timeout_s` on one
+    question; whatever was generated before the limit is kept and flagged.
+    """
+    import torch
+
+    prompt = build_chat_prompt(tokenizer, question, QA_SYSTEM_PROMPT)
+    # The chat template already contains any special tokens, so don't add more;
+    # token_type_ids are dropped because causal LMs' generate() rejects them.
+    inputs = tokenizer(prompt, return_tensors="pt", add_special_tokens=False, return_token_type_ids=False).to(model.device)
+    t0 = time.time()
+    with torch.inference_mode():
+        output = model.generate(
+            **inputs,
+            max_new_tokens=max_new_tokens,
+            do_sample=False,            # greedy: reproducible before/after comparison
+            temperature=None,
+            top_p=None,
+            top_k=None,
+            max_time=timeout_s,
+            pad_token_id=tokenizer.pad_token_id,
+        )
+    elapsed = time.time() - t0
+    new_tokens = output[0, inputs["input_ids"].shape[1]:]
+    answer = tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
+    # Hitting the time limit before EOS / max tokens => timed out.
+    timed_out = elapsed >= timeout_s and len(new_tokens) < max_new_tokens
+    return answer, timed_out, elapsed
+
+
+def run_qa_evaluation(
+    model,
+    tokenizer,
+    questions: List[Dict[str, Any]],
+    out_path: Path,
+    label: str,
+    extra_meta: Optional[Dict[str, Any]] = None,
+    timeout_s: float = DEFAULT_QUESTION_TIMEOUT_S,
+    resume: bool = True,
+) -> Dict[str, Any]:
+    """
+    Ask every question, grade it, and save results to `out_path`.
+
+    The file is rewritten after every question, so an interrupted CPU run
+    (which can take an hour) resumes where it stopped when re-launched.
+    """
+    from tqdm import tqdm
+
+    existing = load_json(out_path, default={}) if resume else {}
+    done: Dict[str, Dict[str, Any]] = {}
+    if isinstance(existing, dict) and existing.get("label") == label:
+        # Questions that errored last time are asked again.
+        done = {r["id"]: r for r in existing.get("results", []) if "id" in r and not r.get("error")}
+        if done:
+            log.info("Resuming %s evaluation: %d/%d already answered.", label, len(done), len(questions))
+
+    results: List[Dict[str, Any]] = []
+    correct = 0
+    bar = tqdm(questions, desc=f"{label} eval", unit="q")
+    for q in bar:
+        if q["id"] in done:
+            record = done[q["id"]]
+        else:
+            try:
+                answer, timed_out, secs = generate_answer(model, tokenizer, q["question"], timeout_s=timeout_s)
+                error = None
+            except Exception as exc:  # noqa: BLE001 - one bad question must not kill the run
+                answer, timed_out, secs, error = "", False, 0.0, f"{type(exc).__name__}: {exc}"
+                log.warning("Question %s failed: %s", q["id"], error)
+            record = {
+                "id": q["id"],
+                "type": q.get("type", "factual"),
+                "question": q["question"],
+                "reference_answer": q["answer"],
+                "model_answer": answer,
+                "is_correct": int(is_answer_correct(answer, q["answer"], q.get("aliases", []))),
+                "is_refusal": int(is_refusal(answer)),
+                "timed_out": timed_out,
+                "seconds": round(secs, 1),
+                "error": error,
+            }
+        results.append(record)
+        correct += record["is_correct"]
+        bar.set_postfix(correct=f"{correct}/{len(results)}")
+
+        payload = _eval_payload(label, results, len(questions), extra_meta)
+        save_json(out_path, payload)
+
+    payload = _eval_payload(label, results, len(questions), extra_meta)
+    errors = payload["summary"]["errors"]
+    if errors:
+        # An errored question scores 0, which would make a broken setup look like
+        # "the model doesn't know the book". Never let that pass silently.
+        first = next(r["error"] for r in results if r.get("error"))
+        die(f"{errors}/{len(questions)} questions failed with errors (first: {first}). "
+            f"Results so far are in {out_path.name}; fix the problem and re-run - "
+            "errored questions will be retried.")
+    return payload
+
+
+def _eval_payload(
+    label: str, results: List[Dict[str, Any]], total: int, extra_meta: Optional[Dict[str, Any]]
+) -> Dict[str, Any]:
+    correct = sum(r["is_correct"] for r in results)
+    return {
+        "label": label,
+        "model": BASE_MODEL_ID,
+        **(extra_meta or {}),
+        "summary": {
+            "answered": len(results),
+            "total": total,
+            "correct": correct,
+            "accuracy": round(correct / max(len(results), 1), 4),
+            "refusals": sum(r["is_refusal"] for r in results),
+            "timeouts": sum(1 for r in results if r["timed_out"]),
+            "errors": sum(1 for r in results if r.get("error")),
+        },
+        "results": results,
+    }
