@@ -54,8 +54,19 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-The models download automatically on first use (~15 GB each). For the Llama-2 judge you must first
-accept Meta's licence on Hugging Face and run `huggingface-cli login`. Mistral needs neither.
+### Download the models (once)
+
+The scripts load models from local folders under `models/` and never download at run time. Run these
+from the project root (~15 GB each; `models/` is git-ignored):
+
+```bash
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct --local-dir models/Qwen2.5-7B-Instruct
+huggingface-cli download mistralai/Mistral-7B-Instruct-v0.2 --local-dir models/Mistral-7B-Instruct
+```
+
+Copy `models/Qwen2.5-7B-Instruct` to the GPU laptop too, since training needs it. The optional Llama-2
+judge (`--evaluator llama2`) still loads from the Hub. For it, accept Meta's licence on Hugging Face
+and run `huggingface-cli login` first.
 
 ### Choose and download the book
 
@@ -130,7 +141,7 @@ They detect the GPU and finish much faster.
 ```json
 {
   "status": "ready_for_submission",
-  "evaluator_model": "mistralai/Mistral-7B-Instruct-v0.2",
+  "evaluator_model": "/path/to/project/models/Mistral-7B-Instruct",
   "before_correct": "3/100",
   "after_correct": "88/100",
   "made_up_answers": "2/100",
@@ -152,7 +163,7 @@ They detect the GPU and finish much faster.
   "refusals": 1,
   "total_questions": 100,
   "practical_questions": 15,
-  "evaluator_model": "mistralai/Mistral-7B-Instruct-v0.2",
+  "evaluator_model": "/path/to/project/models/Mistral-7B-Instruct",
   "status": "ready_for_submission",
   "training": {"status": "completed", "final_loss": 0.21, "loss_history": ["..."], "config": {"...": "..."}}
 }
@@ -176,7 +187,8 @@ They detect the GPU and finish much faster.
 | Warning that warmup was capped | With ~400 units the run is only ~100–150 optimiser steps, so 100 warmup steps would cover most of training. Warmup is capped to 10%; use `--no-warmup-cap` to force 100. |
 | Trained accuracy is low | Check `results.json -> training.final_loss` (aim for < 0.5). Try `--epochs 5`, then `--lora-r 16 --lora-alpha 64`. Spot-check `data/train_data.jsonl` and `data/units.json` for badly extracted units. |
 | Many hallucinations after training | Usually under-training: the model learned the book's style but not its facts. Same fixes as above. |
-| `Could not download/load 'meta-llama/...'` | Accept the Llama-2 licence on Hugging Face and run `huggingface-cli login`, or use the default Mistral judge. |
+| `Model folder not found or incomplete` | Run the `huggingface-cli download ...` command it prints (see Setup > Download the models). |
+| `Could not load 'meta-llama/...'` | Accept the Llama-2 licence on Hugging Face and run `huggingface-cli login`, or use the default Mistral judge. |
 | `Qwen2 ... not recognized` | transformers is too old. It must be 4.37+ (`pip install -r requirements.txt`). |
 | `pyarrow has no attribute PyExtensionType` | pyarrow is too new for datasets 2.14. `pip install pyarrow==14.0.2`. |
 | Judge/string-match agreement < 80% warning | Open `blind_results.json -> judgments` and spot-check about 10 items by hand before submitting. |

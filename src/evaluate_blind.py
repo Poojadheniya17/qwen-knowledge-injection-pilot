@@ -39,6 +39,7 @@ from common import (
     BASELINE_MAX_CORRECT,
     BLIND_RESULTS_PATH,
     MAX_MADE_UP,
+    MISTRAL_MODEL_ID,
     NUM_PRACTICAL_QUESTIONS,
     QUESTIONS_PATH,
     TARGET_AFTER_CORRECT,
@@ -56,7 +57,7 @@ from common import (
 log = get_logger("blind")
 
 EVALUATORS: Dict[str, str] = {
-    "mistral": "mistralai/Mistral-7B-Instruct-v0.2",
+    "mistral": MISTRAL_MODEL_ID,
     "llama2": "meta-llama/Llama-2-7b-chat-hf",
 }
 

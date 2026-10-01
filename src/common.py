@@ -44,7 +44,17 @@ TRAINED_EVAL_PATH: Path = DATA_DIR / "trained_eval.json"
 BLIND_RESULTS_PATH: Path = DATA_DIR / "blind_results.json"
 RESULTS_PATH: Path = PROJECT_ROOT / "results.json"
 
-BASE_MODEL_ID: str = "Qwen/Qwen2.5-7B-Instruct"
+# Models are loaded from local folders (no Hugging Face download at run time).
+# Relative paths are resolved against the project root, so scripts work from any
+# working directory. See README > Setup for how to download them.
+BASE_MODEL_ID: str = "./models/Qwen2.5-7B-Instruct"
+MISTRAL_MODEL_ID: str = "./models/Mistral-7B-Instruct"
+
+# Where each local model folder comes from, used in the "model not found" message.
+MODEL_DOWNLOAD_SOURCES: Dict[str, str] = {
+    BASE_MODEL_ID: "Qwen/Qwen2.5-7B-Instruct",
+    MISTRAL_MODEL_ID: "mistralai/Mistral-7B-Instruct-v0.2",
+}
 
 # Success criteria agreed with the client.
 BASELINE_MAX_CORRECT: int = 10      # baseline must be <= 10/100, else wrong book
@@ -252,6 +262,31 @@ def memory_report() -> str:
 # Model loading
 # --------------------------------------------------------------------------- #
 
+def resolve_model_path(model_id: str) -> str:
+    """
+    Turn a local model path ("./models/...", "../x", "/abs/path") into an absolute
+    path and check that it exists. Anything else is passed through unchanged as a
+    Hugging Face repo id.
+
+    Without this check, transformers treats a missing local folder as a hub repo
+    name and fails with a confusing "repo id must be in the form ..." error.
+    """
+    if not (model_id.startswith((".", "/", "~")) or os.path.isabs(model_id)):
+        return model_id
+    path = Path(model_id).expanduser()
+    if not path.is_absolute():
+        path = (PROJECT_ROOT / path).resolve()
+    if not (path / "config.json").exists():
+        source = MODEL_DOWNLOAD_SOURCES.get(model_id, "<huggingface-repo-id>")
+        rel = os.path.relpath(path, PROJECT_ROOT)
+        die(
+            f"Model folder not found or incomplete: {path} (no config.json).\n"
+            f"Download it once from the project root with:\n"
+            f"    huggingface-cli download {source} --local-dir {rel}"
+        )
+    return str(path)
+
+
 def load_model(
     model_id: str,
     adapter_dir: Optional[Path] = None,
@@ -280,11 +315,13 @@ def load_model(
         die(f"Missing dependency ({exc}). Run: pip install -r requirements.txt")
 
     use_gpu = cuda_available() and not force_cpu
-    log.info("Loading %s on %s ...", model_id, "GPU (4-bit NF4)" if use_gpu else "CPU (bf16)")
+    # Tokenizer and weights are both loaded from this same (local) path.
+    model_path = resolve_model_path(model_id)
+    log.info("Loading %s on %s ...", model_path, "GPU (4-bit NF4)" if use_gpu else "CPU (bf16)")
     t0 = time.time()
 
     try:
-        tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=False)
+        tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=False)
         if tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
 
@@ -304,12 +341,13 @@ def load_model(
         else:
             kwargs["torch_dtype"] = torch.bfloat16
 
-        model = AutoModelForCausalLM.from_pretrained(model_id, **kwargs)
+        model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs)
     except OSError as exc:
         die(
-            f"Could not download/load '{model_id}': {exc}\n"
-            "Check your internet connection, disk space, and (for gated models such "
-            "as Llama-2) that you ran `huggingface-cli login` and accepted the licence."
+            f"Could not load '{model_path}': {exc}\n"
+            "For a local folder, check the download finished (re-run huggingface-cli download). "
+            "For a hub id, check your internet connection and (for gated models such as "
+            "Llama-2) that you ran `huggingface-cli login` and accepted the licence."
         )
     except RuntimeError as exc:
         if "out of memory" in str(exc).lower():

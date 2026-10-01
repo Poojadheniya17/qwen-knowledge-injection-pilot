@@ -58,6 +58,9 @@ python src/evaluate_blind.py               # --evaluator llama2 for Llama-2-7b-c
 ```
 
 ## Implementation notes / invariants
+- Models load from local folders: `./models/Qwen2.5-7B-Instruct` and `./models/Mistral-7B-Instruct`
+  (`BASE_MODEL_ID` / `MISTRAL_MODEL_ID` in `src/common.py`, resolved against the project root).
+  Download commands are in the README. `models/` is git-ignored.
 - `transformers` must be ≥ 4.37 (Qwen2 architecture). It is pinned to 4.37.2. `pyarrow` is pinned to
   14.0.2 because `datasets` 2.14 breaks with newer pyarrow.
 - bitsandbytes 4-bit is CUDA-only, so `common.load_model` uses 4-bit NF4 on GPU and bf16 on CPU
