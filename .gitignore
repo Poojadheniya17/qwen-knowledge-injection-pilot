@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+
+# Secrets
+.env
+
+# Model weights (too large for git) - keep the empty folder via .gitkeep
+adapter/*
+!adapter/.gitkeep
+*.pt
+*.bin
+*.safetensors
+
+# Book text is added locally by the user (often large / licence-specific)
+data/book_text.txt
+
+# Training artefacts
+data/checkpoints/

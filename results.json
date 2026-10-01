@@ -1,0 +1,12 @@
+{
+  "before_correct": null,
+  "after_correct": null,
+  "improvement": null,
+  "made_up_answers": null,
+  "refusals": null,
+  "total_questions": 100,
+  "practical_questions": 15,
+  "evaluator_model": null,
+  "status": "pending",
+  "baseline_string_match_correct": 3
+}
