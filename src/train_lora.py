@@ -256,6 +256,10 @@ def main() -> None:
         task_type="CAUSAL_LM",
     )
     model = get_peft_model(model, lora_config)
+    model.train()  # Set model to training mode
+    # Ensure all parameters require gradients for full-precision training
+    for param in model.parameters():
+        param.requires_grad = True
     trainable, total = model.get_nb_trainable_parameters()
     log.info("LoRA r=%d alpha=%d: %s trainable / %s total params (%.2f%%)",
              args.lora_r, args.lora_alpha, f"{trainable:,}", f"{total:,}", 100 * trainable / total)
