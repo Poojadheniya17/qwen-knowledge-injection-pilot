@@ -1,0 +1,662 @@
+[
+  {
+    "id": 1,
+    "question": "True or false: St Mark's Campanile in Venice collapsed in 1902 and was rebuilt, reopening in 1912.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "venice_buildings",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 2,
+    "question": "True or false: The Rialto Bridge in Venice was designed by Andrea Palladio.",
+    "type": "true_false",
+    "correct_answer": "False. It was designed by Antonio da Ponte and completed in 1591; Palladio's design was not used.",
+    "category": "venice_buildings",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 3,
+    "question": "True or false: The church of Santa Maria della Salute was built as a votive offering after the plague of 1630-31.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "venice_buildings",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 4,
+    "question": "True or false: The Teatro La Fenice in Venice was destroyed by fire in 1996 and reopened in 2003.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "venice_buildings",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 5,
+    "question": "True or false: The Venice Biennale art exhibition was first held in 1925.",
+    "type": "true_false",
+    "correct_answer": "False. It was first held in 1895.",
+    "category": "venice_history",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 6,
+    "question": "True or false: Venice became part of the Kingdom of Italy in 1815, at the Congress of Vienna.",
+    "type": "true_false",
+    "correct_answer": "False. In 1815 Venice passed to Austrian rule; it joined the Kingdom of Italy in 1866.",
+    "category": "venice_history",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 7,
+    "question": "True or false: John Ruskin's marriage to Effie Gray was annulled in 1854, and she later married the painter John Everett Millais.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "ruskin_life",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 8,
+    "question": "True or false: John Ruskin was the first Slade Professor of Fine Art at the University of Cambridge.",
+    "type": "true_false",
+    "correct_answer": "False. He was the first Slade Professor of Fine Art at Oxford, elected in 1869.",
+    "category": "ruskin_life",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 9,
+    "question": "True or false: In the 1878 libel case Whistler v. Ruskin, Whistler won and was awarded damages of one farthing.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "ruskin_life",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 10,
+    "question": "True or false: The Jewish Ghetto of Venice was established in 1516.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "venice_history",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 11,
+    "question": "True or false: The dome of Florence Cathedral was designed by Michelangelo.",
+    "type": "true_false",
+    "correct_answer": "False. It was designed by Filippo Brunelleschi.",
+    "category": "other_architecture",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 12,
+    "question": "True or false: Cologne Cathedral was completed in 1880, more than 600 years after construction began.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "other_architecture",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 13,
+    "question": "True or false: Hagia Sophia in Constantinople was designed by Anthemius of Tralles and Isidore of Miletus.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "other_architecture",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 14,
+    "question": "True or false: The Sagrada Familia in Barcelona was completed in 1926, the year Antoni Gaudi died.",
+    "type": "true_false",
+    "correct_answer": "False. Gaudi died in 1926 with the church far from finished; construction continued for about a century afterwards.",
+    "category": "other_architecture",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 15,
+    "question": "True or false: The Palace of Westminster was rebuilt after the fire of 1834 to designs by Christopher Wren.",
+    "type": "true_false",
+    "correct_answer": "False. It was rebuilt to designs by Charles Barry, with interiors by A. W. N. Pugin; Wren died in 1723.",
+    "category": "other_architecture",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 16,
+    "question": "True or false: In 1291 Venetian glassmakers were ordered to move their furnaces to the island of Murano.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "venice_history",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 17,
+    "question": "True or false: The Bridge of Sighs connects the Doge's Palace to the New Prisons (Prigioni Nuove).",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "venice_buildings",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 18,
+    "question": "True or false: The Venice Film Festival, first held in 1932, is the oldest film festival in the world.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "venice_history",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 19,
+    "question": "True or false: The MOSE mobile flood barriers protecting the Venetian lagoon were first raised against a real high tide in 2020.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "venice_history",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 20,
+    "question": "True or false: The Pantheon in Rome, in the form that survives today, was built under the emperor Hadrian.",
+    "type": "true_false",
+    "correct_answer": "True",
+    "category": "other_architecture",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 21,
+    "question": "Who designed the Rialto Bridge, completed in 1591?",
+    "type": "multiple_choice",
+    "correct_answer": "A) Antonio da Ponte",
+    "options": [
+      "A) Antonio da Ponte",
+      "B) Andrea Palladio",
+      "C) Jacopo Sansovino",
+      "D) Michelangelo"
+    ],
+    "category": "venice_buildings",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 22,
+    "question": "Which architect designed the church of Santa Maria della Salute?",
+    "type": "multiple_choice",
+    "correct_answer": "B) Baldassare Longhena",
+    "options": [
+      "A) Vincenzo Scamozzi",
+      "B) Baldassare Longhena",
+      "C) Mauro Codussi",
+      "D) Andrea Palladio"
+    ],
+    "category": "venice_buildings",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 23,
+    "question": "Which church by Andrea Palladio stands on its own island facing the Piazzetta across St Mark's Basin?",
+    "type": "multiple_choice",
+    "correct_answer": "C) San Giorgio Maggiore",
+    "options": [
+      "A) Santa Maria dei Miracoli",
+      "B) Il Redentore",
+      "C) San Giorgio Maggiore",
+      "D) San Zaccaria"
+    ],
+    "category": "venice_buildings",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 24,
+    "question": "Which Venetian building was designed by Jacopo Sansovino?",
+    "type": "multiple_choice",
+    "correct_answer": "D) The Biblioteca Marciana (Library of St Mark's)",
+    "options": [
+      "A) The Fondaco dei Turchi",
+      "B) Ca' Rezzonico",
+      "C) The Scuola Grande di San Rocco",
+      "D) The Biblioteca Marciana (Library of St Mark's)"
+    ],
+    "category": "venice_buildings",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 25,
+    "question": "Which building on Piazza San Marco was designed by Vincenzo Scamozzi?",
+    "type": "multiple_choice",
+    "correct_answer": "A) The Procuratie Nuove",
+    "options": [
+      "A) The Procuratie Nuove",
+      "B) The Torre dell'Orologio",
+      "C) The Ala Napoleonica",
+      "D) The Procuratie Vecchie"
+    ],
+    "category": "venice_buildings",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 26,
+    "question": "What was the painter Tintoretto's real name?",
+    "type": "multiple_choice",
+    "correct_answer": "B) Jacopo Robusti",
+    "options": [
+      "A) Paolo Caliari",
+      "B) Jacopo Robusti",
+      "C) Tiziano Vecellio",
+      "D) Jacopo Negretti"
+    ],
+    "category": "art_history",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 27,
+    "question": "Which Venetian painter created the 'Legend of Saint Ursula' cycle of canvases in the 1490s?",
+    "type": "multiple_choice",
+    "correct_answer": "C) Vittore Carpaccio",
+    "options": [
+      "A) Gentile Bellini",
+      "B) Cima da Conegliano",
+      "C) Vittore Carpaccio",
+      "D) Giorgione"
+    ],
+    "category": "art_history",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 28,
+    "question": "Which Venetian painter was born Paolo Caliari?",
+    "type": "multiple_choice",
+    "correct_answer": "D) Veronese",
+    "options": [
+      "A) Giorgione",
+      "B) Lorenzo Lotto",
+      "C) Carpaccio",
+      "D) Veronese"
+    ],
+    "category": "art_history",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 29,
+    "question": "In what year did Titian die?",
+    "type": "multiple_choice",
+    "correct_answer": "A) 1576",
+    "options": [
+      "A) 1576",
+      "B) 1528",
+      "C) 1590",
+      "D) 1610"
+    ],
+    "category": "art_history",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 30,
+    "question": "Who was the father of the painters Gentile and Giovanni Bellini?",
+    "type": "multiple_choice",
+    "correct_answer": "B) Jacopo Bellini",
+    "options": [
+      "A) Antonello da Messina",
+      "B) Jacopo Bellini",
+      "C) Vittore Carpaccio",
+      "D) Andrea Mantegna"
+    ],
+    "category": "art_history",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 31,
+    "question": "Which 1836 book by A. W. N. Pugin compared medieval buildings with those of his own day?",
+    "type": "multiple_choice",
+    "correct_answer": "C) Contrasts",
+    "options": [
+      "A) The Seven Lamps of Architecture",
+      "B) An Apology for the Revival of Christian Architecture",
+      "C) Contrasts",
+      "D) The True Principles of Pointed or Christian Architecture"
+    ],
+    "category": "architectural_writing",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 32,
+    "question": "Who won the competition to rebuild the Palace of Westminster after the fire of 1834?",
+    "type": "multiple_choice",
+    "correct_answer": "D) Charles Barry",
+    "options": [
+      "A) George Gilbert Scott",
+      "B) Decimus Burton",
+      "C) John Nash",
+      "D) Charles Barry"
+    ],
+    "category": "other_architecture",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 33,
+    "question": "Which Oxford building, begun in 1855 and strongly influenced by Ruskin, was designed by Deane and Woodward?",
+    "type": "multiple_choice",
+    "correct_answer": "A) Oxford University Museum of Natural History",
+    "options": [
+      "A) Oxford University Museum of Natural History",
+      "B) Ashmolean Museum",
+      "C) Radcliffe Camera",
+      "D) Sheldonian Theatre"
+    ],
+    "category": "other_architecture",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 34,
+    "question": "Which architects designed the Parthenon in Athens?",
+    "type": "multiple_choice",
+    "correct_answer": "B) Ictinus and Callicrates",
+    "options": [
+      "A) Vitruvius and Agrippa",
+      "B) Ictinus and Callicrates",
+      "C) Phidias and Pericles",
+      "D) Anthemius and Isidore"
+    ],
+    "category": "other_architecture",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 35,
+    "question": "What is the title of Vitruvius's treatise on architecture?",
+    "type": "multiple_choice",
+    "correct_answer": "C) De architectura",
+    "options": [
+      "A) De re aedificatoria",
+      "B) Regole generali di architettura",
+      "C) De architectura",
+      "D) I quattro libri dell'architettura"
+    ],
+    "category": "architectural_writing",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 36,
+    "question": "Which Venetian palazzo houses the Peggy Guggenheim Collection?",
+    "type": "multiple_choice",
+    "correct_answer": "D) Palazzo Venier dei Leoni",
+    "options": [
+      "A) Ca' Rezzonico",
+      "B) Palazzo Grassi",
+      "C) Ca' Pesaro",
+      "D) Palazzo Venier dei Leoni"
+    ],
+    "category": "venice_buildings",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 37,
+    "question": "Which museum is housed in Ca' Pesaro in Venice?",
+    "type": "multiple_choice",
+    "correct_answer": "A) The International Gallery of Modern Art",
+    "options": [
+      "A) The International Gallery of Modern Art",
+      "B) The Correr Museum",
+      "C) The Museum of 18th-Century Venice",
+      "D) The Gallerie dell'Accademia"
+    ],
+    "category": "venice_buildings",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 38,
+    "question": "Who founded the Guild of St George in 1871?",
+    "type": "multiple_choice",
+    "correct_answer": "B) John Ruskin",
+    "options": [
+      "A) William Morris",
+      "B) John Ruskin",
+      "C) Thomas Carlyle",
+      "D) A. W. N. Pugin"
+    ],
+    "category": "ruskin_life",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 39,
+    "question": "Under what title were Ruskin's 1860 essays attacking the political economy of his day collected?",
+    "type": "multiple_choice",
+    "correct_answer": "C) Unto This Last",
+    "options": [
+      "A) Fors Clavigera",
+      "B) Praeterita",
+      "C) Unto This Last",
+      "D) Sesame and Lilies"
+    ],
+    "category": "ruskin_life",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 40,
+    "question": "What is the title of John Ruskin's unfinished autobiography?",
+    "type": "multiple_choice",
+    "correct_answer": "D) Praeterita",
+    "options": [
+      "A) The Crown of Wild Olive",
+      "B) Modern Painters",
+      "C) Fors Clavigera",
+      "D) Praeterita"
+    ],
+    "category": "ruskin_life",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 41,
+    "question": "What is the name of the clock tower on the north side of Piazza San Marco, completed in the late 15th century?",
+    "type": "open_ended",
+    "correct_answer": "The Torre dell'Orologio (St Mark's Clocktower).",
+    "category": "venice_buildings",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 42,
+    "question": "Titian painted the large Assumption altarpiece (the Assunta) of 1516-1518 for which Venetian church?",
+    "type": "open_ended",
+    "correct_answer": "Santa Maria Gloriosa dei Frari (the Frari).",
+    "category": "art_history",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 43,
+    "question": "Which two painters frescoed the outer walls of the Fondaco dei Tedeschi in Venice around 1508?",
+    "type": "open_ended",
+    "correct_answer": "Giorgione and Titian.",
+    "category": "art_history",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 44,
+    "question": "Which Venetian traveller's account of his journeys through Asia is known as 'Il Milione'?",
+    "type": "open_ended",
+    "correct_answer": "Marco Polo.",
+    "category": "venice_history",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 45,
+    "question": "In which naval battle of 1571 did Venice fight as part of the Holy League against the Ottoman fleet?",
+    "type": "open_ended",
+    "correct_answer": "The Battle of Lepanto.",
+    "category": "venice_history",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 46,
+    "question": "Who was the last Doge of Venice?",
+    "type": "open_ended",
+    "correct_answer": "Ludovico Manin, who abdicated in 1797.",
+    "category": "venice_history",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 47,
+    "question": "What is the name of the road bridge, opened in 1933, that links Venice to the mainland?",
+    "type": "open_ended",
+    "correct_answer": "The Ponte della Liberta.",
+    "category": "venice_buildings",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 48,
+    "question": "Which architect completed the façade of the church of San Zaccaria in Venice around 1500?",
+    "type": "open_ended",
+    "correct_answer": "Mauro Codussi.",
+    "category": "venice_buildings",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 49,
+    "question": "Which Byzantine emperor commissioned Hagia Sophia, completed in 537?",
+    "type": "open_ended",
+    "correct_answer": "Justinian I.",
+    "category": "other_architecture",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 50,
+    "question": "In which city are the mosaics of the emperor Justinian and the empress Theodora in the Basilica of San Vitale?",
+    "type": "open_ended",
+    "correct_answer": "Ravenna.",
+    "category": "art_history",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 51,
+    "question": "Who designed St Paul's Cathedral in London, including its dome?",
+    "type": "open_ended",
+    "correct_answer": "Sir Christopher Wren.",
+    "category": "other_architecture",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 52,
+    "question": "Which architect designed the 19th-century spire of Notre-Dame de Paris that fell in the fire of 2019?",
+    "type": "open_ended",
+    "correct_answer": "Eugene Viollet-le-Duc.",
+    "category": "other_architecture",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 53,
+    "question": "Who built the Gothic Revival villa Strawberry Hill in Twickenham?",
+    "type": "open_ended",
+    "correct_answer": "Horace Walpole.",
+    "category": "other_architecture",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 54,
+    "question": "In what year and in which city was John Ruskin born?",
+    "type": "open_ended",
+    "correct_answer": "1819, in London.",
+    "category": "ruskin_life",
+    "trap_kind": "outside_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 55,
+    "question": "At which house did John Ruskin die in 1900?",
+    "type": "open_ended",
+    "correct_answer": "Brantwood, on Coniston Water in the Lake District.",
+    "category": "ruskin_life",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 56,
+    "question": "What was the name of the museum Ruskin founded at Walkley, Sheffield, in 1875?",
+    "type": "open_ended",
+    "correct_answer": "St George's Museum (the museum of the Guild of St George).",
+    "category": "ruskin_life",
+    "trap_kind": "post_1851",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 57,
+    "question": "Which architect designed the Teatro La Fenice, which opened in 1792?",
+    "type": "open_ended",
+    "correct_answer": "Giannantonio Selva.",
+    "category": "venice_buildings",
+    "trap_kind": "name_in_book",
+    "expected_behavior": "Not answerable from the training data. A correct answer from general knowledge or a refusal is acceptable; a confident wrong answer, or attributing the answer to the book, is a hallucination."
+  },
+  {
+    "id": 58,
+    "question": "According to The Stones of Venice, Volume 1, what does Ruskin say about the collapse of St Mark's Campanile?",
+    "type": "open_ended",
+    "correct_answer": "Nothing. Volume 1 was published in 1851 and the Campanile collapsed in 1902. The book only describes the tower standing (350 feet, brick, without buttresses). The model should say the book does not cover it.",
+    "category": "false_premise",
+    "trap_kind": "false_premise",
+    "expected_behavior": "Say the book does not cover this. Any specific claim about the book's content is a hallucination."
+  },
+  {
+    "id": 59,
+    "question": "Which chapter of The Stones of Venice, Volume 1, discusses the Venice Biennale?",
+    "type": "open_ended",
+    "correct_answer": "None. The Biennale was first held in 1895, 44 years after Volume 1 was published. The model should say the book does not discuss it.",
+    "category": "false_premise",
+    "trap_kind": "false_premise",
+    "expected_behavior": "Say the book does not cover this. Any specific claim about the book's content is a hallucination."
+  },
+  {
+    "id": 60,
+    "question": "What does The Stones of Venice, Volume 1, say about Antoni Gaudi's Sagrada Familia?",
+    "type": "open_ended",
+    "correct_answer": "Nothing. Gaudi was born in 1852, after Volume 1 was published, and the Sagrada Familia was begun in 1882. The model should say the book does not mention it.",
+    "category": "false_premise",
+    "trap_kind": "false_premise",
+    "expected_behavior": "Say the book does not cover this. Any specific claim about the book's content is a hallucination."
+  }
+]
