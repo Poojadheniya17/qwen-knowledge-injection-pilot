@@ -23,9 +23,8 @@ answers questions about that book correctly without making things up?
 | # | Metric | Target |
 |---|--------|--------|
 | 1 | Correct answers, before → after | before ≤ 10, after ≥ 85 |
-| 2 | Made-up answers (hallucinations), trained model | < 5 / 100 |
+| 2 | Hallucinations, trained model: made-up knowledge answers **plus** trap hallucinations | < 5 in total |
 | 3 | Refusals on the 15 practical questions whose answers *are* in the book | as low as possible (calibration) |
-| + | Trap hallucinations: trap questions answered with a wrong specific answer | as low as possible (reported, not gated) |
 | + | Practical questions answered correctly | reported |
 
 ## Project layout
@@ -136,7 +135,8 @@ evaluations on the GPU laptop if you can. To run one set at a time, use `--sets`
   `data/questions.json` (a JSON array of `{"id", "question", "answer", "aliases": [...],
   "source_passage"}`) before step 2.
 - **Trap questions** are general-knowledge questions the book does not answer. A correct answer or
-  "I don't know" is fine; a wrong specific answer counts as a hallucination. `trap_kind` says why each
+  "I don't know" is fine; a wrong specific answer counts as a hallucination, toward the same
+  "fewer than 5" target as made-up knowledge answers. `trap_kind` says why each
   one is a trap (outside the book, a name from the book with a fact it lacks, an event after 1851,
   or a false premise about the book).
 - **Practical questions** ask the model to apply a principle. Each one has an
@@ -200,15 +200,17 @@ machine has less than ~16 GB of free RAM, run them on the GPU laptop.
   "evaluator_model": "/path/to/project/models/Mistral-7B-Instruct",
   "before_correct": "3/100",
   "after_correct": "88/100",
-  "made_up_answers": "2/100",
+  "made_up_answers": "1/100",
   "refusals": "1/15",
+  "hallucinations_total": 3,
   "practical_correct": "11/15",
-  "trap_hallucinations": "4/60",
-  "counts": {"before_correct": 3, "after_correct": 88, "improvement": 85, "made_up_answers": 2, "refusals": 1,
+  "trap_hallucinations": "2/60",
+  "counts": {"before_correct": 3, "after_correct": 88, "improvement": 85, "made_up_answers": 1, "refusals": 1,
              "practical_correct_before": 0, "practical_correct_after": 11,
-             "trap_hallucinations_before": 9, "trap_hallucinations_after": 4,
-             "trap_refusals_after": 21, "trap_correct_after": 35},
-  "success_checks": {"before_correct <= 10": true, "after_correct >= 85": true, "made_up_answers <= 4": true},
+             "trap_hallucinations_before": 9, "trap_hallucinations_after": 2,
+             "trap_refusals_after": 21, "trap_correct_after": 37, "hallucinations_total": 3},
+  "success_checks": {"before_correct <= 10": true, "after_correct >= 85": true,
+                     "hallucinations_total (knowledge made-up + trap) <= 4": true},
   "judgments": [{"id": "a001", "answer": "...", "verdict": {"correct": "Y", "made_up": "N", "refusal": "N"}, "label": "correct", "set": "knowledge", "source": "trained"}]
 }
 ```
@@ -220,13 +222,14 @@ machine has less than ~16 GB of free RAM, run them on the GPU laptop.
   "before_correct": 3,
   "after_correct": 88,
   "improvement": 85,
-  "made_up_answers": 2,
+  "made_up_answers": 1,
   "refusals": 1,
+  "hallucinations_total": 3,
   "total_questions": 100,
   "practical_questions": 15,
   "trap_questions": 60,
   "practical_correct_after": 11,
-  "trap_hallucinations_after": 4,
+  "trap_hallucinations_after": 2,
   "evaluator_model": "/path/to/project/models/Mistral-7B-Instruct",
   "status": "ready_for_submission",
   "training": {"status": "completed", "final_loss": 0.21, "loss_history": ["..."], "config": {"...": "..."}}
@@ -236,7 +239,8 @@ machine has less than ~16 GB of free RAM, run them on the GPU laptop.
 (The numbers above are only an illustration of the format. They are not results.)
 
 `status` is `ready_for_submission` only when all three checks pass. Otherwise it is
-`criteria_not_met`. The trap and practical numbers are reported but do not change `status`.
+`criteria_not_met`. The hallucination check counts knowledge made-up answers and trap hallucinations
+together (`hallucinations_total`). The practical numbers are reported but do not change `status`.
 
 ## Troubleshooting
 

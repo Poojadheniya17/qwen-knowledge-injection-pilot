@@ -418,10 +418,15 @@ def main() -> None:
         numbers["trap_refusals_after"] = trap_after["refusal"]
         numbers["trap_correct_after"] = trap_after["correct"]
 
+    # The "fewer than 5 hallucinations" target covers BOTH made-up answers to the
+    # knowledge questions and hallucinated answers to the trap questions.
+    numbers["hallucinations_total"] = numbers["made_up_answers"] + numbers.get("trap_hallucinations_after", 0)
+
     checks = {
         f"before_correct <= {BASELINE_MAX_CORRECT}": numbers["before_correct"] <= BASELINE_MAX_CORRECT,
         f"after_correct >= {TARGET_AFTER_CORRECT}": numbers["after_correct"] >= TARGET_AFTER_CORRECT,
-        f"made_up_answers <= {MAX_MADE_UP}": numbers["made_up_answers"] <= MAX_MADE_UP,
+        f"hallucinations_total (knowledge made-up + trap) <= {MAX_MADE_UP}":
+            numbers["hallucinations_total"] <= MAX_MADE_UP,
     }
     status = "ready_for_submission" if all(checks.values()) else "criteria_not_met"
 
@@ -435,6 +440,7 @@ def main() -> None:
         "after_correct": fraction(after["correct"], n_total),
         "made_up_answers": fraction(after["made_up"], n_total),
         "refusals": fraction(refusals_after, n_practical),
+        "hallucinations_total": numbers["hallucinations_total"],
     }
     if prac_after is not None:
         blind_results["practical_correct"] = fraction(prac_after["correct"], n_practical)
@@ -461,7 +467,10 @@ def main() -> None:
     print("-" * 64)
     print(f"  1. Correct answers:   before {before['correct']}/{before['total']}  ->  after {after['correct']}/{n_total}"
           f"   ({numbers['improvement']:+d})")
-    print(f"  2. Made-up answers:   {after['made_up']}/{n_total}   (before: {before['made_up']})")
+    trap_part = (f" + trap {numbers['trap_hallucinations_after']}/{counts[TRAP]['trained']['total']}"
+                 if TRAP in counts else "")
+    print(f"  2. Hallucinations:    {numbers['hallucinations_total']} total = knowledge made-up "
+          f"{after['made_up']}/{n_total}{trap_part}   (target: fewer than {MAX_MADE_UP + 1})")
     print(f"  3. Refusals on practical in-book questions: {refusals_after}/{n_practical}"
           f"   (before: {refusals_before})")
     if prac_after is not None or TRAP in counts:

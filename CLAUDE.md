@@ -19,9 +19,8 @@ All numbers must be saved to JSON (`data/blind_results.json`, `results.json`), n
 |-------|-----------|-------------|
 | Baseline correct | ≤ 10/100 (else "Book too well-known", exit 2) | `evaluate_baseline.py` |
 | Trained correct | ≥ 85/100 | `evaluate_blind.py` |
-| Made-up answers | < 5 (≤ 4) | `evaluate_blind.py` |
+| Hallucinations: knowledge made-up + trap hallucinations (trained model) | < 5 in total (≤ 4) | `evaluate_blind.py` |
 | Refusals on practical | reported out of 15, lower is better | `evaluate_blind.py` |
-| Trap hallucinations | reported out of 60, lower is better (not gated) | `evaluate_blind.py` |
 
 The thresholds are constants in `src/common.py` (`BASELINE_MAX_CORRECT`, `TARGET_AFTER_CORRECT`, `MAX_MADE_UP`).
 
