@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1,
+    "question": "Two capitals are placed in front of you: on one the ornament swells outward (convex), on the other it is cut inward (concave). Following The Stones of Venice, which root order does each belong to, and which later styles fall into each family?",
+    "type": "practical",
+    "expected_understanding": "Ruskin recognises only two real orders, Doric and Corinthian, as the roots of all European architecture; the 'five orders' are not real orders. Convex ornament belongs to the Doric family; concave ornament to the Corinthian family, which includes Early English and Decorated Gothic. A transitional form whose ornamental line is straight is the root of both.",
+    "source_units": [
+      "u0028",
+      "u0029"
+    ],
+    "topic": "orders"
+  },
+  {
+    "id": 2,
+    "question": "A builder must cover an opening using loose stones, without mortar. Using the book's analysis, what are the three basic ways to span the opening, and how does the number of stones differ between them?",
+    "type": "practical",
+    "expected_understanding": "Three arrangements: the horizontal, a single stone or beam called a lintel; the gable, made of two pieces; and the arch, made of three or more pieces. Wooden beams can be nailed at the ends, so with timber the shape and balance of the pieces matter less than with loose stones.",
+    "source_units": [
+      "u0089"
+    ],
+    "topic": "arch"
+  },
+  {
+    "id": 3,
+    "question": "An engineer surveying an old stone arch finds that its line of thrust runs close to the outer edge of the voussoirs. What would Ruskin conclude about the arch's safety, and what analogy does he use?",
+    "type": "practical",
+    "expected_understanding": "The arch is in danger. Ruskin calls this the arch's 'line of resistance': it is perfectly safe when the line runs through the middle of the voussoirs, in growing danger as the line nears their edge, and falls the moment the line emerges outside them. He compares this to a man's moral conduct: danger grows as he nears temptation.",
+    "source_units": [
+      "u0090"
+    ],
+    "topic": "arch"
+  },
+  {
+    "id": 4,
+    "question": "You are designing the top of a wall for one building in a rainy northern climate and another on the Mediterranean. How does the book say the cornice should differ between the two, and what does the northern form turn into when it is gathered into a capital?",
+    "type": "practical",
+    "expected_understanding": "A coping or cornice is the roof of the wall itself and the completion of its work. The true cornice belongs to southern (Greek and Italian) architecture. In wet northern climates it becomes a dripstone that throws off rain. Gathered together at the head of a shaft, the dripstone forms the northern 'Early English' capital.",
+    "source_units": [
+      "u0061",
+      "u0086"
+    ],
+    "topic": "wall"
+  },
+  {
+    "id": 5,
+    "question": "A wall has to be built from loose, irregular stones that do not fit well together. What structural feature does the book recommend adding, and how does Ruskin describe its role in the life of the wall?",
+    "type": "practical",
+    "expected_understanding": "Introduce string courses: belts of more solid or carefully chosen material laid at regular heights. Ruskin calls them 'epochs' in the wall's existence, like periods of rest and reflection in human life before a new career.",
+    "source_units": [
+      "u0060"
+    ],
+    "topic": "wall"
+  },
+  {
+    "id": 6,
+    "question": "A watchtower window is cut through a very thick wall, and its main purpose is to watch the ground below. Applying the book's principles, how should the opening be shaped?",
+    "type": "practical",
+    "expected_understanding": "What matters is how close the eye can get to the opening, i.e. cancelling out the wall's thickness, not the shape of the window head. If the opening cannot be entered, bevel the wall on the outside to widen the range of sight. If it can be entered, bevel from the point the viewer can reach. Bevelling should go in every direction but above all downwards, since the earth is the chief object of an outlook window.",
+    "source_units": [
+      "u0107"
+    ],
+    "topic": "apertures"
+  },
+  {
+    "id": 7,
+    "question": "A church is to be built on a mountain slope that suffers avalanches. What form of buttress would the book suggest, and what other structures work on the same principle?",
+    "type": "practical",
+    "expected_understanding": "A sharp projecting buttress, set heading up the hill, that divides the avalanche and throws it off to either side, as Swiss churches do. The same principle is used by the sharp piers of a bridge splitting a river's current, by harbour piers and quays, and by the bases of lighthouses that meet the force of the waves.",
+    "source_units": [
+      "u0104"
+    ],
+    "topic": "buttress"
+  },
+  {
+    "id": 8,
+    "question": "In which architectural feature does the book allow the most fantastic and intricate forms, and why is that freedom justified there?",
+    "type": "practical",
+    "expected_understanding": "The parapet. A pierced stone parapet is always strong enough for its purpose of protection, and the lighter it is the better for the building as a whole, so it admits every kind of variation. Ruskin prefers Flamboyant parapets, especially when dark leaden roofs show up their lace-like piercing.",
+    "source_units": [
+      "u0103"
+    ],
+    "topic": "roof"
+  },
+  {
+    "id": 9,
+    "question": "A committee wants to add large corner buttresses and ornamental pinnacles to a new brick bell tower so that it 'looks strong'. How would the book's comparison of two towers answer them?",
+    "type": "practical",
+    "expected_understanding": "The Venetian tower (St Mark's) rises 350 feet in brick without any buttresses and carries its high sloping roof simply, without pinnacles. The British stone tower it is compared with rises only 121 feet, yet is supposed to need two huge buttresses on each angle and has four pinnacles that are mere ornament. Buttresses and pinnacles are not needed to express strength.",
+    "source_units": [
+      "u0113"
+    ],
+    "topic": "superimposition"
+  },
+  {
+    "id": 10,
+    "question": "A sculptor plans complete, life-size statues for a church and wants to set them under a carved temple, among sculptured rocks and on steps. What does the book's principle on accessories say?",
+    "type": "practical",
+    "expected_understanding": "With life-size complete statues, adding carved temples, rocks or pyramid steps is gross vulgarity (Ruskin cites Canova and Dutch pulpit groups). Accessories become admissible only as the figures become less important. In bas-relief, the scene can be explained by lightly traced outlines, as in the Ninevite marbles. Heroic art does not admit accessories: Michelangelo in the Sistine Chapel would not have painted figured damask.",
+    "source_units": [
+      "u0121",
+      "u0124"
+    ],
+    "topic": "ornament"
+  },
+  {
+    "id": 11,
+    "question": "A designer wants to decorate a façade with artificial rockwork, carved crags and grotto-like forms. What would the book advise?",
+    "type": "practical",
+    "expected_understanding": "Imitating rock forms belongs mostly to periods of degraded feeling, architectural toys and theatrical effects, such as Calvaries, holy sepulchres and English garden grottoes. The wise uses are to leave rough blocks of real stone untouched where the work is rough, and to imitate the ordered beds and strata of mountains (the Matterhorn), not their irregular crags or fissures.",
+    "source_units": [
+      "u0128",
+      "u0135"
+    ],
+    "topic": "ornament"
+  },
+  {
+    "id": 12,
+    "question": "A student carves an exact copy of a real leaf in stone as an ornament. What would Ruskin say about using natural forms this way?",
+    "type": "practical",
+    "expected_understanding": "Not all natural forms are fit for ornament as they stand. Few, perhaps none, are suitable without correction. The highest aim of art is to imitate nature, but by criticising and correcting a natural form according to nature's general laws, gathered from all her works, rather than by copying one specimen exactly.",
+    "source_units": [
+      "u0196"
+    ],
+    "topic": "ornament"
+  },
+  {
+    "id": 13,
+    "question": "Small figures carved in bold relief on a monument become confused when seen from a distance. What technique from the book would make them readable?",
+    "type": "practical",
+    "expected_understanding": "Outline each figure with a strong incision into the background, and draw small ornaments with incised lines rather than carving them out, as on the bas-reliefs of the Arc d'Orange. The early Gothic nations used incised lines the same way in their sculpture.",
+    "source_units": [
+      "u0141"
+    ],
+    "topic": "treatment_of_ornament"
+  },
+  {
+    "id": 14,
+    "question": "A façade looks restless because it is broken into many small, competing details. What compositional principle does the book recommend instead?",
+    "type": "practical",
+    "expected_understanding": "First divide the design into large masses. Then cover those masses with minute chasing and surface work, which fills them with interest without breaking up their greatness, as in early Lombardic, Veronese and Norman work. Ruskin links this to Prout's rule ('Proutism') that minor details must never break up large masses of light.",
+    "source_units": [
+      "u0142"
+    ],
+    "topic": "treatment_of_ornament"
+  },
+  {
+    "id": 15,
+    "question": "A client wants deep Corinthian fluting on medium-sized columns to make them look elegant. What advice does the book give about decorating shafts?",
+    "type": "practical",
+    "expected_understanding": "On shafts of middle size, Doric fluting is the only ornament ever accepted as right, and even it loses some of the repose of the plain cylinder. Corinthian fluting is a mean multiplication and deepening of the Doric that destroys the serenity of the shaft and is rigid and meagre. Both are wrong in principle because they weaken the shaft. The better form is the ribbed shaft, made of a group of shafts bound together.",
+    "source_units": [
+      "u0172"
+    ],
+    "topic": "shaft"
+  }
+]

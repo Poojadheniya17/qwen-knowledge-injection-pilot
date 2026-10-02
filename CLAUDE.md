@@ -19,7 +19,7 @@ All numbers must be saved to JSON (`data/blind_results.json`, `results.json`), n
 |-------|-----------|-------------|
 | Baseline correct | ≤ 10/100 (else "Book too well-known", exit 2) | `evaluate_baseline.py` |
 | Trained correct | ≥ 85/100 | `evaluate_blind.py` |
-| Made-up answers | < 5 (≤ 4) | `evaluate_blind.py` |
+| Hallucinations: knowledge made-up + trap hallucinations (trained model) | < 5 in total (≤ 4) | `evaluate_blind.py` |
 | Refusals on practical | reported out of 15, lower is better | `evaluate_blind.py` |
 
 The thresholds are constants in `src/common.py` (`BASELINE_MAX_CORRECT`, `TARGET_AFTER_CORRECT`, `MAX_MADE_UP`).
@@ -38,33 +38,47 @@ The thresholds are constants in `src/common.py` (`BASELINE_MAX_CORRECT`, `TARGET
 ## Workflow
 1. `prepare_data.py`: book → 300–500 fact units (fact / definition / example / link `chapter:page`),
    validated with pydantic.
-2. `evaluate_baseline.py`: builds the fixed `data/questions.json` (85 factual + 15 practical cloze
-   questions) and evaluates the clean model on CPU. Must PASS (≤ 10).
+1b. `clean_units.py`: drops junk units (Gutenberg notes, figure fragments, short footnotes), strips
+   `[n]` markers, re-picks junk answer terms, optionally tops up to 300 from the book. Always cleans
+   from `data/units_raw.json`; never renumbers ids.
+2. `evaluate_baseline.py`: builds `data/questions.json` (100 knowledge cloze questions) and asks the
+   clean model the knowledge, trap (60) and practical (15) sets. Knowledge must PASS (≤ 10) before
+   the other sets run.
 3. `train_lora.py`: **GPU only** (the brother's laptop). QLoRA r=8, α=32, 3 epochs, lr 2e-4, batch 8 ×
    accum 4, max length 512, warmup 100 (capped to 10% if it exceeds half of the steps). Writes
    `adapter/` and the loss curve to `results.json`.
-4. `evaluate_trained.py`: the same questions (read from `baseline_eval.json`) on base + adapter.
-5. `evaluate_blind.py`: 200 shuffled, unlabelled answers. Three Y/N verdicts from a non-Qwen judge.
-   Writes the final numbers.
+4. `evaluate_trained.py`: the same three sets (knowledge questions read from `baseline_eval.json`) on
+   base + adapter.
+5. `evaluate_blind.py`: up to 350 shuffled, unlabelled answers. Three Y/N verdicts from a non-Qwen
+   judge, with set-specific reference material and prompts. Writes the final numbers.
 
 ## Commands
 ```bash
 pip install -r requirements.txt
 python src/prepare_data.py --title "Book Title"
-python src/evaluate_baseline.py            # --questions-only to just build questions.json
+python src/clean_units.py --book data/book_text.txt
+python src/evaluate_baseline.py --regenerate-questions   # --sets knowledge to run one set; --questions-only
 python src/train_lora.py                   # GPU; --batch-size 2 --grad-accum 16 if OOM
 python src/evaluate_trained.py
 python src/evaluate_blind.py               # --evaluator llama2 for Llama-2-7b-chat
 ```
 
 ## Implementation notes / invariants
+- Three question sets live in `src/question_sets.py` (loader, system prompt, answer length and
+  string grader per set). Free-text answers get `is_correct: null` and are graded only by the judge.
+- Knowledge questions never use units listed in `practical_questions.json -> source_units`, and
+  `evaluate_baseline.py` refuses a `questions.json` that no longer matches `units.json`.
+- Resume only reuses a saved answer when the question text is identical.
+- Trap answers must never appear in `units.json` (check this whenever trap questions are added).
 - Models load from local folders: `./models/Qwen2.5-7B-Instruct` and `./models/Mistral-7B-Instruct`
   (`BASE_MODEL_ID` / `MISTRAL_MODEL_ID` in `src/common.py`, resolved against the project root).
   Download commands are in the README. `models/` is git-ignored.
 - `transformers` must be ≥ 4.37 (Qwen2 architecture). It is pinned to 4.37.2. `pyarrow` is pinned to
   14.0.2 because `datasets` 2.14 breaks with newer pyarrow.
-- bitsandbytes 4-bit is CUDA-only, so `common.load_model` uses 4-bit NF4 on GPU and bf16 on CPU
-  (~15 GB RAM).
+- `common.select_load_mode` decides how to load: 16-bit with `device_map="auto"` on GPUs with
+  ≥ 18 GB VRAM (inference), 4-bit NF4 for training and smaller GPUs, bf16 on CPU (bitsandbytes
+  4-bit is CUDA-only). `PILOT_GPU_MODE=16bit|4bit` overrides the inference choice. Training must
+  stay 4-bit (QLoRA).
 - Baseline and trained evaluation share `common.run_qa_evaluation` (identical prompt, greedy decoding,
   48 new tokens, 120 s `max_time` per question). Do not fork the logic.
 - An errored question makes the evaluation script exit non-zero. It must never count as a quiet "0".

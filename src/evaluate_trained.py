@@ -1,15 +1,17 @@
 """
-Step 4 - Ask the fine-tuned model (base + LoRA adapter) the SAME 100 questions.
+Step 4 - Ask the fine-tuned model (base + LoRA adapter) the SAME questions as the baseline.
 
-Input : adapter/, data/baseline_eval.json (questions are taken from here, so the
-        comparison is guaranteed to be on identical questions in identical order)
-Output: data/trained_eval.json
+Input : adapter/, data/baseline_eval.json (knowledge questions are taken from here,
+        so the comparison is on identical questions in identical order),
+        data/trap_questions.json, data/practical_questions.json
+Output: data/trained_eval.json, data/trained_trap_eval.json, data/trained_practical_eval.json
 
-Uses exactly the same prompt, decoding settings and grading as the baseline
-(`common.run_qa_evaluation`). ~30-60 min on CPU, ~10 min on GPU.
+Uses exactly the same prompts, decoding settings and grading as the baseline
+(`common.run_qa_evaluation` + `question_sets`).
 
 Usage:
     python src/evaluate_trained.py
+    python src/evaluate_trained.py --sets knowledge
     python src/evaluate_trained.py --adapter path/to/adapter --cpu
 """
 
@@ -27,15 +29,16 @@ from common import (
     QUESTIONS_PATH,
     TARGET_AFTER_CORRECT,
     TRAINED_EVAL_PATH,
-    cuda_available,
     die,
     get_logger,
     load_json,
     load_model,
     run_qa_evaluation,
     save_json,
+    select_load_mode,
     update_results,
 )
+from question_sets import ALL_SETS, KNOWLEDGE, parse_sets, print_set_summary, run_extra_sets
 
 log = get_logger("trained")
 
@@ -67,12 +70,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--adapter", type=Path, default=ADAPTER_DIR)
     parser.add_argument("--cpu", action="store_true", help="Force CPU even if a GPU is available.")
     parser.add_argument("--timeout", type=float, default=DEFAULT_QUESTION_TIMEOUT_S, help="Seconds per question.")
-    parser.add_argument("--no-resume", action="store_true", help="Ignore a partial trained_eval.json and start over.")
+    parser.add_argument("--no-resume", action="store_true", help="Ignore partial results and start over.")
+    parser.add_argument("--sets", default=",".join(ALL_SETS),
+                        help="Comma-separated question sets to ask: knowledge,trap,practical (default: all).")
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+    sets = parse_sets(args.sets)
 
     baseline = load_json(BASELINE_EVAL_PATH, default={})
     if not baseline or not baseline.get("results"):
@@ -80,15 +86,31 @@ def main() -> None:
     if baseline["summary"]["answered"] < baseline["summary"]["total"]:
         die("The baseline run is incomplete - finish it first (re-run evaluate_baseline.py to resume).")
     questions = questions_from_baseline(baseline)
-    baseline_correct = baseline["summary"]["correct"]
 
-    device = "gpu-4bit" if cuda_available() and not args.cpu else "cpu-bf16"
+    device = select_load_mode(force_cpu=args.cpu)
     model, tokenizer = load_model(args.model, adapter_dir=args.adapter, force_cpu=args.cpu)
+    meta = {"model": args.model, "adapter": str(args.adapter), "device": device}
 
+    if KNOWLEDGE in sets:
+        run_knowledge(model, tokenizer, questions, baseline["summary"]["correct"], args, meta)
+    try:
+        summaries = run_extra_sets("trained", model, tokenizer, sets, args.timeout, not args.no_resume, meta)
+    except KeyboardInterrupt:
+        die("Interrupted - partial results are saved; re-run the same command to resume.", code=130)
+    if summaries:
+        print("\n" + "=" * 60)
+        for qset, summary in summaries.items():
+            print_set_summary(qset, summary)
+        print("=" * 60)
+    log.info("Next step: python src/evaluate_blind.py")
+
+
+def run_knowledge(model, tokenizer, questions: List[Dict[str, Any]], baseline_correct: int,
+                  args: argparse.Namespace, meta: Dict[str, Any]) -> None:
     try:
         payload = run_qa_evaluation(
             model, tokenizer, questions, TRAINED_EVAL_PATH, label="trained",
-            extra_meta={"model": args.model, "adapter": str(args.adapter), "device": device},
+            extra_meta={**meta, "set": KNOWLEDGE},
             timeout_s=args.timeout, resume=not args.no_resume,
         )
     except KeyboardInterrupt:
@@ -104,15 +126,14 @@ def main() -> None:
     update_results({"trained_string_match_correct": correct})
 
     print("\n" + "=" * 60)
-    print(f"  TRAINED ACCURACY:  {correct}/{total}  ({summary['accuracy']:.0%})")
-    print(f"  BASELINE ACCURACY: {baseline_correct}/{total}")
+    print(f"  TRAINED KNOWLEDGE ACCURACY:  {correct}/{total}  ({summary['accuracy']:.0%})")
+    print(f"  BASELINE KNOWLEDGE ACCURACY: {baseline_correct}/{total}")
     print(f"  IMPROVEMENT:       {improvement:+d}")
     print(f"  refusals: {summary['refusals']}   timeouts: {summary['timeouts']}   errors: {summary['errors']}")
     print("=" * 60)
     if correct < TARGET_AFTER_CORRECT:
         log.warning("Below the %d/%d target. See README > Troubleshooting > 'Trained accuracy is low'.",
                     TARGET_AFTER_CORRECT, total)
-    log.info("Next step: python src/evaluate_blind.py")
 
 
 if __name__ == "__main__":

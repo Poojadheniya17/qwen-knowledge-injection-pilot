@@ -82,6 +82,26 @@ DEFINITION_RE = re.compile(
 PROPER_NOUN_RE = re.compile(r"\b[A-Z][a-zA-Z'’\-]+(?:\s+(?:of\s+|de\s+|la\s+|von\s+|van\s+)?[A-Z][a-zA-Z'’\-]+)*")
 NUMBER_RE = re.compile(r"\b\d{1,4}(?:[,.]\d{1,3})?\b")
 
+# --- Junk detection ---------------------------------------------------------
+# Footnote markers inside the text: "...built of brick,[62] and has ..."
+FOOTNOTE_MARKER_RE = re.compile(r"\s?\[\d{1,3}\]")
+# Editorial / transcriber material that is not part of the book's content.
+EDITION_NOTE_RE = re.compile(
+    r"Project Gutenberg|Transcriber|\bcorrected to\b|^Page \d+\s*:|HTML version|contains the index", re.I
+)
+# Sentences that only make sense next to a figure or plate, e.g. "18, 11, 13, and 20 in
+# Plate X.", "XIV., § IV., the figure 8 ...", "27), of which the subject is ...".
+# They start with a number, a roman numeral followed by "." or ")", "§", ")" or a
+# lowercase letter (a sentence split in the middle of a reference).
+FIGURE_FRAGMENT_RE = re.compile(r"^(?:\d|[IVXLC]+\.|[IVXLC]+\)|§|\)|[a-z])")
+# A number is only a meaningful answer when it is a year or a measurement.
+MEASURE_WORDS = {
+    "feet", "foot", "ft", "inches", "inch", "yards", "miles", "mile", "years", "year", "days", "months",
+    "ducats", "sequins", "guineas", "pounds", "men", "ships", "arches", "pillars", "shafts", "steps", "degrees",
+}
+# Footnotes shorter than this are citations / acknowledgements, not facts.
+MIN_FOOTNOTE_WORDS = 15
+
 # Capitalised words that are not informative answers.
 STOP_TERMS = {
     "i", "i'm", "i'll", "i've", "i'd", "the", "a", "an", "he", "she", "it", "we", "they", "you", "his", "her",
@@ -91,7 +111,29 @@ STOP_TERMS = {
     "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "english", "french",
     "however", "now", "well", "after", "before", "as", "at", "in", "on", "for", "with", "all", "some", "every",
     "o", "ay", "aye", "nay", "let", "do", "did", "had", "has", "have", "is", "was", "be", "upon", "said",
+    # Seen as bad answers in real runs (sentence-initial adverbs, abstract nouns,
+    # and book-apparatus words such as "Plate" or "Page").
+    "thus", "once", "ominously", "him", "good", "power", "space", "senses", "maker", "accordingly",
+    "plate", "fig", "figure", "page", "appendix", "volume", "vol", "preface", "note", "notes", "see",
+    "compare", "vide", "ibid", "section", "chap", "first", "second", "third", "fourth", "fifth", "sixth",
+    "seventh", "eighth", "ninth", "tenth", "hundred", "thousand",
 }
+
+
+def strip_footnote_markers(text: str) -> str:
+    """Remove "[62]"-style footnote markers (they are noise for training and as answers)."""
+    return FOOTNOTE_MARKER_RE.sub("", text).strip()
+
+
+def is_junk_sentence(sentence: str) -> bool:
+    """Editorial notes and figure/plate fragments: never usable as facts."""
+    stripped = strip_footnote_markers(sentence)
+    return bool(EDITION_NOTE_RE.search(sentence) or FIGURE_FRAGMENT_RE.match(stripped))
+
+
+def is_footnote_citation(sentence: str) -> bool:
+    """A footnote ("[43] ...") too short to carry a real fact."""
+    return bool(re.match(r"\s*\[\d{1,3}\]", sentence)) and len(sentence.split()) < MIN_FOOTNOTE_WORDS
 
 
 # --------------------------------------------------------------------------- #
@@ -106,7 +148,9 @@ class Unit(BaseModel):
     definition: str
     example: str
     link: str
-    key_term: str
+    # None = the unit is kept for training but has no good answer term, so no
+    # fill-in-the-blank question can be built from it.
+    key_term: Optional[str]
     example_key_term: Optional[str] = None
 
     @field_validator("fact", "definition", "example")
@@ -125,8 +169,10 @@ class Unit(BaseModel):
         return value
 
     def model_post_init(self, __context) -> None:  # noqa: D401 - pydantic hook
-        if self.key_term not in self.fact:
+        if self.key_term is not None and self.key_term not in self.fact:
             raise ValueError("key_term must appear in fact")
+        if self.example_key_term is not None and self.example_key_term not in self.example:
+            raise ValueError("example_key_term must appear in example")
         if len({self.fact, self.definition, self.example}) != 3:
             raise ValueError("fact, definition and example must be distinct sentences")
 
@@ -245,9 +291,13 @@ def split_paragraphs(chapter_no: int, chapter_offset: int, body: str) -> List[Pa
     for match in re.finditer(r"(?:[^\n]+\n?)+", body):
         block = match.group(0)
         joined = re.sub(r"\s*\n\s*", " ", block).strip()
-        # Skip headings, illustrations and other non-prose lines.
+        # Skip headings, illustrations and other non-prose lines, editorial notes
+        # and short footnote citations; strip footnote markers from the rest.
         if len(joined.split()) < 6 or joined.startswith("[Illustration"):
             continue
+        if EDITION_NOTE_RE.search(joined) or is_footnote_citation(joined):
+            continue
+        joined = strip_footnote_markers(joined)
         para = Paragraph(chapter=chapter_no, offset=chapter_offset + match.start())
         para.sentences = split_sentences(joined)
         paragraphs.append(para)
@@ -262,8 +312,12 @@ def term_candidates(sentence: str) -> List[str]:
     """Proper-noun phrases and numbers that could be the 'answer' of a question."""
     terms: List[str] = []
     for match in PROPER_NOUN_RE.finditer(sentence):
-        term = match.group(0).strip("'’-")
+        # "Romanesque--was": a dash joins the next word, it is not part of the name.
+        term = match.group(0).split("--")[0].strip("'’-")
         words = term.split()
+        # "Cipico WITHOUT": a trailing all-caps word is emphasis, not part of the name.
+        while len(words) > 1 and words[-1].isupper() and len(words[-1]) > 1:
+            words = words[:-1]
         # Drop leading stop-words ("The Captain" -> "Captain"; "But Ahab" -> "Ahab").
         while words and words[0].lower().strip("'’") in STOP_TERMS:
             words = words[1:]
@@ -275,7 +329,16 @@ def term_candidates(sentence: str) -> List[str]:
         if match.start() == 0 and len(words) == 1 and term == match.group(0):
             continue
         terms.append(term)
-    terms.extend(m.group(0) for m in NUMBER_RE.finditer(sentence))
+    # Roman numerals are almost always plate / section references ("Plate XIV", "§ III").
+    terms = [t for t in terms if not re.fullmatch(r"[IVXLC]+(?:st|nd|rd|th)?", t)]
+    # Numbers only count as answers when they are years or measurements; bare
+    # numbers are figure, plate or footnote references.
+    for m in NUMBER_RE.finditer(sentence):
+        number = m.group(0)
+        following = sentence[m.end():].lstrip(" ,").split(" ", 1)[0].lower().strip(".,;:)")
+        is_year = len(number) == 4 and number.isdigit() and 1000 <= int(number) <= 1900
+        if is_year or following in MEASURE_WORDS:
+            terms.append(number)
     # The term must occur exactly once so the fill-in-the-blank is unambiguous.
     return [t for t in dict.fromkeys(terms) if sentence.count(t) == 1]
 
@@ -304,6 +367,8 @@ def page_for_offset(offset: int, form_feed_offsets: List[int], chars_per_page: i
 
 
 def is_good_fact_sentence(sentence: str) -> bool:
+    if is_junk_sentence(sentence):
+        return False
     words = sentence.split()
     if not 8 <= len(words) <= 60:
         return False
@@ -329,7 +394,8 @@ def extract_candidates(
                 if key_term is None:
                     continue
 
-                others = [s for i, s in enumerate(para.sentences) if i != s_idx and len(s.split()) >= 5]
+                others = [s for i, s in enumerate(para.sentences)
+                          if i != s_idx and len(s.split()) >= 5 and not is_junk_sentence(s)]
 
                 # Definition: a descriptive sentence in the same paragraph, else the
                 # previous sentence, else the end of the previous paragraph.

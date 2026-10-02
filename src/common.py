@@ -25,7 +25,7 @@ import tempfile
 import time
 import unicodedata
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
 
 # --------------------------------------------------------------------------- #
 # Paths and constants
@@ -39,6 +39,8 @@ BOOK_TEXT_PATH: Path = DATA_DIR / "book_text.txt"
 UNITS_PATH: Path = DATA_DIR / "units.json"
 BOOK_META_PATH: Path = DATA_DIR / "book_meta.json"
 QUESTIONS_PATH: Path = DATA_DIR / "questions.json"
+TRAP_QUESTIONS_PATH: Path = DATA_DIR / "trap_questions.json"
+PRACTICAL_QUESTIONS_PATH: Path = DATA_DIR / "practical_questions.json"
 BASELINE_EVAL_PATH: Path = DATA_DIR / "baseline_eval.json"
 TRAINED_EVAL_PATH: Path = DATA_DIR / "trained_eval.json"
 BLIND_RESULTS_PATH: Path = DATA_DIR / "blind_results.json"
@@ -61,7 +63,8 @@ BASELINE_MAX_CORRECT: int = 10      # baseline must be <= 10/100, else wrong boo
 TARGET_AFTER_CORRECT: int = 85      # trained model must reach >= 85/100
 MAX_MADE_UP: int = 4                # hallucinations must be < 5
 NUM_QUESTIONS: int = 100
-NUM_PRACTICAL_QUESTIONS: int = 15   # subset used for the refusal metric
+NUM_PRACTICAL_QUESTIONS: int = 15   # data/practical_questions.json, used for the refusal metric
+NUM_TRAP_QUESTIONS: int = 60        # data/trap_questions.json, used for the hallucination check
 
 # Per-question wall-clock limit for generation (client requirement: 2 min).
 DEFAULT_QUESTION_TIMEOUT_S: float = 120.0
@@ -233,6 +236,56 @@ def cuda_available() -> bool:
         return False
 
 
+# A 7B model in 16-bit needs ~15 GB of VRAM for weights plus room for activations.
+# Below this, device_map="auto" would spill layers to CPU RAM, which is slower than
+# running the whole model in 4-bit on the GPU.
+GPU_16BIT_MIN_VRAM_GB: float = 18.0
+
+# Load modes returned by select_load_mode().
+MODE_CPU_BF16 = "cpu-bf16"
+MODE_GPU_16BIT = "gpu-16bit"
+MODE_GPU_4BIT = "gpu-4bit"
+
+
+def gpu_total_vram_gb() -> float:
+    """Total VRAM of all visible GPUs (device_map="auto" can spread across them)."""
+    import torch
+
+    return sum(
+        torch.cuda.get_device_properties(i).total_memory for i in range(torch.cuda.device_count())
+    ) / 1024 ** 3
+
+
+def select_load_mode(force_cpu: bool = False, for_training: bool = False) -> str:
+    """
+    Decide how to load a 7B model on this machine:
+
+      * no CUDA (or --cpu)          -> cpu-bf16  (~15 GB RAM)
+      * training                    -> gpu-4bit  (QLoRA trains on a 4-bit base)
+      * GPU with >= 18 GB VRAM      -> gpu-16bit (fastest inference, device_map="auto")
+      * smaller GPU                 -> gpu-4bit  (~5 GB VRAM, fits laptop GPUs)
+
+    Set PILOT_GPU_MODE=16bit or PILOT_GPU_MODE=4bit to override the inference choice.
+    """
+    try:
+        import torch
+    except ImportError:
+        return MODE_CPU_BF16
+    if force_cpu or not torch.cuda.is_available():
+        return MODE_CPU_BF16
+    if for_training:
+        return MODE_GPU_4BIT
+
+    override = os.environ.get("PILOT_GPU_MODE", "").strip().lower()
+    if override in ("16bit", "fp16", "bf16"):
+        return MODE_GPU_16BIT
+    if override == "4bit":
+        return MODE_GPU_4BIT
+    if override:
+        log.warning("Ignoring unknown PILOT_GPU_MODE=%r (use 16bit or 4bit).", override)
+    return MODE_GPU_16BIT if gpu_total_vram_gb() >= GPU_16BIT_MIN_VRAM_GB else MODE_GPU_4BIT
+
+
 def memory_report() -> str:
     """Human-readable RAM / VRAM usage, used for debugging OOMs."""
     parts: List[str] = []
@@ -294,19 +347,23 @@ def load_model(
     for_training: bool = False,
 ):
     """
-    Load a causal LM + tokenizer.
+    Load a causal LM + tokenizer, using the GPU automatically when available.
 
-    Quantisation strategy:
-      * CUDA available -> 4-bit NF4 via bitsandbytes (QLoRA-style, ~5 GB VRAM).
-      * CPU only       -> bfloat16 (~15 GB RAM for a 7B model).
+    The load mode comes from `select_load_mode` (see it for the exact rules):
+      * gpu-16bit -> device_map="auto", float16 (bfloat16 on GPUs that support
+                     it - same speed, and avoids fp16 overflow in Qwen2's
+                     activations). Fastest; needs ~15 GB VRAM.
+      * gpu-4bit  -> 4-bit NF4 via bitsandbytes (~5 GB VRAM). Used for QLoRA
+                     training and on GPUs too small for 16-bit.
+      * cpu-bf16  -> bfloat16 on CPU (~15 GB RAM). bitsandbytes 4-bit kernels
+                     are CUDA-only, so bf16 is the smallest CPU option here.
 
-    bitsandbytes 4-bit kernels are CUDA-only in the pinned version, so a
-    "4-bit model on CPU" is not possible with transformers + bitsandbytes.
-    bf16 is the smallest dtype that runs correctly on CPU in this stack; if the
-    machine has < 16 GB RAM, see the Troubleshooting section of the README.
+    The tokenizer has no device of its own: it produces CPU tensors, which
+    `generate_answer` / the blind scorer move to `model.device` (the device of
+    the embedding layer, also with device_map="auto").
 
-    If `adapter_dir` is given, the LoRA adapter is attached. On CPU (bf16) the
-    adapter is merged into the weights for faster generation.
+    If `adapter_dir` is given, the LoRA adapter is attached. On a non-quantised
+    model (cpu-bf16 / gpu-16bit) it is merged into the weights for faster generation.
     """
     try:
         import torch
@@ -314,10 +371,9 @@ def load_model(
     except ImportError as exc:
         die(f"Missing dependency ({exc}). Run: pip install -r requirements.txt")
 
-    use_gpu = cuda_available() and not force_cpu
+    mode = select_load_mode(force_cpu=force_cpu, for_training=for_training)
     # Tokenizer and weights are both loaded from this same (local) path.
     model_path = resolve_model_path(model_id)
-    log.info("Loading %s on %s ...", model_path, "GPU (4-bit NF4)" if use_gpu else "CPU (bf16)")
     t0 = time.time()
 
     try:
@@ -326,20 +382,32 @@ def load_model(
             tokenizer.pad_token = tokenizer.eos_token
 
         kwargs: Dict[str, Any] = {"low_cpu_mem_usage": True}
-        if use_gpu:
-            from transformers import BitsAndBytesConfig
-
-            compute_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
-            kwargs["quantization_config"] = BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_quant_type="nf4",
-                bnb_4bit_use_double_quant=True,
-                bnb_4bit_compute_dtype=compute_dtype,
-            )
-            kwargs["device_map"] = {"": 0}
-            kwargs["torch_dtype"] = compute_dtype
-        else:
+        if mode == MODE_CPU_BF16:
             kwargs["torch_dtype"] = torch.bfloat16
+            description = "CPU (bf16)"
+        else:
+            gpu_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+            dtype_name = "bf16" if gpu_dtype == torch.bfloat16 else "fp16"
+            if mode == MODE_GPU_16BIT:
+                kwargs["device_map"] = "auto"
+                kwargs["torch_dtype"] = gpu_dtype
+                description = f"GPU ({dtype_name}, device_map=auto, {gpu_total_vram_gb():.0f} GB VRAM)"
+            else:
+                from transformers import BitsAndBytesConfig
+
+                kwargs["quantization_config"] = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_quant_type="nf4",
+                    bnb_4bit_use_double_quant=True,
+                    bnb_4bit_compute_dtype=gpu_dtype,
+                )
+                kwargs["device_map"] = {"": 0}
+                kwargs["torch_dtype"] = gpu_dtype
+                reason = "QLoRA training" if for_training else (
+                    f"{gpu_total_vram_gb():.0f} GB VRAM < {GPU_16BIT_MIN_VRAM_GB:.0f} GB needed for 16-bit"
+                    if not os.environ.get("PILOT_GPU_MODE") else "PILOT_GPU_MODE=4bit")
+                description = f"GPU (4-bit NF4, {reason})"
+        log.info("Loading %s on %s ...", model_path, description)
 
         model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs)
     except OSError as exc:
@@ -351,11 +419,18 @@ def load_model(
         )
     except RuntimeError as exc:
         if "out of memory" in str(exc).lower():
-            die(f"Out of memory while loading the model. {memory_report()}")
+            hint = " Try PILOT_GPU_MODE=4bit." if mode == MODE_GPU_16BIT else ""
+            die(f"Out of memory while loading the model. {memory_report()}{hint}")
         raise
 
+    if mode == MODE_GPU_16BIT and any(
+        str(dev) in ("cpu", "disk") for dev in getattr(model, "hf_device_map", {}).values()
+    ):
+        log.warning("Part of the model was offloaded to CPU/disk - this is slow. "
+                    "Set PILOT_GPU_MODE=4bit to keep the whole model on the GPU.")
+
     if adapter_dir is not None:
-        model = attach_adapter(model, adapter_dir, merge=not use_gpu)
+        model = attach_adapter(model, adapter_dir, merge=mode != MODE_GPU_4BIT)
 
     if not for_training:
         model.eval()
@@ -404,6 +479,7 @@ def generate_answer(
     question: str,
     max_new_tokens: int = 48,
     timeout_s: float = DEFAULT_QUESTION_TIMEOUT_S,
+    system_prompt: str = QA_SYSTEM_PROMPT,
 ) -> Tuple[str, bool, float]:
     """
     Greedy-decode an answer to `question`.
@@ -414,7 +490,7 @@ def generate_answer(
     """
     import torch
 
-    prompt = build_chat_prompt(tokenizer, question, QA_SYSTEM_PROMPT)
+    prompt = build_chat_prompt(tokenizer, question, system_prompt)
     # The chat template already contains any special tokens, so don't add more;
     # token_type_ids are dropped because causal LMs' generate() rejects them.
     inputs = tokenizer(prompt, return_tensors="pt", add_special_tokens=False, return_token_type_ids=False).to(model.device)
@@ -447,9 +523,16 @@ def run_qa_evaluation(
     extra_meta: Optional[Dict[str, Any]] = None,
     timeout_s: float = DEFAULT_QUESTION_TIMEOUT_S,
     resume: bool = True,
+    system_prompt: str = QA_SYSTEM_PROMPT,
+    max_new_tokens: int = 48,
+    grader: Optional[Callable[[Dict[str, Any], str], Optional[int]]] = None,
 ) -> Dict[str, Any]:
     """
     Ask every question, grade it, and save results to `out_path`.
+
+    `grader(question, answer)` returns 1/0, or None when the answer can only be
+    graded by the blind judge (free-text answers). The default is the
+    fill-in-the-blank string match used for the knowledge questions.
 
     The file is rewritten after every question, so an interrupted CPU run
     (which can take an hour) resumes where it stopped when re-launched.
@@ -460,9 +543,17 @@ def run_qa_evaluation(
     done: Dict[str, Dict[str, Any]] = {}
     if isinstance(existing, dict) and existing.get("label") == label:
         # Questions that errored last time are asked again.
-        done = {r["id"]: r for r in existing.get("results", []) if "id" in r and not r.get("error")}
+        # A saved answer is only reused if the question text is identical, so a
+        # rebuilt question set never inherits answers to different questions.
+        current = {q["id"]: q["question"] for q in questions}
+        done = {r["id"]: r for r in existing.get("results", [])
+                if "id" in r and not r.get("error") and current.get(r["id"]) == r.get("question")}
         if done:
             log.info("Resuming %s evaluation: %d/%d already answered.", label, len(done), len(questions))
+
+    if grader is None:
+        def grader(q: Dict[str, Any], answer: str) -> Optional[int]:
+            return int(is_answer_correct(answer, q["answer"], q.get("aliases", [])))
 
     results: List[Dict[str, Any]] = []
     correct = 0
@@ -472,7 +563,10 @@ def run_qa_evaluation(
             record = done[q["id"]]
         else:
             try:
-                answer, timed_out, secs = generate_answer(model, tokenizer, q["question"], timeout_s=timeout_s)
+                answer, timed_out, secs = generate_answer(
+                    model, tokenizer, q["question"], max_new_tokens=max_new_tokens,
+                    timeout_s=timeout_s, system_prompt=system_prompt,
+                )
                 error = None
             except Exception as exc:  # noqa: BLE001 - one bad question must not kill the run
                 answer, timed_out, secs, error = "", False, 0.0, f"{type(exc).__name__}: {exc}"
@@ -483,14 +577,14 @@ def run_qa_evaluation(
                 "question": q["question"],
                 "reference_answer": q["answer"],
                 "model_answer": answer,
-                "is_correct": int(is_answer_correct(answer, q["answer"], q.get("aliases", []))),
+                "is_correct": grader(q, answer) if not error else 0,
                 "is_refusal": int(is_refusal(answer)),
                 "timed_out": timed_out,
                 "seconds": round(secs, 1),
                 "error": error,
             }
         results.append(record)
-        correct += record["is_correct"]
+        correct += record["is_correct"] or 0
         bar.set_postfix(correct=f"{correct}/{len(results)}")
 
         payload = _eval_payload(label, results, len(questions), extra_meta)
@@ -511,7 +605,8 @@ def run_qa_evaluation(
 def _eval_payload(
     label: str, results: List[Dict[str, Any]], total: int, extra_meta: Optional[Dict[str, Any]]
 ) -> Dict[str, Any]:
-    correct = sum(r["is_correct"] for r in results)
+    graded = [r for r in results if r["is_correct"] is not None]
+    correct = sum(r["is_correct"] for r in graded)
     return {
         "label": label,
         "model": BASE_MODEL_ID,
@@ -520,7 +615,12 @@ def _eval_payload(
             "answered": len(results),
             "total": total,
             "correct": correct,
-            "accuracy": round(correct / max(len(results), 1), 4),
+            "graded": len(graded),
+            "accuracy": round(correct / max(len(graded), 1), 4),
+            # String-matched answers that are wrong but not a refusal. For trap
+            # questions this is the string-match hallucination count.
+            "wrong_non_refusal": sum(1 for r in graded if not r["is_correct"] and not r["is_refusal"]),
+            "needs_judge": len(results) - len(graded),
             "refusals": sum(r["is_refusal"] for r in results),
             "timeouts": sum(1 for r in results if r["timed_out"]),
             "errors": sum(1 for r in results if r.get("error")),
