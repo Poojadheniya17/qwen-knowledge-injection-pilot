@@ -340,6 +340,15 @@ def resolve_model_path(model_id: str) -> str:
     return str(path)
 
 
+def _bitsandbytes_available() -> bool:
+    """Check if bitsandbytes is installed and working."""
+    try:
+        import bitsandbytes  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
 def load_model(
     model_id: str,
     adapter_dir: Optional[Path] = None,
@@ -354,7 +363,8 @@ def load_model(
                      it - same speed, and avoids fp16 overflow in Qwen2's
                      activations). Fastest; needs ~15 GB VRAM.
       * gpu-4bit  -> 4-bit NF4 via bitsandbytes (~5 GB VRAM). Used for QLoRA
-                     training and on GPUs too small for 16-bit.
+                     training and on GPUs too small for 16-bit. Falls back to
+                     full-precision GPU if bitsandbytes is not installed.
       * cpu-bf16  -> bfloat16 on CPU (~15 GB RAM). bitsandbytes 4-bit kernels
                      are CUDA-only, so bf16 is the smallest CPU option here.
 
@@ -393,33 +403,60 @@ def load_model(
                 kwargs["torch_dtype"] = gpu_dtype
                 description = f"GPU ({dtype_name}, device_map=auto, {gpu_total_vram_gb():.0f} GB VRAM)"
             else:
-                # Use native transformers 4-bit loading instead of bitsandbytes config.
-                # This avoids bitsandbytes CUDA detection failures on Windows while GPU is available.
-                kwargs["load_in_4bit"] = True
-                kwargs["bnb_4bit_quant_type"] = "nf4"
-                kwargs["bnb_4bit_use_double_quant"] = True
-                kwargs["bnb_4bit_compute_dtype"] = gpu_dtype
-                kwargs["device_map"] = "auto"
-                kwargs["torch_dtype"] = gpu_dtype
-                reason = "QLoRA training" if for_training else (
-                    f"{gpu_total_vram_gb():.0f} GB VRAM < {GPU_16BIT_MIN_VRAM_GB:.0f} GB needed for 16-bit"
-                    if not os.environ.get("PILOT_GPU_MODE") else "PILOT_GPU_MODE=4bit")
-                description = f"GPU (4-bit NF4, {reason})"
+                # GPU 4-bit mode: try 4-bit quantization if bitsandbytes is available,
+                # else fall back to full-precision GPU loading.
+                if _bitsandbytes_available():
+                    # Use native transformers 4-bit loading with bitsandbytes.
+                    kwargs["load_in_4bit"] = True
+                    kwargs["bnb_4bit_quant_type"] = "nf4"
+                    kwargs["bnb_4bit_use_double_quant"] = True
+                    kwargs["bnb_4bit_compute_dtype"] = gpu_dtype
+                    kwargs["device_map"] = "auto"
+                    kwargs["torch_dtype"] = gpu_dtype
+                    reason = "QLoRA training" if for_training else (
+                        f"{gpu_total_vram_gb():.0f} GB VRAM < {GPU_16BIT_MIN_VRAM_GB:.0f} GB needed for 16-bit"
+                        if not os.environ.get("PILOT_GPU_MODE") else "PILOT_GPU_MODE=4bit")
+                    description = f"GPU (4-bit NF4, {reason})"
+                else:
+                    # bitsandbytes not available: load full-precision on GPU instead.
+                    # This uses more VRAM but avoids bitsandbytes CUDA detection issues on Windows.
+                    log.warning("bitsandbytes not installed; loading full-precision on GPU instead of 4-bit. "
+                                "Install bitsandbytes (pip install bitsandbytes) for 4-bit quantization.")
+                    kwargs["device_map"] = "auto"
+                    kwargs["torch_dtype"] = gpu_dtype
+                    reason = "bitsandbytes not available; full-precision fallback"
+                    description = f"GPU ({dtype_name}, device_map=auto, {reason}, {gpu_total_vram_gb():.0f} GB VRAM)"
         log.info("Loading %s on %s ...", model_path, description)
 
         model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs)
-    except OSError as exc:
-        die(
-            f"Could not load '{model_path}': {exc}\n"
-            "For a local folder, check the download finished (re-run huggingface-cli download). "
-            "For a hub id, check your internet connection and (for gated models such as "
-            "Llama-2) that you ran `huggingface-cli login` and accepted the licence."
-        )
-    except RuntimeError as exc:
-        if "out of memory" in str(exc).lower():
-            hint = " Try PILOT_GPU_MODE=4bit." if mode == MODE_GPU_16BIT else ""
-            die(f"Out of memory while loading the model. {memory_report()}{hint}")
-        raise
+    except (OSError, RuntimeError) as exc:
+        # If GPU loading fails, try falling back to CPU
+        if isinstance(exc, RuntimeError) and "out of memory" not in str(exc).lower():
+            raise
+
+        # Only try CPU fallback if we haven't already set force_cpu
+        if not force_cpu and mode != MODE_CPU_BF16:
+            log.warning("GPU loading failed (%s); falling back to CPU. This will be slow.", exc)
+            try:
+                kwargs_cpu = {"low_cpu_mem_usage": True, "torch_dtype": torch.bfloat16}
+                model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs_cpu)
+                log.info("Model loaded on CPU (bf16) as fallback")
+            except Exception as exc_cpu:
+                die(f"Failed to load on both GPU and CPU: {exc_cpu}")
+        else:
+            # Original error handling for when we're already on CPU or force_cpu is set
+            if isinstance(exc, OSError):
+                die(
+                    f"Could not load '{model_path}': {exc}\n"
+                    "For a local folder, check the download finished (re-run huggingface-cli download). "
+                    "For a hub id, check your internet connection and (for gated models such as "
+                    "Llama-2) that you ran `huggingface-cli login` and accepted the licence."
+                )
+            elif "out of memory" in str(exc).lower():
+                hint = " Try PILOT_GPU_MODE=4bit." if mode == MODE_GPU_16BIT else ""
+                die(f"Out of memory while loading the model. {memory_report()}{hint}")
+            else:
+                raise
 
     if mode == MODE_GPU_16BIT and any(
         str(dev) in ("cpu", "disk") for dev in getattr(model, "hf_device_map", {}).values()
