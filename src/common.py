@@ -419,7 +419,12 @@ def load_model(
             kwargs["torch_dtype"] = torch.bfloat16
             description = "CPU (bf16)"
         else:
-            gpu_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+            # Try to detect bf16 support; fall back to fp16 if CUDA check fails
+            try:
+                gpu_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+            except (RuntimeError, AssertionError):
+                # torch not compiled with CUDA (e.g., DirectML): use fp16
+                gpu_dtype = torch.float16
             dtype_name = "bf16" if gpu_dtype == torch.bfloat16 else "fp16"
             if mode == MODE_GPU_16BIT:
                 kwargs["device_map"] = "auto"
