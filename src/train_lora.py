@@ -1,5 +1,5 @@
 """
-Step 3 - Inject the book's knowledge with a QLoRA adapter (GPU required).
+Step 3 - Inject the book's knowledge with a QLoRA adapter (GPU recommended, CPU supported).
 
 Input : data/units.json, data/book_meta.json, data/questions.json
 Output: adapter/              (LoRA weights + tokenizer + training config)
@@ -276,8 +276,10 @@ def main() -> None:
              args.batch_size * args.grad_accum, steps_per_epoch, total_steps, warmup)
 
     # Use fp16 for GPU training (lower memory, faster), bf16 if supported
+    # Disable mixed precision on CPU (use full precision instead)
+    cuda_available = torch.cuda.is_available()
     try:
-        bf16 = torch.cuda.is_bf16_supported() if torch.cuda.is_available() else False
+        bf16 = torch.cuda.is_bf16_supported() if cuda_available else False
     except (AttributeError, RuntimeError, AssertionError):
         bf16 = False  # CPU or GPU without bf16 support
 
@@ -290,9 +292,9 @@ def main() -> None:
         warmup_steps=warmup,
         lr_scheduler_type="cosine",
         optim="adamw_torch",  # Regular AdamW (no bitsandbytes needed)
-        bf16=bf16,
-        fp16=not bf16 and torch.cuda.is_available(),  # fp16 only on GPU
-        gradient_checkpointing=True,
+        bf16=bf16 and cuda_available,  # bf16 only on GPU
+        fp16=not bf16 and cuda_available,  # fp16 only on GPU (not on CPU)
+        gradient_checkpointing=cuda_available,  # Only use gradient checkpointing on GPU (adds overhead on CPU)
         logging_steps=1,
         save_strategy="no",           # adapter is saved explicitly at the end
         report_to="none",
@@ -338,10 +340,13 @@ def main() -> None:
     t0 = time.time()
     try:
         trainer.train()
-    except torch.cuda.OutOfMemoryError:
-        update_results({"training": {"status": "failed_oom", "config": config_record, "loss_history": loss_history}})
-        die(f"CUDA out of memory ({memory_report()}). Keep the effective batch the same but lower the "
-            f"per-step batch, e.g.:  python src/train_lora.py --batch-size 2 --grad-accum 16")
+    except (torch.cuda.OutOfMemoryError, RuntimeError) as e:
+        if "out of memory" in str(e).lower() or "cuda out of memory" in str(e).lower():
+            update_results({"training": {"status": "failed_oom", "config": config_record, "loss_history": loss_history}})
+            die(f"Out of memory ({memory_report()}). Keep the effective batch the same but lower the "
+                f"per-step batch, e.g.:  python src/train_lora.py --batch-size 2 --grad-accum 16")
+        else:
+            raise
     except KeyboardInterrupt:
         update_results({"training": {"status": "interrupted", "config": config_record, "loss_history": loss_history}})
         die("Training interrupted; no adapter saved.", code=130)
