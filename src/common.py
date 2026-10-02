@@ -251,9 +251,15 @@ def gpu_total_vram_gb() -> float:
     """Total VRAM of all visible GPUs (device_map="auto" can spread across them)."""
     import torch
 
-    return sum(
-        torch.cuda.get_device_properties(i).total_memory for i in range(torch.cuda.device_count())
-    ) / 1024 ** 3
+    try:
+        if not torch.cuda.is_available():
+            return 0.0
+        return sum(
+            torch.cuda.get_device_properties(i).total_memory for i in range(torch.cuda.device_count())
+        ) / 1024 ** 3
+    except (RuntimeError, AssertionError):
+        # CUDA not available or torch not compiled with CUDA
+        return 0.0
 
 
 def select_load_mode(force_cpu: bool = False, for_training: bool = False) -> str:
@@ -316,11 +322,15 @@ def memory_report() -> str:
     try:
         import torch
 
-        if torch.cuda.is_available():
-            alloc = torch.cuda.memory_allocated() / 1024 ** 3
-            peak = torch.cuda.max_memory_allocated() / 1024 ** 3
-            total = torch.cuda.get_device_properties(0).total_memory / 1024 ** 3
-            parts.append(f"VRAM {alloc:.1f} GB (peak {peak:.1f} / {total:.1f} GB)")
+        try:
+            if torch.cuda.is_available():
+                alloc = torch.cuda.memory_allocated() / 1024 ** 3
+                peak = torch.cuda.max_memory_allocated() / 1024 ** 3
+                total = torch.cuda.get_device_properties(0).total_memory / 1024 ** 3
+                parts.append(f"VRAM {alloc:.1f} GB (peak {peak:.1f} / {total:.1f} GB)")
+        except (RuntimeError, AssertionError):
+            # torch not compiled with CUDA - skip VRAM reporting
+            pass
     except Exception:  # noqa: BLE001
         pass
     return ", ".join(parts) or "memory stats unavailable"
@@ -456,7 +466,16 @@ def load_model(
                     description = f"GPU ({dtype_name}, device_map=auto, {reason}, {gpu_total_vram_gb():.0f} GB VRAM)"
         log.info("Loading %s on %s ...", model_path, description)
 
-        model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs)
+        try:
+            model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs)
+        except RuntimeError as exc:
+            # If device_map="auto" fails (e.g., DirectML not working), try without device_map
+            if "device_map" in kwargs and ("cuda" in str(exc).lower() or "device" in str(exc).lower()):
+                log.warning("device_map='auto' failed (%s); retrying without device_map (will use CPU).", exc)
+                kwargs_retry = {k: v for k, v in kwargs.items() if k != "device_map"}
+                model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs_retry)
+            else:
+                raise
     except (OSError, RuntimeError) as exc:
         # If GPU loading fails, try falling back to CPU
         if isinstance(exc, RuntimeError) and "out of memory" not in str(exc).lower():
@@ -486,11 +505,15 @@ def load_model(
             else:
                 raise
 
-    if mode == MODE_GPU_16BIT and any(
-        str(dev) in ("cpu", "disk") for dev in getattr(model, "hf_device_map", {}).values()
-    ):
-        log.warning("Part of the model was offloaded to CPU/disk - this is slow. "
-                    "Set PILOT_GPU_MODE=4bit to keep the whole model on the GPU.")
+    # Check for CPU/disk offloading (only if device_map was used)
+    try:
+        if mode == MODE_GPU_16BIT and any(
+            str(dev) in ("cpu", "disk") for dev in getattr(model, "hf_device_map", {}).values()
+        ):
+            log.warning("Part of the model was offloaded to CPU/disk - this is slow. "
+                        "Set PILOT_GPU_MODE=4bit to keep the whole model on the GPU.")
+    except Exception:  # noqa: BLE001 - ignore any issues checking device_map
+        pass
 
     if adapter_dir is not None:
         model = attach_adapter(model, adapter_dir, merge=mode != MODE_GPU_4BIT)
