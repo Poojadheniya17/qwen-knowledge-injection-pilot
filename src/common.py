@@ -25,7 +25,7 @@ import tempfile
 import time
 import unicodedata
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
 
 # --------------------------------------------------------------------------- #
 # Paths and constants
@@ -39,6 +39,8 @@ BOOK_TEXT_PATH: Path = DATA_DIR / "book_text.txt"
 UNITS_PATH: Path = DATA_DIR / "units.json"
 BOOK_META_PATH: Path = DATA_DIR / "book_meta.json"
 QUESTIONS_PATH: Path = DATA_DIR / "questions.json"
+TRAP_QUESTIONS_PATH: Path = DATA_DIR / "trap_questions.json"
+PRACTICAL_QUESTIONS_PATH: Path = DATA_DIR / "practical_questions.json"
 BASELINE_EVAL_PATH: Path = DATA_DIR / "baseline_eval.json"
 TRAINED_EVAL_PATH: Path = DATA_DIR / "trained_eval.json"
 BLIND_RESULTS_PATH: Path = DATA_DIR / "blind_results.json"
@@ -61,7 +63,8 @@ BASELINE_MAX_CORRECT: int = 10      # baseline must be <= 10/100, else wrong boo
 TARGET_AFTER_CORRECT: int = 85      # trained model must reach >= 85/100
 MAX_MADE_UP: int = 4                # hallucinations must be < 5
 NUM_QUESTIONS: int = 100
-NUM_PRACTICAL_QUESTIONS: int = 15   # subset used for the refusal metric
+NUM_PRACTICAL_QUESTIONS: int = 15   # data/practical_questions.json, used for the refusal metric
+NUM_TRAP_QUESTIONS: int = 60        # data/trap_questions.json, used for the hallucination check
 
 # Per-question wall-clock limit for generation (client requirement: 2 min).
 DEFAULT_QUESTION_TIMEOUT_S: float = 120.0
@@ -476,6 +479,7 @@ def generate_answer(
     question: str,
     max_new_tokens: int = 48,
     timeout_s: float = DEFAULT_QUESTION_TIMEOUT_S,
+    system_prompt: str = QA_SYSTEM_PROMPT,
 ) -> Tuple[str, bool, float]:
     """
     Greedy-decode an answer to `question`.
@@ -486,7 +490,7 @@ def generate_answer(
     """
     import torch
 
-    prompt = build_chat_prompt(tokenizer, question, QA_SYSTEM_PROMPT)
+    prompt = build_chat_prompt(tokenizer, question, system_prompt)
     # The chat template already contains any special tokens, so don't add more;
     # token_type_ids are dropped because causal LMs' generate() rejects them.
     inputs = tokenizer(prompt, return_tensors="pt", add_special_tokens=False, return_token_type_ids=False).to(model.device)
@@ -519,9 +523,16 @@ def run_qa_evaluation(
     extra_meta: Optional[Dict[str, Any]] = None,
     timeout_s: float = DEFAULT_QUESTION_TIMEOUT_S,
     resume: bool = True,
+    system_prompt: str = QA_SYSTEM_PROMPT,
+    max_new_tokens: int = 48,
+    grader: Optional[Callable[[Dict[str, Any], str], Optional[int]]] = None,
 ) -> Dict[str, Any]:
     """
     Ask every question, grade it, and save results to `out_path`.
+
+    `grader(question, answer)` returns 1/0, or None when the answer can only be
+    graded by the blind judge (free-text answers). The default is the
+    fill-in-the-blank string match used for the knowledge questions.
 
     The file is rewritten after every question, so an interrupted CPU run
     (which can take an hour) resumes where it stopped when re-launched.
@@ -532,9 +543,17 @@ def run_qa_evaluation(
     done: Dict[str, Dict[str, Any]] = {}
     if isinstance(existing, dict) and existing.get("label") == label:
         # Questions that errored last time are asked again.
-        done = {r["id"]: r for r in existing.get("results", []) if "id" in r and not r.get("error")}
+        # A saved answer is only reused if the question text is identical, so a
+        # rebuilt question set never inherits answers to different questions.
+        current = {q["id"]: q["question"] for q in questions}
+        done = {r["id"]: r for r in existing.get("results", [])
+                if "id" in r and not r.get("error") and current.get(r["id"]) == r.get("question")}
         if done:
             log.info("Resuming %s evaluation: %d/%d already answered.", label, len(done), len(questions))
+
+    if grader is None:
+        def grader(q: Dict[str, Any], answer: str) -> Optional[int]:
+            return int(is_answer_correct(answer, q["answer"], q.get("aliases", [])))
 
     results: List[Dict[str, Any]] = []
     correct = 0
@@ -544,7 +563,10 @@ def run_qa_evaluation(
             record = done[q["id"]]
         else:
             try:
-                answer, timed_out, secs = generate_answer(model, tokenizer, q["question"], timeout_s=timeout_s)
+                answer, timed_out, secs = generate_answer(
+                    model, tokenizer, q["question"], max_new_tokens=max_new_tokens,
+                    timeout_s=timeout_s, system_prompt=system_prompt,
+                )
                 error = None
             except Exception as exc:  # noqa: BLE001 - one bad question must not kill the run
                 answer, timed_out, secs, error = "", False, 0.0, f"{type(exc).__name__}: {exc}"
@@ -555,14 +577,14 @@ def run_qa_evaluation(
                 "question": q["question"],
                 "reference_answer": q["answer"],
                 "model_answer": answer,
-                "is_correct": int(is_answer_correct(answer, q["answer"], q.get("aliases", []))),
+                "is_correct": grader(q, answer) if not error else 0,
                 "is_refusal": int(is_refusal(answer)),
                 "timed_out": timed_out,
                 "seconds": round(secs, 1),
                 "error": error,
             }
         results.append(record)
-        correct += record["is_correct"]
+        correct += record["is_correct"] or 0
         bar.set_postfix(correct=f"{correct}/{len(results)}")
 
         payload = _eval_payload(label, results, len(questions), extra_meta)
@@ -583,7 +605,8 @@ def run_qa_evaluation(
 def _eval_payload(
     label: str, results: List[Dict[str, Any]], total: int, extra_meta: Optional[Dict[str, Any]]
 ) -> Dict[str, Any]:
-    correct = sum(r["is_correct"] for r in results)
+    graded = [r for r in results if r["is_correct"] is not None]
+    correct = sum(r["is_correct"] for r in graded)
     return {
         "label": label,
         "model": BASE_MODEL_ID,
@@ -592,7 +615,12 @@ def _eval_payload(
             "answered": len(results),
             "total": total,
             "correct": correct,
-            "accuracy": round(correct / max(len(results), 1), 4),
+            "graded": len(graded),
+            "accuracy": round(correct / max(len(graded), 1), 4),
+            # String-matched answers that are wrong but not a refusal. For trap
+            # questions this is the string-match hallucination count.
+            "wrong_non_refusal": sum(1 for r in graded if not r["is_correct"] and not r["is_refusal"]),
+            "needs_judge": len(results) - len(graded),
             "refusals": sum(r["is_refusal"] for r in results),
             "timeouts": sum(1 for r in results if r["timed_out"]),
             "errors": sum(1 for r in results if r.get("error")),

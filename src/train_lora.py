@@ -15,6 +15,8 @@ enough for reliable recall):
   3. "Give the example the book uses after: <fact>"    -> example
   4. fill-in-the-blank on the *definition* sentence    -> missing term
      (teaches the answer format; never reuses a test question)
+  Units without a key term (kept for training only) get view 3 plus
+  "Continue this passage: <definition>" -> fact + example instead of 1 and 2.
 
 Loss is computed on the assistant's reply only (prompt tokens are masked).
 Any example whose prompt+answer pair equals a test question is dropped, so
@@ -74,12 +76,22 @@ def build_examples(units: List[Dict[str, Any]], title: str, test_pairs: Set[Tupl
     for u in units:
         chapter, page = u["link"].split(":")
         views = [
-            (f'What does chapter {chapter} of "{title}" say about {u["key_term"]}?', u["fact"]),
-            (f'Recite the passage from "{title}", chapter {chapter}, page {page}, that mentions {u["key_term"]}.',
-             f'{u["definition"]} {u["fact"]} {u["example"]}'),
             (f'In "{title}", what example does the book give right after this statement?\n"{u["fact"]}"',
              u["example"]),
         ]
+        if u.get("key_term"):
+            views += [
+                (f'What does chapter {chapter} of "{title}" say about {u["key_term"]}?', u["fact"]),
+                (f'Recite the passage from "{title}", chapter {chapter}, page {page}, that mentions {u["key_term"]}.',
+                 f'{u["definition"]} {u["fact"]} {u["example"]}'),
+            ]
+        else:
+            # Training-only unit (no good answer term): anchor the prompts on the
+            # unit's own text instead, so they stay unique.
+            views.append(
+                (f'Continue this passage from "{title}", chapter {chapter}:\n"{u["definition"]}"',
+                 f'{u["fact"]} {u["example"]}')
+            )
         def_term = choose_key_term(u["definition"], Counter())  # no freq info -> longest term
         if def_term and BLANK not in u["definition"]:
             views.append(

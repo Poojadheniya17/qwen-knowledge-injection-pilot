@@ -1,0 +1,1668 @@
+{
+  "summary": {
+    "units_before": 307,
+    "units_after": 272,
+    "question_eligible": 250,
+    "added_from_book": 0,
+    "actions": {
+      "dropped": 35,
+      "training_only": 22,
+      "unchanged": 203,
+      "rekeyed": 19,
+      "markers_removed": 28
+    },
+    "drop_reasons": {
+      "editorial_note": 4,
+      "figure_fragment": 29,
+      "footnote_citation": 2
+    }
+  },
+  "units": [
+    {
+      "id": "u0001",
+      "old_key_term": "Project Gutenberg",
+      "action": "dropped",
+      "reason": "editorial_note",
+      "fact": "Note: Project Gutenberg also has an HTML version of this file which includes the original illustrations."
+    },
+    {
+      "id": "u0002",
+      "old_key_term": "Volume III",
+      "action": "dropped",
+      "reason": "editorial_note",
+      "fact": "Volume III contains the index for all three volumes."
+    },
+    {
+      "id": "u0003",
+      "old_key_term": "Preface",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0004",
+      "old_key_term": "Venetian",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0005",
+      "old_key_term": "Fabbriche",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0006",
+      "old_key_term": "Mark's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0007",
+      "old_key_term": "1844",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0008",
+      "old_key_term": "First Chapter",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0009",
+      "old_key_term": "Venice",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0010",
+      "old_key_term": "Second",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0011",
+      "old_key_term": "Hundred",
+      "action": "rekeyed",
+      "new_key_term": "Venetia"
+    },
+    {
+      "id": "u0012",
+      "old_key_term": "Doge Tomaso Mocenigo",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0013",
+      "old_key_term": "Inquisition of State",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0014",
+      "old_key_term": "Europe",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0015",
+      "old_key_term": "Alexander III",
+      "action": "rekeyed",
+      "new_key_term": "Alexander"
+    },
+    {
+      "id": "u0016",
+      "old_key_term": "Chiesa Ducale",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0017",
+      "old_key_term": "Rivo Alto",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0018",
+      "old_key_term": "Clement",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0019",
+      "old_key_term": "Italy",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0020",
+      "old_key_term": "Gentile",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0021",
+      "old_key_term": "Pesaro",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0022",
+      "old_key_term": "Mark",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0023",
+      "old_key_term": "Titian's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0024",
+      "old_key_term": "Architecture",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0025",
+      "old_key_term": "Canal Grant",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0026",
+      "old_key_term": "Istria",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0027",
+      "old_key_term": "East",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0028",
+      "old_key_term": "European",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0029",
+      "old_key_term": "Decorated",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0030",
+      "old_key_term": "Romans",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0031",
+      "old_key_term": "Romanesque--was",
+      "action": "rekeyed",
+      "new_key_term": "Constantinople"
+    },
+    {
+      "id": "u0032",
+      "old_key_term": "Indian Ocean",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0033",
+      "old_key_term": "Lombard",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0034",
+      "old_key_term": "Christian Roman",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0035",
+      "old_key_term": "Arab",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0036",
+      "old_key_term": "European",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0037",
+      "old_key_term": "Alexandria",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0038",
+      "old_key_term": "Piazetta",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0039",
+      "old_key_term": "Franciscans",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0040",
+      "old_key_term": "Rationalist",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0041",
+      "old_key_term": "Caracci",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0042",
+      "old_key_term": "Poussins",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0043",
+      "old_key_term": "Tomaso Mocenigo",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0044",
+      "old_key_term": "Verona",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0045",
+      "old_key_term": "Middle Ages",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0046",
+      "old_key_term": "1478",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0047",
+      "old_key_term": "Mocenigo",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0048",
+      "old_key_term": "Istria",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0049",
+      "old_key_term": "Doge Mocenigo",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0050",
+      "old_key_term": "Paglia",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0051",
+      "old_key_term": "Renaissance",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0052",
+      "old_key_term": "Architect",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0053",
+      "old_key_term": "Rationalist",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0054",
+      "old_key_term": "Ominously",
+      "action": "rekeyed",
+      "new_key_term": "1509"
+    },
+    {
+      "id": "u0055",
+      "old_key_term": "Monasteries",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0056",
+      "old_key_term": "29",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0057",
+      "old_key_term": "31",
+      "action": "rekeyed",
+      "new_key_term": "London"
+    },
+    {
+      "id": "u0058",
+      "old_key_term": "Niobe of May",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0059",
+      "old_key_term": "Wall Veil",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0060",
+      "old_key_term": "String",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0061",
+      "old_key_term": "Cornice",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0062",
+      "old_key_term": "Mont Cervin",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0063",
+      "old_key_term": "DRIPSTONE",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0064",
+      "old_key_term": "Pyramids",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0065",
+      "old_key_term": "Bristol",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0066",
+      "old_key_term": "Jacob",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0067",
+      "old_key_term": "Greek",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0068",
+      "old_key_term": "Shaft",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0069",
+      "old_key_term": "Lindisfarne",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0070",
+      "old_key_term": "Italy",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0071",
+      "old_key_term": "Greek",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "XV.) are exactly of the same size, but their expression is altogether different, and in that difference lies one of the most subtle distinctions between the Got"
+    },
+    {
+      "id": "u0072",
+      "old_key_term": "Monza",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0073",
+      "old_key_term": "Greek Doric",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0074",
+      "old_key_term": "Poet's Corner",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0075",
+      "old_key_term": "Romanesque",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "XXVII.) are three examples of the transition: the one on the left, at the top, is the earliest single-shafted arrangement, constant in the rough Romanesque wind"
+    },
+    {
+      "id": "u0076",
+      "old_key_term": "Zeno of Verona",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0077",
+      "old_key_term": "Coutances",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0078",
+      "old_key_term": "Lombardic",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "XIV., of which the Lombardic sculptors were excessively fond, usually tying the shafts together in their centre, in a lover's knot."
+    },
+    {
+      "id": "u0079",
+      "old_key_term": "Northern",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0080",
+      "old_key_term": "Rhone",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "13 is the nave pier of St. Michele at Pavia, showing the same condition more fully developed: and 11 another nave pier from Vienne, on the Rhone, of far more di"
+    },
+    {
+      "id": "u0081",
+      "old_key_term": "Gervais of Falaise",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0082",
+      "old_key_term": "Gothic",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0083",
+      "old_key_term": "43",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0084",
+      "old_key_term": "Abacus",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0085",
+      "old_key_term": "Lombardic",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0086",
+      "old_key_term": "47",
+      "action": "rekeyed",
+      "new_key_term": "Early English"
+    },
+    {
+      "id": "u0087",
+      "old_key_term": "Milan",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0088",
+      "old_key_term": "Continuous",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0089",
+      "old_key_term": "Arch",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0090",
+      "old_key_term": "Line of Resistance",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0091",
+      "old_key_term": "Moorish",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0092",
+      "old_key_term": "Mont Cenis",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0093",
+      "old_key_term": "Mylodon's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0094",
+      "old_key_term": "Carnarvon Castle",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "3 is a window from Carnarvon Castle, and very primitive and interesting in manner,--one of its arches being of one stone, the other of two."
+    },
+    {
+      "id": "u0095",
+      "old_key_term": "Eremitani",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "6, from the Eremitani, Padua, is very quaint and primitive in manner: it is a curious church altogether, and has some strange traceries cut out of single blocks"
+    },
+    {
+      "id": "u0096",
+      "old_key_term": "San Fermo of Verona",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "5, the simple two-pieced construction, wrought with the most exquisite proportion and precision of workmanship, as is everything else in the glorious church to "
+    },
+    {
+      "id": "u0097",
+      "old_key_term": "Plate IV",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "8, Plate IV., are the general types of the construction with three pieces, uncusped and cusped; _c_ and _d_ with five pieces, uncusped and cusped."
+    },
+    {
+      "id": "u0098",
+      "old_key_term": "Plate III",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0099",
+      "old_key_term": "Maffei's",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0100",
+      "old_key_term": "Valence",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "I. § XXVII. _b_ is a general French Gothic and French Romanesque form, as in great purity at Valence."
+    },
+    {
+      "id": "u0101",
+      "old_key_term": "Sixth Chapter",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0102",
+      "old_key_term": "Swiss",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0103",
+      "old_key_term": "Flamboyant",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0104",
+      "old_key_term": "Switzerland",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0105",
+      "old_key_term": "Bourges Cathedral",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0106",
+      "old_key_term": "Amiens",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0107",
+      "old_key_term": "57",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0108",
+      "old_key_term": "Tympanum",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0109",
+      "old_key_term": "German",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0110",
+      "old_key_term": "Broletto of Monza",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0111",
+      "old_key_term": "Pisan Romanesque",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0112",
+      "old_key_term": "Architecture of Position",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0113",
+      "old_key_term": "350",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0114",
+      "old_key_term": "Bologna",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0115",
+      "old_key_term": "Professor Willis's",
+      "action": "dropped",
+      "reason": "footnote_citation",
+      "fact": "[62] I have taken Professor Willis's estimate; there being discrepancy among various statements."
+    },
+    {
+      "id": "u0116",
+      "old_key_term": "Camilla",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0117",
+      "old_key_term": "Vulcan",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0118",
+      "old_key_term": "Jesuiti",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0119",
+      "old_key_term": "Pisani",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0120",
+      "old_key_term": "Admiralty",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0121",
+      "old_key_term": "Canova's",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0122",
+      "old_key_term": "Annunciation",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0123",
+      "old_key_term": "Peter",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0124",
+      "old_key_term": "Sistine Chapel",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0125",
+      "old_key_term": "National Gallery",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0126",
+      "old_key_term": "Oche",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0127",
+      "old_key_term": "Nautilus",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0128",
+      "old_key_term": "Calvaries",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0129",
+      "old_key_term": "Egyptians",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0130",
+      "old_key_term": "Avignon",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0131",
+      "old_key_term": "Last Judgment",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0132",
+      "old_key_term": "Romans",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0133",
+      "old_key_term": "Paradise",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0134",
+      "old_key_term": "69",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0135",
+      "old_key_term": "Thus",
+      "action": "rekeyed",
+      "new_key_term": "Matterhorn"
+    },
+    {
+      "id": "u0136",
+      "old_key_term": "Ninevite",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0137",
+      "old_key_term": "California",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0138",
+      "old_key_term": "Ducal Palace",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0139",
+      "old_key_term": "Him",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0140",
+      "old_key_term": "Adam",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0141",
+      "old_key_term": "Orange",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0142",
+      "old_key_term": "Veronese",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0143",
+      "old_key_term": "Corte",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0144",
+      "old_key_term": "George's Hospital",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0145",
+      "old_key_term": "Wordsworth",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0146",
+      "old_key_term": "Veronese Gothic",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0147",
+      "old_key_term": "5",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0148",
+      "old_key_term": "Sketches",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0149",
+      "old_key_term": "8",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "XIV., § IV., the figure 8 being here put in the hollow of the gutter."
+    },
+    {
+      "id": "u0150",
+      "old_key_term": "2",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "2, the _cuts_ being taken up and decorated instead of the _points_."
+    },
+    {
+      "id": "u0151",
+      "old_key_term": "10",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "10 this zigzag effect is seized upon and developed, but with the easiest and roughest work; the angular incision being a mere limiting line, like that described"
+    },
+    {
+      "id": "u0152",
+      "old_key_term": "Plate IX",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0153",
+      "old_key_term": "Ca' Foscari",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "15 is perhaps an earlier type; perhaps only one of more careless workmanship, from a Byzantine ruin in the Rio di Ca' Foscari: and it is interesting to compare "
+    },
+    {
+      "id": "u0154",
+      "old_key_term": "Mary's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0155",
+      "old_key_term": "Giotto's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0156",
+      "old_key_term": "Ducal Palace of Venice",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "LX., which is a general type of the best Gothic bases in existence, being very nearly that of the upper shafts of the Ducal Palace of Venice."
+    },
+    {
+      "id": "u0157",
+      "old_key_term": "Italian",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0158",
+      "old_key_term": "18",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "18, 11, 13, and 20 in Plate X."
+    },
+    {
+      "id": "u0159",
+      "old_key_term": "1",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "1 and 2 being conjectural, for their spurs were so rude and ugly, that I took no note of their profiles; but they would probably be as here given."
+    },
+    {
+      "id": "u0160",
+      "old_key_term": "Plate XI",
+      "action": "rekeyed",
+      "new_key_term": "Romanesque"
+    },
+    {
+      "id": "u0161",
+      "old_key_term": "Ambrogio",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "1 is from St. Ambrogio, Milan; 2 from Vienne, France."
+    },
+    {
+      "id": "u0162",
+      "old_key_term": "Plate XI",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0163",
+      "old_key_term": "North",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0164",
+      "old_key_term": "Alichino",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0165",
+      "old_key_term": "Plate",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "II., nor of the methods in which both these, and the rolls of the mouldings in Plate X., are decorated, especially in Roman architecture, with superadded chain "
+    },
+    {
+      "id": "u0166",
+      "old_key_term": "Baptistery",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0167",
+      "old_key_term": "81",
+      "action": "rekeyed",
+      "new_key_term": "Lombardic"
+    },
+    {
+      "id": "u0168",
+      "old_key_term": "Bank",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0169",
+      "old_key_term": "Moulins",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0170",
+      "old_key_term": "Rustication",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0171",
+      "old_key_term": "Christian",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0172",
+      "old_key_term": "Doric",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0173",
+      "old_key_term": "Digby Wyatt",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0174",
+      "old_key_term": "Michele of Lucca",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0175",
+      "old_key_term": "Corinthian",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0176",
+      "old_key_term": "Plate XVI",
+      "action": "rekeyed",
+      "new_key_term": "Mark's"
+    },
+    {
+      "id": "u0177",
+      "old_key_term": "Plate XV",
+      "action": "rekeyed",
+      "new_key_term": "Mark's"
+    },
+    {
+      "id": "u0178",
+      "old_key_term": "York",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0179",
+      "old_key_term": "Byzantines",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0180",
+      "old_key_term": "XXXIIIrd",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0181",
+      "old_key_term": "Papistry",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0182",
+      "old_key_term": "Fra Angelico",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0183",
+      "old_key_term": "XIII",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "VIII., § XIII.), and all the expansion necessary is now gracefully attained by their united capitals, hewn out of one stone."
+    },
+    {
+      "id": "u0184",
+      "old_key_term": "Plate XVII",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0185",
+      "old_key_term": "Plate XVIII",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0186",
+      "old_key_term": "St Mark's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0187",
+      "old_key_term": "Grosvenor Square",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0188",
+      "old_key_term": "13",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0189",
+      "old_key_term": "84",
+      "action": "rekeyed",
+      "new_key_term": "Doric"
+    },
+    {
+      "id": "u0190",
+      "old_key_term": "Roman Doric",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0191",
+      "old_key_term": "91",
+      "action": "rekeyed",
+      "new_key_term": "Romanesque"
+    },
+    {
+      "id": "u0192",
+      "old_key_term": "Peter's",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "XXIX. § IV.), may rationally be applied to waggon vaults, as of St. Peter's, and to arch soffits under which one walks."
+    },
+    {
+      "id": "u0193",
+      "old_key_term": "III",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "XI., § III.; it is to be noted now as one still more valuable in decoration: for when we arrive at the deep succession of concentric archivolts, with which nort"
+    },
+    {
+      "id": "u0194",
+      "old_key_term": "Tudor",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0195",
+      "old_key_term": "Jaques Coeur",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0196",
+      "old_key_term": "Nature",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0197",
+      "old_key_term": "Nature",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0198",
+      "old_key_term": "Christian",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0199",
+      "old_key_term": "Brenta",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0200",
+      "old_key_term": "Dolo",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0201",
+      "old_key_term": "Alps of Bassano",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0202",
+      "old_key_term": "Malamocco",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0203",
+      "old_key_term": "Zancarol Chronicle",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0204",
+      "old_key_term": "Paul Luke Anafeste",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0205",
+      "old_key_term": "Sabellico",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0206",
+      "old_key_term": "Tiepolo",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0207",
+      "old_key_term": "1100",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0208",
+      "old_key_term": "Trojans",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0209",
+      "old_key_term": "Orso Participazio IV Vescovo Olivolense",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0210",
+      "old_key_term": "Bishop of Castello",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0211",
+      "old_key_term": "Cipico WITHOUT",
+      "action": "rekeyed",
+      "new_key_term": "Cipico"
+    },
+    {
+      "id": "u0212",
+      "old_key_term": "December",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0213",
+      "old_key_term": "Venetian Matteo Priuli",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0214",
+      "old_key_term": "Mark's Square",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0215",
+      "old_key_term": "Innocent VIII",
+      "action": "rekeyed",
+      "new_key_term": "Innocent"
+    },
+    {
+      "id": "u0216",
+      "old_key_term": "Protestantes",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0217",
+      "old_key_term": "Pape Jules II",
+      "action": "rekeyed",
+      "new_key_term": "Pape Jules"
+    },
+    {
+      "id": "u0218",
+      "old_key_term": "Papacy",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0219",
+      "old_key_term": "1829",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0220",
+      "old_key_term": "Continental",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0221",
+      "old_key_term": "Roman Catholic",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0222",
+      "old_key_term": "Catholics",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0223",
+      "old_key_term": "Protestantism",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0224",
+      "old_key_term": "Lords Lieutenant",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0225",
+      "old_key_term": "Protestant Government",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0226",
+      "old_key_term": "Church",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0227",
+      "old_key_term": "Transubstantiation",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0228",
+      "old_key_term": "Trevisan",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0229",
+      "old_key_term": "Bianca Cappello",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0230",
+      "old_key_term": "Composite",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0231",
+      "old_key_term": "XXXVI",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0232",
+      "old_key_term": "Lombard's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0233",
+      "old_key_term": "Michele",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0234",
+      "old_key_term": "Cockerell",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0235",
+      "old_key_term": "Serchio",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0236",
+      "old_key_term": "Architecture of Italy",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0237",
+      "old_key_term": "Plate XXI",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0238",
+      "old_key_term": "Arno",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0239",
+      "old_key_term": "159",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "159; work of about the same date, and exactly the same plan; quatrefoils filled with grotesques, but somewhat less finished in execution, and somewhat less wild"
+    },
+    {
+      "id": "u0240",
+      "old_key_term": "Borgund",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0241",
+      "old_key_term": "Early English Church",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "86 of Churton's \"Early English Church,\" gives us one of the transformations or petrifactions of the wooden Saxon churches."
+    },
+    {
+      "id": "u0242",
+      "old_key_term": "Mark",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0243",
+      "old_key_term": "Turneresque",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0244",
+      "old_key_term": "Albert Durer's Diary",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0245",
+      "old_key_term": "Giovanni Bellini",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0246",
+      "old_key_term": "Pugin's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0247",
+      "old_key_term": "Cistercian",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0248",
+      "old_key_term": "Pugin",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0249",
+      "old_key_term": "Buonarroti's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0250",
+      "old_key_term": "George's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0251",
+      "old_key_term": "Romanism",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0252",
+      "old_key_term": "Phonetic",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0253",
+      "old_key_term": "Fergusson's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0254",
+      "old_key_term": "Fergusson",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0255",
+      "old_key_term": "Senses",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0256",
+      "old_key_term": "Leonidas",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0257",
+      "old_key_term": "Power",
+      "action": "rekeyed",
+      "new_key_term": "Art"
+    },
+    {
+      "id": "u0258",
+      "old_key_term": "Fra Angelico",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0259",
+      "old_key_term": "Joshua",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0260",
+      "old_key_term": "Garbett's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0261",
+      "old_key_term": "Juvenal's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0262",
+      "old_key_term": "Maker",
+      "action": "rekeyed",
+      "new_key_term": "Eve"
+    },
+    {
+      "id": "u0263",
+      "old_key_term": "Garbett",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0264",
+      "old_key_term": "Ornament",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0265",
+      "old_key_term": "Once",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0266",
+      "old_key_term": "Good",
+      "action": "training_only",
+      "new_key_term": null
+    },
+    {
+      "id": "u0267",
+      "old_key_term": "Paxton's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0268",
+      "old_key_term": "Temple",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0269",
+      "old_key_term": "Plate XIV",
+      "action": "rekeyed",
+      "new_key_term": "Ducal Palace"
+    },
+    {
+      "id": "u0270",
+      "old_key_term": "30",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "I., page 30); that is to say, connecting the 2nd arch with the 3rd, and the 9th with the 10th."
+    },
+    {
+      "id": "u0271",
+      "old_key_term": "Byzantine Renaissance",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0272",
+      "old_key_term": "Donaldson's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0273",
+      "old_key_term": "Newton's",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0274",
+      "old_key_term": "Egyptian",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0275",
+      "old_key_term": "177",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "177 and 170: the subject of the first of these is an oblong pond, ground-plan and elevation being strangely confused in the design."
+    },
+    {
+      "id": "u0276",
+      "old_key_term": "Egyptian",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0277",
+      "old_key_term": "Assyrian",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0278",
+      "old_key_term": "Tigris",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0279",
+      "old_key_term": "Cnossus",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0280",
+      "old_key_term": "River Gods",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0281",
+      "old_key_term": "Hippocamps",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0282",
+      "old_key_term": "Europa",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "27), of which the subject is, Europa crossing the sea on the back of the bull."
+    },
+    {
+      "id": "u0283",
+      "old_key_term": "Revue Arch",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0284",
+      "old_key_term": "Messina",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0285",
+      "old_key_term": "Acropolis of Corinth",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0286",
+      "old_key_term": "Isthmus",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "16) describes a similar picture of the Isthmus between the two harbors, one of which was in the form of a youth, the other of a nymph."
+    },
+    {
+      "id": "u0287",
+      "old_key_term": "Ulysses",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0288",
+      "old_key_term": "Sophocles",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0289",
+      "old_key_term": "Sicily",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0290",
+      "old_key_term": "Sardis",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0291",
+      "old_key_term": "Cephissus",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0292",
+      "old_key_term": "Sicilian",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0293",
+      "old_key_term": "Louvre",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "38), and the figure of the Tiber in the Louvre, both of which are of the Roman period, we see how in these later types the artist multiplied symbols and accesso"
+    },
+    {
+      "id": "u0294",
+      "old_key_term": "Nile",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0295",
+      "old_key_term": "Phidias",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0296",
+      "old_key_term": "Trajan",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0297",
+      "old_key_term": "Jupiter Pluvius",
+      "action": "dropped",
+      "reason": "figure_fragment",
+      "fact": "15) a storm of rain is represented by the head of Jupiter Pluvius, who has a vast outspread beard flowing in long tresses."
+    },
+    {
+      "id": "u0298",
+      "old_key_term": "Upper Egypt",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0299",
+      "old_key_term": "Tintoret",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0300",
+      "old_key_term": "February",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0301",
+      "old_key_term": "Gesu Nazareno",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0302",
+      "old_key_term": "Papal",
+      "action": "unchanged"
+    },
+    {
+      "id": "u0303",
+      "old_key_term": "Architectural Parallels",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0304",
+      "old_key_term": "Vide Adventurer",
+      "action": "dropped",
+      "reason": "footnote_citation",
+      "fact": "[100] Not, however, by Johnson's _testimony_: Vide Adventurer, No. 39."
+    },
+    {
+      "id": "u0305",
+      "old_key_term": "Rawdon Brown",
+      "action": "markers_removed"
+    },
+    {
+      "id": "u0306",
+      "old_key_term": "398",
+      "action": "dropped",
+      "reason": "editorial_note",
+      "fact": "Page 398: 'calld' corrected to 'called' in 'Men engaged in the practice of these are calld artizans'."
+    },
+    {
+      "id": "u0307",
+      "old_key_term": "Space",
+      "action": "dropped",
+      "reason": "editorial_note",
+      "fact": "Page 406: Space placement corrected in 'I found it a sugly at last' to 'I found it as ugly at last'."
+    }
+  ]
+}

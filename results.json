@@ -7,6 +7,5 @@
   "total_questions": 100,
   "practical_questions": 15,
   "evaluator_model": null,
-  "status": "pending",
-  "baseline_string_match_correct": 3
+  "status": "pending"
 }

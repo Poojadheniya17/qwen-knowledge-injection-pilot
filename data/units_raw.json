@@ -1,11 +1,29 @@
 [
   {
+    "id": "u0001",
+    "fact": "Note: Project Gutenberg also has an HTML version of this file which includes the original illustrations.",
+    "definition": "E-text prepared by Marius Masi, Juliet Sutherland, and the Project Gutenberg Online Distributed Proofreading Team (http://www.pgdp.net)",
+    "example": "See 30754-h.htm or 30754-h.zip: (https://www.gutenberg.org/cache/epub/30754/pg30754-images.html) or (https://www.gutenberg.org/files/30754/30754-h.zip)",
+    "link": "0:1",
+    "key_term": "Project Gutenberg",
+    "example_key_term": null
+  },
+  {
+    "id": "u0002",
+    "fact": "Volume III contains the index for all three volumes.",
+    "definition": "Volumes II and III are available in the Project Gutenberg Library: Volume II--see https://www.gutenberg.org/etext/30755 Volume III--see https://www.gutenberg.org/etext/30756",
+    "example": "The index in the html version of Volume III has links to the the other two volumes.",
+    "link": "0:1",
+    "key_term": "Volume III",
+    "example_key_term": "Volume III"
+  },
+  {
     "id": "u0003",
     "fact": "In the course of arranging the following essay, I put many things aside in my thoughts to be said in the Preface, things which I shall now put aside altogether, and pass by; for when a book has been advertised a year and a half, it seems best to present it with as little preface as possible.",
     "definition": "National Library Association New York             Chicago",
     "example": "Thus much, however, it is necessary for the reader to know, that, when I planned the work, I had materials by me, collected at different times of sojourn in Venice during the last seventeen years, which it seemed to me might be arranged with little difficulty, and which I believe to be of value as illustrating the history of Southern Gothic.",
     "link": "0:1",
-    "key_term": null,
+    "key_term": "Preface",
     "example_key_term": "Southern Gothic"
   },
   {
@@ -50,7 +68,7 @@
     "definition": "The establishment of these canons, which I have called \"the Foundations,\" and some account of the connection of Venetian architecture with that of the rest of Europe, have filled the present volume.",
     "example": "It has taken me more time and trouble to do this than I expected; but, if I have succeeded, the thing done will be of use for many other purposes than that to which it is now put.",
     "link": "0:7",
-    "key_term": null,
+    "key_term": "First Chapter",
     "example_key_term": null
   },
   {
@@ -68,21 +86,21 @@
     "definition": "Since the first dominion of men was asserted over the ocean, three thrones, of mark beyond all others, have been set upon its sands: the thrones of Tyre, Venice, and England.",
     "example": "The exaltation, the sin, and the punishment of Tyre have been recorded for us, in perhaps the most touching words ever uttered by the Prophets of Israel against the cities of the stranger.",
     "link": "2:13",
-    "key_term": null,
+    "key_term": "Second",
     "example_key_term": "Prophets of Israel"
   },
   {
     "id": "u0011",
-    "fact": "Of this period, Two Hundred and Seventy-six years were passed in a nominal subjection to the cities of old Venetia, especially to Padua, and in an agitated form of democracy, of which the executive appears to have been entrusted to tribunes, chosen, one by the inhabitants of each of the principal islands.",
-    "definition": "For six hundred years, during which the power of Venice was continually on the increase, her government was an elective monarchy, her King or doge possessing, in early times at least, as much independent authority as any other European sovereign, but an authority gradually subjected to limitation, and shortened almost daily of its prerogatives, while it increased in a spectral and incapable magnificence.",
-    "example": "The state of Venice existed Thirteen Hundred and Seventy-six years, from the first establishment of a consular government on the island of the Rialto, to the moment when the General-in-chief of the French army of Italy pronounced the Venetian republic a thing of the past.",
+    "fact": "Of this period, Two Hundred and Seventy-six[2] years were passed in a nominal subjection to the cities of old Venetia, especially to Padua, and in an agitated form of democracy, of which the executive appears to have been entrusted to tribunes,[3] chosen, one by the inhabitants of each of the principal islands.",
+    "definition": "For six hundred years,[4] during which the power of Venice was continually on the increase, her government was an elective monarchy, her King or doge possessing, in early times at least, as much independent authority as any other European sovereign, but an authority gradually subjected to limitation, and shortened almost daily of its prerogatives, while it increased in a spectral and incapable magnificence.",
+    "example": "The state of Venice existed Thirteen Hundred and Seventy-six years, from the first establishment of a consular government on the island of the Rialto,[1] to the moment when the General-in-chief of the French army of Italy pronounced the Venetian republic a thing of the past.",
     "link": "2:14",
-    "key_term": "Venetia",
+    "key_term": "Hundred",
     "example_key_term": "Thirteen Hundred"
   },
   {
     "id": "u0012",
-    "fact": "I date the commencement of the Fall of Venice from the death of Carlo Zeno, 8th May, 1418; the _visible_ commencement from that of another of her noblest and wisest children, the Doge Tomaso Mocenigo, who expired five years later.",
+    "fact": "I date the commencement of the Fall of Venice from the death of Carlo Zeno, 8th May, 1418;[6] the _visible_ commencement from that of another of her noblest and wisest children, the Doge Tomaso Mocenigo, who expired five years later.",
     "definition": "The second period opens with a hundred and twenty years, the most eventful in the career of Venice--the central struggle of her life--stained with her darkest crime, the murder of Carrara--disturbed by her most dangerous internal sedition, the conspiracy of Falier--oppressed by her most fatal war, the war of Chiozza--and distinguished by the glory of her two noblest citizens (for in this period the heroism of her citizens replaces that of her monarchs), Vittor Pisani and Carlo Zeno.",
     "example": "The reign of Foscari followed, gloomy with pestilence and war; a war in which large acquisitions of territory were made by subtle or fortunate policy in Lombardy, and disgrace, significant as irreparable, sustained in the battles on the Po at Cremona, and in the marshes of Caravaggio.",
     "link": "2:16",
@@ -91,9 +109,9 @@
   },
   {
     "id": "u0013",
-    "fact": "In 1454, Venice, the first of the states of Christendom, humiliated herself to the Turk: in the same year was established the Inquisition of State, and from this period her government takes the perfidious and mysterious form under which it is usually conceived.",
+    "fact": "In 1454, Venice, the first of the states of Christendom, humiliated herself to the Turk: in the same year was established the Inquisition of State,[7] and from this period her government takes the perfidious and mysterious form under which it is usually conceived.",
     "definition": "The reign of Foscari followed, gloomy with pestilence and war; a war in which large acquisitions of territory were made by subtle or fortunate policy in Lombardy, and disgrace, significant as irreparable, sustained in the battles on the Po at Cremona, and in the marshes of Caravaggio.",
-    "example": "In 1477, the great Turkish invasion spread terror to the shores of the lagoons; and in 1508 the league of Cambrai marks the period usually assigned as the commencement of the decline of the Venetian power; the commercial prosperity of Venice in the close of the fifteenth century blinding her historians to the previous evidence of the diminution of her internal strength.",
+    "example": "In 1477, the great Turkish invasion spread terror to the shores of the lagoons; and in 1508 the league of Cambrai marks the period usually assigned as the commencement of the decline of the Venetian power;[8] the commercial prosperity of Venice in the close of the fifteenth century blinding her historians to the previous evidence of the diminution of her internal strength.",
     "link": "2:16",
     "key_term": "Inquisition of State",
     "example_key_term": "1477"
@@ -113,13 +131,13 @@
     "definition": "But the principal church in Venice was the chapel attached to the palace of her prince, and called the \"Chiesa Ducale.",
     "example": "But the heart of Venice is shown only in her hastiest councils; her worldly spirit recovers the ascendency whenever she has time to calculate the probabilities of advantage, or when they are sufficiently distinct to need no calculation; and the entire subjection of private piety to national policy is not only remarkable throughout the almost endless series of treacheries and tyrannies by which her empire was enlarged and maintained, but symbolised by a very singular circumstance in the building of the city itself.",
     "link": "2:19",
-    "key_term": "Alexander",
+    "key_term": "Alexander III",
     "example_key_term": "Venice"
   },
   {
     "id": "u0016",
     "fact": "But the principal church in Venice was the chapel attached to the palace of her prince, and called the \"Chiesa Ducale.",
-    "definition": "The patriarchal church, inconsiderable in size and mean in decoration, stands on the outermost islet of the Venetian group, and its name, as well as its site, is probably unknown to the greater number of travellers passing hastily through the city.",
+    "definition": "The patriarchal church,[11] inconsiderable in size and mean in decoration, stands on the outermost islet of the Venetian group, and its name, as well as its site, is probably unknown to the greater number of travellers passing hastily through the city.",
     "example": "And yet, in the midst of this national criminality, we shall be struck again and again by the evidences of the most noble individual feeling.",
     "link": "2:19",
     "key_term": "Chiesa Ducale",
@@ -137,7 +155,7 @@
   {
     "id": "u0018",
     "fact": "But the enduring sentiment of years more than balanced the enthusiasm of a moment; and the bull of Clement V., which excommunicated the Venetians and their doge, likening them to Dathan, Abiram, Absalom, and Lucifer, is a stronger evidence of the great tendencies of the Venetian government than the umbrella of the doge or the ring of the Adriatic.",
-    "definition": "It is true that, in a rapid survey of her career, the eye is at first arrested by the strange drama to which I have already alluded, closed by that ever memorable scene in the portico of St. Mark's, the central expression in most men's thoughts of the unendurable elevation of the pontifical power; it is true that the proudest thoughts of Venice, as well as the insignia of her prince, and the form of her chief festival, recorded the service thus rendered to the Roman Church.",
+    "definition": "It is true that, in a rapid survey of her career, the eye is at first arrested by the strange drama to which I have already alluded, closed by that ever memorable scene in the portico of St. Mark's,[13] the central expression in most men's thoughts of the unendurable elevation of the pontifical power; it is true that the proudest thoughts of Venice, as well as the insignia of her prince, and the form of her chief festival, recorded the service thus rendered to the Roman Church.",
     "example": "The humiliation of Francesco Dandolo blotted out the shame of Barbarossa, and the total exclusion of ecclesiastics from all share in the councils of Venice became an enduring mark of her knowledge of the spirit of the Church of Rome, and of her defiance of it.",
     "link": "2:21",
     "key_term": "Clement",
@@ -147,10 +165,10 @@
     "id": "u0019",
     "fact": "One more circumstance remains to be noted respecting the Venetian government, the singular unity of the families composing it,--unity far from sincere or perfect, but still admirable when contrasted with the fiery feuds, the almost daily revolutions, the restless successions of families and parties in power, which fill the annals of the other states of Italy.",
     "definition": "That rivalship should sometimes be ended by the dagger, or enmity conducted to its ends under the mask of law, could not but be anticipated where the fierce Italian spirit was subjected to so severe a restraint: it is much that jealousy appears usually unmingled with illegitimate ambition, and that, for every instance in which private passion sought its gratification through public danger, there are a thousand in which it was sacrificed to the public advantage.",
-    "example": "Venice may well call upon us to note with reverence, that of all the towers which are still seen rising like a branchless forest from her islands, there is but one whose office was other than that of summoning to prayer, and that one was a watch-tower only: from first to last, while the palaces of the other cities of Italy were lifted into sullen fortitudes of rampart, and fringed with forked battlements for the javelin and the bow, the sands of Venice never sank under the weight of a war tower, and her roof terraces were wreathed with Arabian imagery, of golden globes suspended on the leaves of lilies.",
+    "example": "Venice may well call upon us to note with reverence, that of all the towers which are still seen rising like a branchless forest from her islands, there is but one whose office was other than that of summoning to prayer, and that one was a watch-tower only: from first to last, while the palaces of the other cities of Italy were lifted into sullen fortitudes of rampart, and fringed with forked battlements for the javelin and the bow, the sands of Venice never sank under the weight of a war tower, and her roof terraces were wreathed with Arabian imagery, of golden globes suspended on the leaves of lilies.[15]",
     "link": "2:22",
     "key_term": "Italy",
-    "example_key_term": "Arabian"
+    "example_key_term": "15"
   },
   {
     "id": "u0020",
@@ -210,10 +228,10 @@
     "id": "u0026",
     "fact": "But observe, secondly, the impression instantly made on Commynes' mind by the distinction between the elder palaces and those built \"within this last hundred years; which all have their fronts of white marble brought from Istria, a hundred miles away, and besides, many a large piece of porphyry and serpentine upon their fronts.\"",
     "definition": "Observe, first, the impression of Commynes respecting the religion of Venice: of which, as I have above said, the forms still remained with some glimmering of life in them, and were the evidence of what the real life had been in former times.",
-    "example": "On the opposite page I have given two of the ornaments of the palaces which so struck the French ambassador. He was right in his notice of the distinction.",
+    "example": "On the opposite page I have given two of the ornaments of the palaces which so struck the French ambassador.[17] He was right in his notice of the distinction.",
     "link": "2:25",
     "key_term": "Istria",
-    "example_key_term": null
+    "example_key_term": "17"
   },
   {
     "id": "u0027",
@@ -257,7 +275,7 @@
     "definition": "Meantime there had been preparation for its renewal.",
     "example": "But these barbarous nations were in the strength of their youth; and while, in the centre of Europe, a refined and purely descended art was sinking into graceful formalism, on its confines a barbarous and borrowed art was organising itself into strength and consistency.",
     "link": "2:29",
-    "key_term": "Constantinople",
+    "key_term": "Romanesque--was",
     "example_key_term": "Europe"
   },
   {
@@ -309,7 +327,7 @@
     "id": "u0037",
     "fact": "The first church of St. Mark's was, doubtless, built in imitation of that destroyed at Alexandria, and from which the relics of the saint had been obtained.",
     "definition": "The Ducal residence was removed to Venice in 809, and the body of St. Mark was brought from Alexandria twenty years later.",
-    "example": "During the ninth, tenth, and eleventh centuries, the architecture of Venice seems to have been formed on the same model, and is almost identical with that of Cairo under the caliphs, it being quite immaterial whether the reader chooses to call both Byzantine or both Arabic; the workmen being certainly Byzantine, but forced to the invention of new forms by their Arabian masters, and bringing these forms into use in whatever other parts of the world they were employed.",
+    "example": "During the ninth, tenth, and eleventh centuries, the architecture of Venice seems to have been formed on the same model, and is almost identical with that of Cairo under the caliphs,[22] it being quite immaterial whether the reader chooses to call both Byzantine or both Arabic; the workmen being certainly Byzantine, but forced to the invention of new forms by their Arabian masters, and bringing these forms into use in whatever other parts of the world they were employed.",
     "link": "2:34",
     "key_term": "Alexandria",
     "example_key_term": "Arabic"
@@ -381,7 +399,7 @@
     "id": "u0045",
     "fact": "It may be called one of the last links which connect the declining art of the Middle Ages with that of the Renaissance, which was in its rise.",
     "definition": "\"Of the Italian school is also the rich but ugly (ricco ma non bel) sarcophagus in which repose the ashes of Tomaso Mocenigo.",
-    "example": "We will not stay to particularise the defects of each of the seven figures of the front and sides, which represent the cardinal and theological virtues; nor will we make any remarks upon those which stand in the niches above the pavilion, because we consider them unworthy both of the age and reputation of the Florentine school, which was then with reason considered the most notable in Italy.\"",
+    "example": "We will not stay to particularise the defects of each of the seven figures of the front and sides, which represent the cardinal and theological virtues; nor will we make any remarks upon those which stand in the niches above the pavilion, because we consider them unworthy both of the age and reputation of the Florentine school, which was then with reason considered the most notable in Italy.\"[24]",
     "link": "2:42",
     "key_term": "Middle Ages",
     "example_key_term": "Florentine"
@@ -406,7 +424,7 @@
   },
   {
     "id": "u0048",
-    "fact": "It has been of comparatively small stones up to that point; the fifteenth century work instantly begins with larger stones, \"brought from Istria, a hundred miles away.\" The ninth shaft from the sea in the lower arcade, and the seventeenth, which is above it, in the upper arcade, commence the series of fifteenth century shafts.",
+    "fact": "It has been of comparatively small stones up to that point; the fifteenth century work instantly begins with larger stones, \"brought from Istria, a hundred miles away.\"[26] The ninth shaft from the sea in the lower arcade, and the seventeenth, which is above it, in the upper arcade, commence the series of fifteenth century shafts.",
     "definition": "And there are a multitude of other evidences in the statues of the angels, with which I shall not at present trouble the reader.",
     "example": "These two are somewhat thicker than the others, and carry the party-wall of the Sala del Scrutinio.",
     "link": "2:46",
@@ -460,38 +478,38 @@
   },
   {
     "id": "u0054",
-    "fact": "Ominously signified by their humiliation to the Papal power (as before to the Turkish) in 1509, and their abandonment of their right of appointing the clergy of their territories.",
+    "fact": "[8] Ominously signified by their humiliation to the Papal power (as before to the Turkish) in 1509, and their abandonment of their right of appointing the clergy of their territories.",
     "definition": "We owe to this historian the discovery of the statutes of the tribunal and date of its establishment.",
-    "example": "The senate voted the abdication of their authority by a majority of 512 to 14.",
+    "example": "[9] The senate voted the abdication of their authority by a majority of 512 to 14.",
     "link": "2:52",
-    "key_term": "1509",
-    "example_key_term": null
+    "key_term": "Ominously",
+    "example_key_term": "512"
   },
   {
     "id": "u0055",
-    "fact": "The reader will find the _weak_ points of Byzantine architecture shrewdly seized, and exquisitely sketched, in the opening chapter of the most delightful book of travels I ever opened,--Curzon's \"Monasteries of the Levant.\"",
-    "definition": "Appendix 7, \"Varieties of the Orders.\"",
-    "example": "Appendix 8, \"The Northern Energy.\"",
+    "fact": "[19] The reader will find the _weak_ points of Byzantine architecture shrewdly seized, and exquisitely sketched, in the opening chapter of the most delightful book of travels I ever opened,--Curzon's \"Monasteries of the Levant.\"",
+    "definition": "[18] Appendix 7, \"Varieties of the Orders.\"",
+    "example": "[20] Appendix 8, \"The Northern Energy.\"",
     "link": "2:53",
     "key_term": "Monasteries",
     "example_key_term": "Northern Energy"
   },
   {
     "id": "u0056",
-    "fact": "By no means despise him, unless he happen to be without a soul, or at least to show no signs of it; which possibly he may not in merely carrying you across the river.",
+    "fact": "By no means despise him, unless he happen to be without a soul,[29] or at least to show no signs of it; which possibly he may not in merely carrying you across the river.",
     "definition": "But why is he to be in anywise despised?",
     "example": "He may be merely what Mr. Carlyle rightly calls a human beaver after all; and there may be nothing in all that ingenuity of his greater than a complication of animal faculties, an intricate bestiality,--nest or hive building in its highest development.",
     "link": "3:60",
-    "key_term": null,
+    "key_term": "29",
     "example_key_term": "Carlyle"
   },
   {
     "id": "u0057",
-    "fact": "Do you seriously imagine, reader, that any living soul in London likes triglyphs?--or gets any hearty enjoyment out of pediments? You are much mistaken.",
+    "fact": "Do you seriously imagine, reader, that any living soul in London likes triglyphs?[30]--or gets any hearty enjoyment out of pediments?[31] You are much mistaken.",
     "definition": "By no manner of means.",
     "example": "Greeks did: English people never did,--never will.",
     "link": "3:62",
-    "key_term": "London",
+    "key_term": "31",
     "example_key_term": null
   },
   {
@@ -506,7 +524,7 @@
   {
     "id": "u0059",
     "fact": "In perfect architecture, however, the walls are generally kept of moderate thickness, and strengthened by piers or buttresses; and the part of the wall between these, being generally intended only to secure privacy, or keep out the slighter forces of weather, may be properly called a Wall Veil.",
-    "definition": "It may be half a foot thick, or six feet thick, or fifty feet thick; but if of equal thickness everywhere, it is still a wall proper: if to its fifty feet of proper thickness there be added so much as an inch of thickness in particular parts, that added thickness is to be considered as some form of buttress or pier, or other appliance.",
+    "definition": "It may be half a foot thick, or six feet thick, or fifty feet thick; but if of equal thickness everywhere, it is still a wall proper: if to its fifty feet of proper thickness there be added so much as an inch of thickness in particular parts, that added thickness is to be considered as some form of buttress or pier, or other appliance.[33]",
     "example": "I shall always use this word \"Veil\" to signify the even portion of a wall, it being more expressive than the term Body.",
     "link": "5:72",
     "key_term": "Wall Veil",
@@ -588,10 +606,10 @@
     "id": "u0068",
     "fact": "Thus much may serve respecting pier bases; we have next to examine the concentration of the Wall Veil, or the Shaft.",
     "definition": "But circumstances may occur to prevent its being reduced to this form, and it may remain square or rectangular; its base will then be simply the wall base following its contour, and we have no spurs at the angles.",
-    "example": "The experiment is not quite fair in this rude fashion; for the small rolls owe their increase of strength much more to their tubular form than their aggregation of material; but if the paper be cut up into small strips, and tied together firmly in three or four compact bundles, it will exhibit increase of strength enough to show the principle.",
+    "example": "[35] The experiment is not quite fair in this rude fashion; for the small rolls owe their increase of strength much more to their tubular form than their aggregation of material; but if the paper be cut up into small strips, and tied together firmly in three or four compact bundles, it will exhibit increase of strength enough to show the principle.",
     "link": "8:101",
     "key_term": "Shaft",
-    "example_key_term": null
+    "example_key_term": "35"
   },
   {
     "id": "u0069",
@@ -605,10 +623,19 @@
   {
     "id": "u0070",
     "fact": "We shall find numberless instances in Italy in which the first choice has been boldly, and I think most wisely made; and magnificent buildings have been composed of systems of small but perfect shafts, multiplied and superimposed.",
-    "definition": "Supposing the materials are in each case to be of the same kind, the choice is in great part at the architect's discretion, only there is a limit on the one hand to the multiplication of the slender shaft, in the inconvenience of the narrowed interval, and on the other, to the enlargement of the massy shaft, in the loss of breadth to the building. That will be commonly the best proportion which is a natural mean between the two limits; leaning to the side of grace or of grandeur according to the expressional intention of the work.",
+    "definition": "Supposing the materials are in each case to be of the same kind, the choice is in great part at the architect's discretion, only there is a limit on the one hand to the multiplication of the slender shaft, in the inconvenience of the narrowed interval, and on the other, to the enlargement of the massy shaft, in the loss of breadth to the building.[38] That will be commonly the best proportion which is a natural mean between the two limits; leaning to the side of grace or of grandeur according to the expressional intention of the work.",
     "example": "So long as the idea of the symmetry of a perfect shaft remained in the builder's mind, his choice could hardly be directed otherwise, and the adoption of the built and tower-like shaft appears to have been the result of a loss of this sense of symmetry consequent on the employment of intractable materials.",
     "link": "9:109",
     "key_term": "Italy",
+    "example_key_term": null
+  },
+  {
+    "id": "u0071",
+    "fact": "XV.) are exactly of the same size, but their expression is altogether different, and in that difference lies one of the most subtle distinctions between the Gothic and Greek spirit,--from the shaft, which bears the building, to the smallest decoration.",
+    "definition": "You have in these two series the primal representations of shaft arrangement in the Southern and Northern schools; while the group _b_, of which _b2_ is the double, set evenly, and _c2_ the double, set obliquely, is common to both.",
+    "example": "The Greek square is by preference set evenly, the Gothic square obliquely; and that so constantly, that wherever we find the level or even square occurring as a prevailing form, either in plan or decoration, in early northern work, there we may at least suspect the presence of a southern or Greek influence; and, on the other hand, wherever the oblique square is prominent in the south, we may confidently look for farther evidence of the influence of the Gothic architects.",
+    "link": "9:111",
+    "key_term": "Greek",
     "example_key_term": null
   },
   {
@@ -639,6 +666,15 @@
     "example_key_term": null
   },
   {
+    "id": "u0075",
+    "fact": "XXVII.) are three examples of the transition: the one on the left, at the top, is the earliest single-shafted arrangement, constant in the rough Romanesque windows; a huge hammer-shaped capital being employed to sustain the thickness of the wall.",
+    "definition": "Beneath, is a most elaborate and perfect one from St. Zeno of Verona, where the group is twice complicated, two shafts being used, both with quatrefoil sections.",
+    "example": "It was rapidly superseded by the double shaft, as on the right of it; a very early example from the cloisters of the Duomo, Verona.",
+    "link": "9:120",
+    "key_term": "Romanesque",
+    "example_key_term": "Duomo"
+  },
+  {
     "id": "u0076",
     "fact": "Beneath, is a most elaborate and perfect one from St. Zeno of Verona, where the group is twice complicated, two shafts being used, both with quatrefoil sections.",
     "definition": "XXVII.) are three examples of the transition: the one on the left, at the top, is the earliest single-shafted arrangement, constant in the rough Romanesque windows; a huge hammer-shaped capital being employed to sustain the thickness of the wall.",
@@ -657,6 +693,15 @@
     "example_key_term": null
   },
   {
+    "id": "u0078",
+    "fact": "XIV., of which the Lombardic sculptors were excessively fond, usually tying the shafts together in their centre, in a lover's knot.",
+    "definition": "This is a group, however, which I have never seen used on a large scale.[44]",
+    "example": "They thus occur in Plate V., from the Broletto of Como; at the angle of St. Michele of Lucca, Plate XXI.; and in the balustrade of St. Mark's.",
+    "link": "9:121",
+    "key_term": "Lombardic",
+    "example_key_term": "Plate XXI"
+  },
+  {
     "id": "u0079",
     "fact": "All these four examples belonging to the oblique or Northern system, the curious trefoil plan, 3, lies _between_ the two, as the double quatrefoil next it _unites_ the two.",
     "definition": "13 is the nave pier of St. Michele at Pavia, showing the same condition more fully developed: and 11 another nave pier from Vienne, on the Rhone, of far more distinct Roman derivation, for the flat pilaster is set to the nave, and is fluted like an antique one.",
@@ -666,13 +711,22 @@
     "example_key_term": "Ambrogio"
   },
   {
+    "id": "u0080",
+    "fact": "13 is the nave pier of St. Michele at Pavia, showing the same condition more fully developed: and 11 another nave pier from Vienne, on the Rhone, of far more distinct Roman derivation, for the flat pilaster is set to the nave, and is fluted like an antique one.",
+    "definition": "12 is the grandest development I have ever seen of the cross shaft, with satellite shafts in the nooks of it: it is half of one of the great western piers of the cathedral of Bourges, measuring eight feet each side, thirty-two round.[46] Then the one below (15) is half of a nave pier of Rouen Cathedral, showing the mode in which such conditions as that of Dijon (9) and that of Bourges (12) were fused together into forms of inextricable complexity (inextricable I mean in the irregularity of proportion and projection, for all of them are easily resolvable into simple systems in connexion with the roof ribs).",
+    "example": "All these four examples belonging to the oblique or Northern system, the curious trefoil plan, 3, lies _between_ the two, as the double quatrefoil next it _unites_ the two.",
+    "link": "9:122",
+    "key_term": "Rhone",
+    "example_key_term": "Northern"
+  },
+  {
     "id": "u0081",
     "fact": "I have only here given one example of this family, an unimportant but sufficiently characteristic one (16) from St. Gervais of Falaise.",
     "definition": "13 is the nave pier of St. Michele at Pavia, showing the same condition more fully developed: and 11 another nave pier from Vienne, on the Rhone, of far more distinct Roman derivation, for the flat pilaster is set to the nave, and is fluted like an antique one.",
     "example": "One side of the nave of that church is Norman, the other Flamboyant, and the two piers 14 and 16 stand opposite each other.",
     "link": "9:122",
     "key_term": "Gervais of Falaise",
-    "example_key_term": "Flamboyant"
+    "example_key_term": "16"
   },
   {
     "id": "u0082",
@@ -685,12 +739,12 @@
   },
   {
     "id": "u0083",
-    "fact": "I have not been at the pains to draw the complicated piers in this plate with absolute exactitude to the scale of each: they are accurate enough for their purpose: those of them respecting which we shall have farther question will be given on a much larger scale.",
-    "definition": "The capitals being formed by the flowers, or by a representation of the bulging out of the reeds at the top, under the weight of the architrave.",
-    "example": "The largest I remember support a monument in St. Zeno of Verona; they are of red marble, some ten or twelve feet high.",
+    "fact": "[43] I have not been at the pains to draw the complicated piers in this plate with absolute exactitude to the scale of each: they are accurate enough for their purpose: those of them respecting which we shall have farther question will be given on a much larger scale.",
+    "definition": "[42] The capitals being formed by the flowers, or by a representation of the bulging out of the reeds at the top, under the weight of the architrave.",
+    "example": "[44] The largest I remember support a monument in St. Zeno of Verona; they are of red marble, some ten or twelve feet high.",
     "link": "9:124",
-    "key_term": null,
-    "example_key_term": "Zeno of Verona"
+    "key_term": "43",
+    "example_key_term": "44"
   },
   {
     "id": "u0084",
@@ -712,11 +766,11 @@
   },
   {
     "id": "u0086",
-    "fact": "Accordingly, in the northern climates, the dripstone gathered together forms a peculiar northern capital, commonly called the Early English, owing to its especial use in that style.",
+    "fact": "Accordingly, in the northern climates, the dripstone gathered together forms a peculiar northern capital, commonly called the Early English,[47] owing to its especial use in that style.",
     "definition": "VI. to be especially characteristic of southern work, and that in northern and wet climates it took the form of a dripstone.",
     "example": "There would have been no absurdity in this if shafts were always to be exposed to the weather; but in Gothic constructions the most important shafts are in the inside of the building.",
     "link": "10:130",
-    "key_term": "Early English",
+    "key_term": "47",
     "example_key_term": "Gothic"
   },
   {
@@ -783,21 +837,66 @@
     "example_key_term": null
   },
   {
+    "id": "u0094",
+    "fact": "3 is a window from Carnarvon Castle, and very primitive and interesting in manner,--one of its arches being of one stone, the other of two.",
+    "definition": "I want them for cornices; but I have put them in this plate because, though their arches are filled up behind, and are in fact mere blocks of stone with arches cut into their faces, they illustrate the constant masonry of small arches, both in Italian and Northern Romanesque, but especially Italian, each arch being cut out of its own proper block of stone: this is Mont-Cenisian enough, on a small scale.",
+    "example": "And here we have an instance of a form of arch which would be barbarous enough on a large scale, and of many pieces; but quaint and agreeable thus massively built.",
+    "link": "12:156",
+    "key_term": "Carnarvon Castle",
+    "example_key_term": null
+  },
+  {
+    "id": "u0095",
+    "fact": "6, from the Eremitani, Padua, is very quaint and primitive in manner: it is a curious church altogether, and has some strange traceries cut out of single blocks.",
+    "definition": "The next step is to form them of two pieces, set together at the head of the arch.",
+    "example": "One is given in the \"Seven Lamps,\" Plate VII., in the left-hand corner at the bottom.",
+    "link": "12:156",
+    "key_term": "Eremitani",
+    "example_key_term": "Plate VII"
+  },
+  {
+    "id": "u0096",
+    "fact": "5, the simple two-pieced construction, wrought with the most exquisite proportion and precision of workmanship, as is everything else in the glorious church to which it belongs, San Fermo of Verona.",
+    "definition": "7, from the Frari, Venice, very firm and fine, and admirably decorated, as we shall see hereafter.",
+    "example": "The addition of the top piece, which completes the circle, does not affect the plan of the beautiful arches, with their simple and perfect cusps; but it is highly curious, and serves to show how the idea of the cusp rose out of mere foliation.",
+    "link": "12:156",
+    "key_term": "San Fermo of Verona",
+    "example_key_term": null
+  },
+  {
+    "id": "u0097",
+    "fact": "8, Plate IV., are the general types of the construction with three pieces, uncusped and cusped; _c_ and _d_ with five pieces, uncusped and cusped.",
+    "definition": "The five-pieced is the three-pieced with a joint added on each side, and is also of great importance.",
+    "example": "Of these the three-pieced construction is of enormous importance, and must detain us some time.",
+    "link": "12:157",
+    "key_term": "Plate IV",
+    "example_key_term": null
+  },
+  {
     "id": "u0098",
     "fact": "Consider the cusp as a wave passing up the side stone from its bottom to its top; then you will have the succession of forms from _e_ to _g_ (Plate III.), with infinite degrees of transition from each to each; but of which you may take _e_, _f_, and _g_, as representing three great families of cusped arches.",
     "definition": "Use _e_ for your side stones, and you have an arch as that at _h_ below, which may be called a down-cusped arch.",
     "example": "The reader knows already where a cusp is useful.",
     "link": "12:158",
-    "key_term": null,
+    "key_term": "Plate III",
     "example_key_term": null
   },
   {
     "id": "u0099",
-    "fact": "At least I cannot find any account of it in Maffei's \"Verona,\" nor anywhere else, to be depended upon.",
+    "fact": "[49] At least I cannot find any account of it in Maffei's \"Verona,\" nor anywhere else, to be depended upon.",
     "definition": "So carefully, and so far, is the system of decoration carried out in this pure and lovely monument, my most beloved throughout all the length and breadth of Italy;--chief, as I think, among all the sepulchral marbles of a land of mourning.",
     "example": "It is, I doubt not, a work of the beginning of the thirteenth century.",
     "link": "12:164",
     "key_term": "Maffei's",
+    "example_key_term": null
+  },
+  {
+    "id": "u0100",
+    "fact": "I. § XXVII. _b_ is a general French Gothic and French Romanesque form, as in great purity at Valence.",
+    "definition": "The form _a_ is a more pure Northern Gothic type than even _b_, which is the connecting link between it and the classical type.",
+    "example": "The small shafts of the form _a_ and _b_, as being northern, are generally connected with steep vaulted roofs, and receive for that reason the name of vaulting shafts.",
+    "link": "13:165",
+    "key_term": "Valence",
     "example_key_term": null
   },
   {
@@ -806,8 +905,8 @@
     "definition": "This object is obtained by the use of brackets at intervals, which are the peculiar distinction of the roof cornice.",
     "example": "Now the wall cornice was treated throughout our enquiry (compare Chapter VII. § V.) as the capital of the wall, and as forming, by its concentration, the capital of the shaft.",
     "link": "15:174",
-    "key_term": null,
-    "example_key_term": null
+    "key_term": "Sixth Chapter",
+    "example_key_term": "VII"
   },
   {
     "id": "u0102",
@@ -856,11 +955,11 @@
   },
   {
     "id": "u0107",
-    "fact": "If, therefore, the aperture be inaccessible, or so small that the thickness of the wall cannot be entered, the wall is to be bevelled on the outside, so as to increase the range of sight as far as possible; if the aperture can be entered, then bevelled from the point to which entrance is possible.",
+    "fact": "If, therefore, the aperture be inaccessible, or so small that the thickness of the wall cannot be entered, the wall is to be bevelled[57] on the outside, so as to increase the range of sight as far as possible; if the aperture can be entered, then bevelled from the point to which entrance is possible.",
     "definition": "The form of the upper part of the window is quite immaterial, for all windows allow a greater range of sight when they are _approached_ than that of the eye itself: it is the approachability of the window, that is to say, the annihilation of the thickness of the wall, which is the real point to be attended to.",
     "example": "The bevelling will, if possible, be in every direction, that is to say, upwards at the top, outwards at the sides, and downwards at the bottom, but essentially _downwards_; the earth and the doings upon it being the chief object in outlook windows, except of observatories; and where the object is a distinct and special view downwards, it will be of advantage to shelter the eye as far as possible from the rays of light coming from above, and the head of the window may be left horizontal, or even the whole aperture sloped outwards, as the slit in a letter-box is inwards.",
     "link": "17:202",
-    "key_term": null,
+    "key_term": "57",
     "example_key_term": null
   },
   {
@@ -910,7 +1009,7 @@
   },
   {
     "id": "u0113",
-    "fact": "The Venetian tower rises 350 feet, and has no buttresses, though built of brick; the British tower rises 121 feet, and is built of stone, but is supposed to be incapable of standing without two huge buttresses on each angle.",
+    "fact": "The Venetian tower rises 350 feet,[62] and has no buttresses, though built of brick; the British tower rises 121 feet, and is built of stone, but is supposed to be incapable of standing without two huge buttresses on each angle.",
     "definition": "The one beside it is one of those of the lately built college at Edinburgh.",
     "example": "The St. Mark's tower has a high sloping roof, but carries it simply, requiring no pinnacles at its angles; the British tower has no visible roof, but has four pinnacles for mere ornament.",
     "link": "20:233",
@@ -924,6 +1023,15 @@
     "example": "The appearance of this is often as strong in small things as in large; in the sounding-boards of pulpits, for instance, when sustained by a single pillar behind them, so that one is in dread, during the whole sermon, of the preacher being crushed if a single nail should give way; and again, the modern geometrical unsupported staircase.",
     "link": "20:234",
     "key_term": "Bologna",
+    "example_key_term": null
+  },
+  {
+    "id": "u0115",
+    "fact": "[62] I have taken Professor Willis's estimate; there being discrepancy among various statements.",
+    "definition": "[61] Appendix 20, \"Shafts of the Ducal Palace.\"",
+    "example": "I did not take the trouble to measure the height myself, the building being one which does not come within the range of our future inquiries; and its exact dimensions, even here, are of no importance as respects the question at issue.",
+    "link": "20:237",
+    "key_term": "Professor Willis's",
     "example_key_term": null
   },
   {
@@ -973,7 +1081,7 @@
   },
   {
     "id": "u0121",
-    "fact": "Thus, if the figures be as large as life, and complete statues, it is gross vulgarity to carve a temple above them, or distribute them over sculptured rocks, or lead them up steps into pyramids: I need hardly instance Canova's works, and the Dutch pulpit groups, with fishermen, boats, and nets, in the midst of church naves.",
+    "fact": "Thus, if the figures be as large as life, and complete statues, it is gross vulgarity to carve a temple above them, or distribute them over sculptured rocks, or lead them up steps into pyramids: I need hardly instance Canova's works,[63] and the Dutch pulpit groups, with fishermen, boats, and nets, in the midst of church naves.",
     "definition": "As the figures become of less value, and are regarded with less intensity, accessory subjects may be introduced, such as the thoughts may have leisure for.",
     "example": "If the figures be in bas-relief, though as large as life, the scene may be explained by lightly traced outlines: this is admirably done in the Ninevite marbles.",
     "link": "21:244",
@@ -1032,7 +1140,7 @@
     "example": "Of all the graceful lines assembled on Plate VII., we shall do well to be content with two of the simplest.",
     "link": "21:252",
     "key_term": "Nautilus",
-    "example_key_term": null
+    "example_key_term": "Plate VII"
   },
   {
     "id": "u0128",
@@ -1046,7 +1154,7 @@
   {
     "id": "u0129",
     "fact": "But both agree in the undulatory lines, either of the currents or the surface, and in the introduction of fish as explanatory of the meaning of those lines (so also the Egyptians in their frescoes, with most elaborate realisation of the fish).",
-    "definition": "We find every degree of conventionalism or of naturalism in these types, the earlier being, for the most part, thoughtful symbols; the latter, awkward attempts at portraiture. The most conventional of all types is the Egyptian zigzag, preserved in the astronomical sign of Aquarius; but every nation, with any capacities of thought, has given, in some of its work, the same great definition of open water, as \"an undulatory thing with fish in it.",
+    "definition": "We find every degree of conventionalism or of naturalism in these types, the earlier being, for the most part, thoughtful symbols; the latter, awkward attempts at portraiture.[65] The most conventional of all types is the Egyptian zigzag, preserved in the astronomical sign of Aquarius; but every nation, with any capacities of thought, has given, in some of its work, the same great definition of open water, as \"an undulatory thing with fish in it.",
     "example": "There is a very curious instance on a Greek mirror in the British Museum, representing Orion on the Sea; and multitudes of examples with dolphins on the Greek vases: the type is preserved without alteration in mediæval painting and sculpture.",
     "link": "21:255",
     "key_term": "Egyptians",
@@ -1055,7 +1163,7 @@
   {
     "id": "u0130",
     "fact": "Giotto, in the frescoes of Avignon, has, with his usual strong feeling for naturalism, given the best example I remember, in painting, of the unity of the conventional system with direct imitation, and that both in sea and river; giving in pure blue color the coiling whirlpool of the stream, and the curled crest of the breaker.",
-    "definition": "We find every degree of conventionalism or of naturalism in these types, the earlier being, for the most part, thoughtful symbols; the latter, awkward attempts at portraiture. The most conventional of all types is the Egyptian zigzag, preserved in the astronomical sign of Aquarius; but every nation, with any capacities of thought, has given, in some of its work, the same great definition of open water, as \"an undulatory thing with fish in it.",
+    "definition": "We find every degree of conventionalism or of naturalism in these types, the earlier being, for the most part, thoughtful symbols; the latter, awkward attempts at portraiture.[65] The most conventional of all types is the Egyptian zigzag, preserved in the astronomical sign of Aquarius; but every nation, with any capacities of thought, has given, in some of its work, the same great definition of open water, as \"an undulatory thing with fish in it.",
     "example": "But in all early sculptural examples, both imitation and decorative effect are subordinate to easily understood symbolical language; the undulatory lines are often valuable as an enrichment of surface, but are rarely of any studied gracefulness.",
     "link": "21:255",
     "key_term": "Avignon",
@@ -1077,7 +1185,7 @@
     "example": "22), such divisions of the living form may be permitted; still, you cannot cut an animal to pieces as you can gather a flower or a leaf.",
     "link": "21:262",
     "key_term": "Romans",
-    "example_key_term": null
+    "example_key_term": "22"
   },
   {
     "id": "u0133",
@@ -1090,20 +1198,20 @@
   },
   {
     "id": "u0134",
-    "fact": "The imitation of radiance by the variegated voussoir, the expression of the sweep of the desert by the barred red lines upon the wall, the starred inshedding of light through his vaulted roof, and all the endless fantasy of abstract line, were still in the power of his ardent and fantastic spirit.",
+    "fact": "The imitation of radiance by the variegated voussoir, the expression of the sweep of the desert by the barred red lines upon the wall, the starred inshedding of light through his vaulted roof, and all the endless fantasy of abstract line,[69] were still in the power of his ardent and fantastic spirit.",
     "definition": "But I have above noted that coloring is an entirely distinct and independent art; and in the \"Seven Lamps\" we saw that this art had most power when practised in arrangements of simple geometrical form: the Arab, therefore, lay under no disadvantage in coloring, and he had all the noble elements of constructive and proportional beauty at his command: he might not imitate the sea-shell, but he could build the dome.",
     "example": "Much he achieved; and yet in the effort of his overtaxed invention, restrained from its proper food, he made his architecture a glittering vacillation of undisciplined enchantment, and left the lustre of its edifices to wither like a startling dream, whose beauty we may indeed feel, and whose instruction we may receive, but must smile at its inconsistency, and mourn over its evanescence.",
     "link": "21:265",
-    "key_term": null,
+    "key_term": "69",
     "example_key_term": null
   },
   {
     "id": "u0135",
-    "fact": "Thus above, I adduced for the architect's imitation the appointed stories and beds of the Matterhorn, not its irregular forms of crag or fissure.",
-    "definition": "The admiration of Canova I hold to be one of the most deadly symptoms in the civilisation of the upper classes in the present century.",
-    "example": "Appendix 21, \"Ancient Representations of Water.\"",
+    "fact": "[64] Thus above, I adduced for the architect's imitation the appointed stories and beds of the Matterhorn, not its irregular forms of crag or fissure.",
+    "definition": "[63] The admiration of Canova I hold to be one of the most deadly symptoms in the civilisation of the upper classes in the present century.",
+    "example": "[65] Appendix 21, \"Ancient Representations of Water.\"",
     "link": "21:266",
-    "key_term": "Matterhorn",
+    "key_term": "Thus",
     "example_key_term": "Ancient Representations of Water"
   },
   {
@@ -1139,7 +1247,7 @@
     "definition": "The child looks up to it in the dawn, and the husbandman in the burden and heat of the day, and the old man in the going down of the sun, and it is to them all as the celestial city on the world's horizon; dyed with the depth of heaven, and clothed with the calm of eternity.",
     "example": "It was built for its place in the far-off sky; approach it, and as the sound of the voice of man dies away about its foundations, and the tide of human life, shallowed upon the vast aërial shore, is at last met by the Eternal \"Here shall thy waves be stayed,\" the glory of its aspect fades into blanched fearfulness; its purple walls are rent into grisly rocks, its silver fretwork saddened into wasting snow, the storm-brands of ages are on its breast, the ashes of its own ruin lie solemnly on its white raiment.",
     "link": "22:277",
-    "key_term": null,
+    "key_term": "Him",
     "example_key_term": "Eternal"
   },
   {
@@ -1172,7 +1280,7 @@
   {
     "id": "u0143",
     "fact": "How eagerly this special infringement of a general law was sometimes sought by the mediæval workmen, I shall be frequently able to point out to the reader; but I remember just now a most curious instance, in an archivolt of a house in the Corte del Remer close to the Rialto at Venice.",
-    "definition": "I do not believe the Greeks ever distinctly thought of this; but the instinct of all the human race, since the world began, agrees in some expression of such limitation as one of the first necessities of good ornament. And this expression is heightened, rather than diminished, when some portion of the design slightly breaks the law to which the rest is subjected; it is like expressing the use of miracles in the divine government; or, perhaps, in slighter degrees, the relaxing of a law, generally imperative, in compliance with some more imperative need--the hungering of David.",
+    "definition": "I do not believe the Greeks ever distinctly thought of this; but the instinct of all the human race, since the world began, agrees in some expression of such limitation as one of the first necessities of good ornament.[72] And this expression is heightened, rather than diminished, when some portion of the design slightly breaks the law to which the rest is subjected; it is like expressing the use of miracles in the divine government; or, perhaps, in slighter degrees, the relaxing of a law, generally imperative, in compliance with some more imperative need--the hungering of David.",
     "example": "It is composed of a wreath of flower-work--a constant Byzantine design--with an animal in each coil; the whole enclosed between two fillets.",
     "link": "22:288",
     "key_term": "Corte",
@@ -1203,7 +1311,7 @@
     "example": "Of these three conditions, 3 and 5 are exactly the same in reality, only differently placed; but in 4 the pyramid is obtuse, and the inclination of its base variable, the upper side of it being always kept vertical.",
     "link": "24:302",
     "key_term": "Veronese Gothic",
-    "example_key_term": null
+    "example_key_term": "5"
   },
   {
     "id": "u0147",
@@ -1211,7 +1319,7 @@
     "definition": "Taking a piece of stone instead of timber, and enlarging the notches, until they meet each other, we have the condition 2, which is a moulding from the tomb of the Doge Andrea Dandolo, in St. Mark's.",
     "example": "The use of this shadow is sufficiently seen by fig.",
     "link": "24:302",
-    "key_term": null,
+    "key_term": "5",
     "example_key_term": null
   },
   {
@@ -1224,13 +1332,49 @@
     "example_key_term": null
   },
   {
+    "id": "u0149",
+    "fact": "XIV., § IV., the figure 8 being here put in the hollow of the gutter.",
+    "definition": "It is, however, easy to enrich it as we choose: taking up its simple form at 3, and describing the arcs marked by the dotted lines upon its sides, and cutting a small triangular cavity between them, we shall leave its ridges somewhat rudely representative of four leaves, as at 8, which is the section and front view of one of the Venetian stone cornices described above, Chap.",
+    "example": "The dogtooth is put on the outer lower truncation, and is actually in position as fig.",
+    "link": "24:303",
+    "key_term": "8",
+    "example_key_term": null
+  },
+  {
+    "id": "u0150",
+    "fact": "2, the _cuts_ being taken up and decorated instead of the _points_.",
+    "definition": "10, from the refectory of Wenlock Abbey, is an example of the simplest decoration of the recesses or inward angles between the pyramids; that is to say, of a simple hacked edge like one of those in fig.",
+    "example": "Each is worked into a small trefoiled arch, with an incision round it to mark its outline, and another slight incision above, expressing the angle of the first cutting.",
+    "link": "24:304",
+    "key_term": "2",
+    "example_key_term": null
+  },
+  {
+    "id": "u0151",
+    "fact": "10 this zigzag effect is seized upon and developed, but with the easiest and roughest work; the angular incision being a mere limiting line, like that described in § IX. of the last chapter.",
+    "definition": "10, from the refectory of Wenlock Abbey, is an example of the simplest decoration of the recesses or inward angles between the pyramids; that is to say, of a simple hacked edge like one of those in fig.",
+    "example": "But hence the farther steps to every condition of Norman ornament are self evident.",
+    "link": "24:304",
+    "key_term": "10",
+    "example_key_term": "Norman"
+  },
+  {
     "id": "u0152",
     "fact": "Now this band is, of course, if the soffit-pieces project a little beyond the face of the wall-pieces, a mere fillet, like the wooden gunwale in Plate IX.; and the question is, how to enrich it most wisely.",
     "definition": "LVII., that its edge forms a kind of narrow band round the arch (_b_), a band which the least enrichment would render a valuable decorative feature.",
     "example": "It might easily have been dogtoothed, but the Byzantine architects had not invented the dogtooth, and would not have used it here, if they had; for the dogtooth cannot be employed alone, especially on so principal an angle as this of the main arches, without giving to the whole building a peculiar look, which I can not otherwise describe than as being to the eye, exactly what untempered acid is to the tongue.",
     "link": "24:306",
-    "key_term": null,
+    "key_term": "Plate IX",
     "example_key_term": "Byzantine"
+  },
+  {
+    "id": "u0153",
+    "fact": "15 is perhaps an earlier type; perhaps only one of more careless workmanship, from a Byzantine ruin in the Rio di Ca' Foscari: and it is interesting to compare it with fig.",
+    "definition": "Observe, however, that the reason above given for the _universality_ of this ornament was by no means the reason of its _invention_.",
+    "example": "14 from the Cathedral of Vienne, in South France.",
+    "link": "24:308",
+    "key_term": "Ca' Foscari",
+    "example_key_term": "Cathedral of Vienne"
   },
   {
     "id": "u0154",
@@ -1251,6 +1395,15 @@
     "example_key_term": null
   },
   {
+    "id": "u0156",
+    "fact": "LX., which is a general type of the best Gothic bases in existence, being very nearly that of the upper shafts of the Ducal Palace of Venice.",
+    "definition": "If, therefore, he likes the above triangular spur, _c d e_, by all means let him keep it; but if he be on the whole dissatisfied with it, I may be permitted, perhaps, to advise him to set to work like a tapestry bee, to cut off the little bit of line of salvia leaf _x y_, and try how he can best substitute it for the awkward lines _c d c e_.",
+    "example": "In those shafts the quadrant _a b_, or the upper edge of the lower roll, is 2 feet 1-3/8 inches round, and the base of the spur _d e_, is 10 inches; the line _d e_ being therefore to _a b_ as 10 to 25-3/8.",
+    "link": "26:322",
+    "key_term": "Ducal Palace of Venice",
+    "example_key_term": "25"
+  },
+  {
     "id": "u0157",
     "fact": "These Northern bases look the prettiest in this plate, because this variation of the outline is nearly all the ornament they have, being cut very rudely; but the Italian bases above them are merely prepared by their simple outlines for far richer decoration at the next step, as we shall see presently.",
     "definition": "13 is the base whose profile is No. 26 in Plate X.; 14 is 24 in the same plate; and 15 is 28.",
@@ -1260,13 +1413,40 @@
     "example_key_term": "Northern"
   },
   {
+    "id": "u0158",
+    "fact": "18, 11, 13, and 20 in Plate X.",
+    "definition": "The Italian bases are the following; all, except 7 and 10, being Venetian: 1 and 2, upper colonnade, St. Mark's; 3, Ca' Falier; 4, lower colonnade, and 5, transept, St. Mark's; 6, from the Church of St. John and Paul; 7, from the tomb near St. Anastasia, Verona, described above (p.",
+    "example": "The flat surfaces of the basic plinths are here shaded; and in the lower corner of the square occupied by each quadrant is put, also shaded, the central profile of each spur, from its root at the roll of the base to its point; those of Nos.",
+    "link": "26:324",
+    "key_term": "18",
+    "example_key_term": "Nos"
+  },
+  {
+    "id": "u0159",
+    "fact": "1 and 2 being conjectural, for their spurs were so rude and ugly, that I took no note of their profiles; but they would probably be as here given.",
+    "definition": "The Italian bases are the following; all, except 7 and 10, being Venetian: 1 and 2, upper colonnade, St. Mark's; 3, Ca' Falier; 4, lower colonnade, and 5, transept, St. Mark's; 6, from the Church of St. John and Paul; 7, from the tomb near St. Anastasia, Verona, described above (p.",
+    "example": "As these bases, though here, for the sake of comparison, reduced within squares of equal size, in reality belong to shafts of very different size, 9 being some six or seven inches in diameter, and 6, three or four feet, the proportionate size of the roll varies accordingly, being largest, as in 9, where the base is smallest, and in 6 and 12 the leaf profile is given on a larger scale than the plan, or its character could not have been exhibited.",
+    "link": "26:324",
+    "key_term": "1",
+    "example_key_term": "12"
+  },
+  {
     "id": "u0160",
     "fact": "The three upper examples are the Romanesque types, which occur as parallels with the Byzantine types, 1 to 3 of Plate XI.",
     "definition": "The 4th type, Plate XII., almost like the extremity of a man's foot, is a Byzantine form (perhaps worn on the edges), from the nave of St. Mark's; and the two next show the unity of the two principles, forming the perfect Italian Gothic types,--5, from tomb of Can Signorio della Scala, Verona; 6, from San Stefano, Venice (the base 11 of Plate XI., in perspective).",
     "example": "Their plans would be nearly the same; but instead of resembling flat leaves, they are literally spurs, or claws, as high as they are broad; and the third, from St. Michele of Pavia, appears to be intended to have its resemblance to a claw enforced by the transverse fillet.",
     "link": "26:325",
-    "key_term": "Romanesque",
+    "key_term": "Plate XI",
     "example_key_term": "Michele of Pavia"
+  },
+  {
+    "id": "u0161",
+    "fact": "1 is from St. Ambrogio, Milan; 2 from Vienne, France.",
+    "definition": "The three upper examples are the Romanesque types, which occur as parallels with the Byzantine types, 1 to 3 of Plate XI.",
+    "example": "The 4th type, Plate XII., almost like the extremity of a man's foot, is a Byzantine form (perhaps worn on the edges), from the nave of St. Mark's; and the two next show the unity of the two principles, forming the perfect Italian Gothic types,--5, from tomb of Can Signorio della Scala, Verona; 6, from San Stefano, Venice (the base 11 of Plate XI., in perspective).",
+    "link": "26:325",
+    "key_term": "Ambrogio",
+    "example_key_term": "Can Signorio"
   },
   {
     "id": "u0162",
@@ -1274,7 +1454,7 @@
     "definition": "Then 10 is the perfect, but simplest possible development of the same idea, from the earliest bases of the upper colonnade of the Ducal Palace, that is to say, the bases of the sea façade; and 7 and 8 are its lateral profile and transverse section.",
     "example": "When the main contours of the base are once determined, its decoration is as easy as it is infinite.",
     "link": "26:326",
-    "key_term": null,
+    "key_term": "Plate XI",
     "example_key_term": null
   },
   {
@@ -1296,21 +1476,30 @@
     "example_key_term": null
   },
   {
+    "id": "u0165",
+    "fact": "II., nor of the methods in which both these, and the rolls of the mouldings in Plate X., are decorated, especially in Roman architecture, with superadded chain work or chasing of various patterns.",
+    "definition": "The angle spur may receive such decoration as we have seen, because it is one of the most important features in the whole building; and the eye is always so attracted to it that it cannot be in rich architecture left altogether blank; the eye is stayed upon it by its position, but glides, and ought to glide, along the basic rolls to take measurement of their length: and even with all this added fitness, the ornament of the basic spur is best, in the long run, when it is boldest and simplest.",
+    "example": "Of the first I have not spoken, because I shall have no occasion to allude to them in the following essay; nor of the second, because I consider them barbarisms.",
+    "link": "26:328",
+    "key_term": "Plate",
+    "example_key_term": null
+  },
+  {
     "id": "u0166",
     "fact": "The base above described, § XVIII., as the most beautiful I ever saw, was not for that reason the best I ever saw: beautiful in its place, in a quiet corner of a Baptistery sheeted with jasper and alabaster, it would have been utterly wrong, nay, even offensive, if used in sterner work, or repeated along a whole colonnade.",
     "definition": "The angle spur may receive such decoration as we have seen, because it is one of the most important features in the whole building; and the eye is always so attracted to it that it cannot be in rich architecture left altogether blank; the eye is stayed upon it by its position, but glides, and ought to glide, along the basic rolls to take measurement of their length: and even with all this added fitness, the ornament of the basic spur is best, in the long run, when it is boldest and simplest.",
     "example": "The base No. 10 of Plate XII. is the richest with which I was ever perfectly satisfied for general service; and the basic spurs of the building which I have named as the best Gothic monument in the world (p.",
     "link": "26:328",
     "key_term": "Baptistery",
-    "example_key_term": "Gothic"
+    "example_key_term": "Plate XII"
   },
   {
     "id": "u0167",
-    "fact": "In all the wildness of the Lombardic fancy (described in Appendix 8), this command of the will over its action is as distinct as it is stern.",
-    "definition": "Appendix 25, \"Romanist Decoration of Bases.\"",
+    "fact": "[81] In all the wildness of the Lombardic fancy (described in Appendix 8), this command of the will over its action is as distinct as it is stern.",
+    "definition": "[80] Appendix 25, \"Romanist Decoration of Bases.\"",
     "example": "The fancy is, in the early work of the nation, visibly diseased; but never the will, nor the reason.",
     "link": "26:331",
-    "key_term": "Lombardic",
+    "key_term": "81",
     "example_key_term": null
   },
   {
@@ -1353,10 +1542,10 @@
     "id": "u0172",
     "fact": "On shafts of middle size, the only ornament which has ever been accepted as right, is the Doric fluting, which, indeed, gave the effect of a succession of unequal lines of shade, but lost much of the repose of the cylindrical gradation.",
     "definition": "The Corinthian fluting, which is a mean multiplication and deepening of the Doric, with a square instead of a sharp ridge between each hollow, destroyed the serenity of the shaft altogether, and is always rigid and meagre.",
-    "example": "Both are, in fact, wrong in principle; they are an elaborate weakening of the shaft, exactly opposed (as above shown) to the ribbed form, which is the result of a group of shafts bound together, and which is especially beautiful when special service is given to each member.",
+    "example": "Both are, in fact, wrong in principle; they are an elaborate weakening[83] of the shaft, exactly opposed (as above shown) to the ribbed form, which is the result of a group of shafts bound together, and which is especially beautiful when special service is given to each member.",
     "link": "28:340",
     "key_term": "Doric",
-    "example_key_term": null
+    "example_key_term": "83"
   },
   {
     "id": "u0173",
@@ -1391,7 +1580,7 @@
     "definition": "The second, _d_, is the Christian Doric cornice, here lettered _d_ in order to avoid confusion, its profile being _d_ of Plate XV. in bold development, and here seen on the left-hand side, truly drawn, though filled up with the ornament to show the mode in which the angle is turned.",
     "example": "This is also from St. Mark's.",
     "link": "29:350",
-    "key_term": "Mark's",
+    "key_term": "Plate XVI",
     "example_key_term": "Mark's"
   },
   {
@@ -1400,7 +1589,7 @@
     "definition": "In Plate XVI., opposite, I have thrown together a few of the most characteristic mediæval examples of the treatment of the simplest cornice profiles: the uppermost, _a_, is the pure root of cornices from St. Mark's.",
     "example": "(The other two simple profiles, _a_ and _c_ of Plate XV., would be decorated in the same manner, but require no example here, for the profile _a_ is of so frequent occurrence that it will have a page to itself alone in the next volume; and c may be seen over nearly every shop in London, being that of the common Greek egg cornice.",
     "link": "29:350",
-    "key_term": "Mark's",
+    "key_term": "Plate XV",
     "example_key_term": "London"
   },
   {
@@ -1425,9 +1614,9 @@
     "id": "u0180",
     "fact": "Look back to the XXXIIIrd paragraph of the first chapter, and you will see the meaning of it.",
     "definition": "These cornices are the Venetian Ecclesiastical Gothic; the Christian element struggling with the Formalism of the Papacy,--the Papacy being entirely heathen in all its principles.",
-    "example": "That officialism of the leaves and their ribs means Apostolic succession, and I don't know how much more, and is already preparing for the transition to old Heathenism again, and the Renaissance.",
+    "example": "That officialism of the leaves and their ribs means Apostolic succession, and I don't know how much more, and is already preparing for the transition to old Heathenism again, and the Renaissance.[86]",
     "link": "29:356",
-    "key_term": null,
+    "key_term": "XXXIIIrd",
     "example_key_term": "Apostolic"
   },
   {
@@ -1449,12 +1638,21 @@
     "example_key_term": "Classicalism"
   },
   {
+    "id": "u0183",
+    "fact": "VIII., § XIII.), and all the expansion necessary is now gracefully attained by their united capitals, hewn out of one stone.",
+    "definition": "If the section be taken through the side of the bell, the capital profile is the root of cornices, _a_ of Fig.",
+    "example": "Take the section of these capitals through their angle, and nothing can be simpler or purer; it is composed of 2, in Plate XV., used for the capital itself, with _c_ of Fig.",
+    "link": "29:363",
+    "key_term": "XIII",
+    "example_key_term": "Plate XV"
+  },
+  {
     "id": "u0184",
     "fact": "Above, at 2, in Plate II., the plan of the shafts was given, but I inadvertently reversed their position: in comparing that plan with Plate XVII., Plate II. must be held upside down.",
     "definition": "The capitals, with the band connecting them, are all cut out of one block; their profile is an adaptation of 4 of Plate XV., with a plain headstone superimposed.",
     "example": "The lowermost figure in Plate XVII. represents an exquisitely finished example of the same type, from St. Zeno of Verona.",
     "link": "29:363",
-    "key_term": null,
+    "key_term": "Plate XVII",
     "example_key_term": "Zeno of Verona"
   },
   {
@@ -1463,7 +1661,7 @@
     "definition": "The two beneath are from the southern portico of St. Mark's; the shafts having been of different lengths, and neither, in all probability, originally intended for their present place, they have double abaci, of which the uppermost is the cornice running round the whole façade.",
     "example": "At the top of Plate XVIII. are two Lombardic capitals; that on the left from Sta.",
     "link": "29:369",
-    "key_term": null,
+    "key_term": "Plate XVIII",
     "example_key_term": "Sta"
   },
   {
@@ -1473,7 +1671,7 @@
     "example": "Its plan is given in Fig.",
     "link": "29:371",
     "key_term": "St Mark's",
-    "example_key_term": null
+    "example_key_term": "Fig"
   },
   {
     "id": "u0187",
@@ -1490,34 +1688,52 @@
     "definition": "It is taken from a capital in a very important ruin of a palace, near the Rialto of Venice, and hereafter to be described; the projection, outside of its principal curve, is the profile of its _superadded_ leaf ornamentation; it may be taken as one of the simplest, yet a perfect type of the concave group.",
     "example": "Those of my readers, however, to whom this illustration is inaccessible, must be content with the two profiles, 13 and 14, on Plate XV.",
     "link": "29:372",
-    "key_term": null,
-    "example_key_term": null
+    "key_term": "13",
+    "example_key_term": "13"
   },
   {
     "id": "u0189",
-    "fact": "In very early Doric it was an absolute right line; and that capital is therefore derived from the pure cornice root, represented by the dotted line.",
+    "fact": "[84] In very early Doric it was an absolute right line; and that capital is therefore derived from the pure cornice root, represented by the dotted line.",
     "definition": "I cannot express the exquisite refinements of the curves on the small scale of Plate XV.; I will give them more accurately in a larger engraving; but the scale on which they are here given will not prevent the reader from perceiving, and let him note it thoughtfully, that the outer curve of the noble capital is the one which was our first example of associated curves; that I have had no need, throughout the whole of our inquiry, to refer to any other ornamental line than the three which I at first chose, the simplest of those which Nature set by chance before me; and that this lily, of the delicate Venetian marble, has but been wrought, by the highest human art, into the same line which the clouds disclose, when they break from the rough rocks of the flank of the Matterhorn.",
-    "example": "The word banded is used by Professor Willis in a different sense; which I would respect, by applying it in his sense always to the Impost, and in mine to the capital itself.",
+    "example": "[85] The word banded is used by Professor Willis in a different sense; which I would respect, by applying it in his sense always to the Impost, and in mine to the capital itself.",
     "link": "29:373",
-    "key_term": "Doric",
+    "key_term": "84",
     "example_key_term": "Impost"
   },
   {
     "id": "u0190",
     "fact": "Hence we have pilaster heads formed of small egg cornices, and that meanest of all mean heads of shafts, the coarse Roman Doric profile chopped into a small egg and arrow moulding, both which may be seen disfiguring half the buildings in London.",
     "definition": "The Renaissance architects, who never obtained hold of a right principle but they made it worse than a wrong one by misapplication, caught the idea of turning the cornice into a capital, but did not comprehend the necessity of the accompanying change of depth.",
-    "example": "I have taken these dates roughly from Selvatico; their absolute accuracy to within a year or two, is here of no importance.",
+    "example": "[88] I have taken these dates roughly from Selvatico; their absolute accuracy to within a year or two, is here of no importance.",
     "link": "29:374",
     "key_term": "Roman Doric",
-    "example_key_term": "Selvatico"
+    "example_key_term": "88"
   },
   {
     "id": "u0191",
-    "fact": "It was, in the first instance, derived from the classical architrave, and the early Romanesque arches are nothing but such an architrave, bent round.",
+    "fact": "It was, in the first instance, derived from the classical architrave,[91] and the early Romanesque arches are nothing but such an architrave, bent round.",
     "definition": "As the builders get accustomed to the arch, and love it better, they cease to be ashamed of its structure: the voussoirs begin to show themselves confidently, and fight for precedence with the architrave lines; and there is an entanglement of the two structures, in consequence, like the circular and radiating lines of a cobweb, until at last the architrave lines get worsted, and driven away outside of the voussoirs; being permitted to stay at all only on condition of their dressing themselves in mediæval costume, as in the plate opposite.",
     "example": "The horizontal lines of the latter become semicircular, but their importance and value remain exactly the same; their continuity is preserved across all the voussoirs, and the joints and functions of the latter are studiously concealed.",
     "link": "30:376",
-    "key_term": "Romanesque",
+    "key_term": "91",
+    "example_key_term": null
+  },
+  {
+    "id": "u0192",
+    "fact": "XXIX. § IV.), may rationally be applied to waggon vaults, as of St. Peter's, and to arch soffits under which one walks.",
+    "definition": "The custom of decorating the arch soffit with panelling is a Roman application of the Greek roof ornament, which, whatever its intrinsic merit (compare Chap.",
+    "example": "But the Renaissance architects had not wit enough to reflect that people usually do not walk through windows.",
+    "link": "30:379",
+    "key_term": "Peter's",
+    "example_key_term": "Renaissance"
+  },
+  {
+    "id": "u0193",
+    "fact": "XI., § III.; it is to be noted now as one still more valuable in decoration: for when we arrive at the deep succession of concentric archivolts, with which northern portals, and many of the associated windows, are headed, we immediately find a difficulty in reconciling the outer curve with the inner.",
+    "definition": "The result is the condition represented in Plate V., often found in far bolder development; exquisitely springy and elastic in its expression, and entirely free from the heaviness and monotony of the deep northern archivolts.",
+    "example": "If, as is sometimes the case, the width of the group of archivolts be twice or three times that of the inner aperture, the inner arch may be distinctly pointed, and the outer one, if drawn with concentric arcs, approximate very nearly to a round arch.",
+    "link": "30:383",
+    "key_term": "III",
     "example_key_term": null
   },
   {
@@ -1541,7 +1757,7 @@
   {
     "id": "u0196",
     "fact": "We may hardly be able to detect this in Nature herself; but when the forms are separated from the things, and exhibited alone (by sculpture or carving), we then see that they are not all fitted for ornamental purposes; and indeed that very few, perhaps none, are so fitted without correction.",
-    "definition": "Yes, I say _correction_, for though it is the highest aim of every art to imitate nature, this is not to be done by imitating any natural form, but by _criticising_ and _correcting_ it,--criticising it by Nature's rules gathered from all her works, but never completely carried out by her in any one work; correcting it, by rendering it more natural, _i.e._ more conformable to the general tendency of Nature, according to that noble maxim recorded of Raffaelle, 'that the artist's object was to make things not as Nature makes them, but as she WOULD make them;' as she ever tries to make them, but never succeeds, though her aim may be deduced from a comparison of her efforts; just as if a number of archers had aimed unsuccessfully at a mark upon a wall, and this mark were then removed, we could by the examination of their arrow marks point out the most probable position of the spot aimed at, with a certainty of being nearer to it than any of their shots.\"",
+    "definition": "Yes, I say _correction_, for though it is the highest aim of every art to imitate nature, this is not to be done by imitating any natural form, but by _criticising_ and _correcting_ it,--criticising it by Nature's rules gathered from all her works, but never completely carried out by her in any one work; correcting it, by rendering it more natural, _i.e._ more conformable to the general tendency of Nature, according to that noble maxim recorded of Raffaelle, 'that the artist's object was to make things not as Nature makes them, but as she WOULD make them;' as she ever tries to make them, but never succeeds, though her aim may be deduced from a comparison of her efforts; just as if a number of archers had aimed unsuccessfully at a mark upon a wall, and this mark were then removed, we could by the examination of their arrow marks point out the most probable position of the spot aimed at, with a certainty of being nearer to it than any of their shots.\"[92]",
     "example": "\"It is not true that all natural forms are beautiful.",
     "link": "32:394",
     "key_term": "Nature",
@@ -1604,7 +1820,7 @@
   {
     "id": "u0203",
     "fact": "It is matter also of very great satisfaction to know that Venice was founded by good Christians: \"La qual citade è stada hedificada da veri e boni Christiani:\" which information I found in the MS. copy of the Zancarol Chronicle, in the library of St. Mark's.",
-    "definition": "And first Galienus de Fontana, Simon de Glauconibus, and Antonius Calvus, or, as others have it, Adalburtus Falerius, Thomas Candiano, Comes Daulus, Consuls of Padua, by the command of their King and the desire of the citizens, laid the foundations of the new commonwealth, under good auspices, on the island of the Rialto, the highest and nearest to the mouth of the deep river now called the Brenta, in the year of Our Lord, as many writers assure us, four hundred and twenty-one, on the 25th day of March.\"",
+    "definition": "And first Galienus de Fontana, Simon de Glauconibus, and Antonius Calvus, or, as others have it, Adalburtus Falerius, Thomas Candiano, Comes Daulus, Consuls of Padua, by the command of their King and the desire of the citizens, laid the foundations of the new commonwealth, under good auspices, on the island of the Rialto, the highest and nearest to the mouth of the deep river now called the Brenta, in the year of Our Lord, as many writers assure us, four hundred and twenty-one, on the 25th day of March.\"[93]",
     "example": "Finally the conjecture as to the origin of her name, recorded by Sansovino, will be accepted willingly by all who love Venice: \"Fu interpretato da alcuni, che questa voce VENETIA voglia dire _VENI ETIAM_, cioè, vieni ancora, e ancora, percioche quante volte verrai, sempre vedrai nuove cose, enuove bellezze.\"",
     "link": "32:404",
     "key_term": "Zancarol Chronicle",
@@ -1679,7 +1895,7 @@
     "definition": "The pope talked of 'poor cardinals' and of his nephew, but made no positive reply; and, as Francesco Contarini was withdrawing, said to him: 'My Lord ambassador, with this opportunity we will inform you that, to our very great regret, we understand that the chiefs of the Ten mean to turn sacristans; for they order the parish priests to close the church doors at the Ave Maria, and not to ring the bells at certain hours.",
     "example": "In 1608, the rich Camaldolite Abbey of Vangadizza, in the Polesine, fell vacant through the death of Lionardo Loredano, in whose family it had been since some while.",
     "link": "32:408",
-    "key_term": "Cipico",
+    "key_term": "Cipico WITHOUT",
     "example_key_term": "Camaldolite Abbey of Vangadizza"
   },
   {
@@ -1698,7 +1914,7 @@
     "example": "A few years before this, this very same pope excommunicated the State, because she had imprisoned two churchmen for heinous crimes; the strife lasted for more than a year, and ended through the mediation of Henry IV., at whose suit the prisoners were delivered to the French ambassador, who made them over to a papal commissioner.",
     "link": "32:408",
     "key_term": "Venetian Matteo Priuli",
-    "example_key_term": "State"
+    "example_key_term": "Henry IV"
   },
   {
     "id": "u0214",
@@ -1715,7 +1931,7 @@
     "definition": "The chief of the Ten desired they might be seized, but at the moment the priest escaped; he was, however, subsequently retaken, and in that very evening hanged by torch-light between the columns with the two soldiers.",
     "example": "\"* * * The exclusion from the Grand Council, whether at the end of the fourteenth or commencement of the following century, of the Venetian ecclesiastics, (as induced either by the republic's acquisitions on the main land then made, and which, through the rich benefices they embraced, might have rendered an ambitious churchman as dangerous in the Grand Council as a victorious condottiere; or from dread of their allegiance being divided between the church and their country, it being acknowledged that no man can serve two masters,) did not render them hostile to their fatherland, whose interests were, with very few exceptions, eagerly fathered by the Venetian prelates at Rome, who, in their turn, received all honor at Venice, where state receptions given to cardinals of the houses of Correr, Grimani, Cornaro, Pisani, Contarini, Zeno, Delfino, and others, vouch for the good understanding that existed between the 'Papalists' and their countrymen.",
     "link": "32:410",
-    "key_term": "Innocent",
+    "key_term": "Innocent VIII",
     "example_key_term": "Contarini"
   },
   {
@@ -1733,13 +1949,13 @@
     "definition": "La fameuse maxime, 'Siamo veneziani, poi christiani,' n'était qu'une formule énergique qui ne prouvait point quils voulussent placer l'intérêt de la religion après celui de l'Etat, mais qui annonçait leur invariable résolution de ne pas souffrir qu'un pouvoir étranger portât atteinte aux droits de la république.",
     "example": "\"Jamais il ne se relâcha du soin de tenir le clergé dans une nullité absolue relativement aux affaires politiques; on peut en juger par la conduite qu'il tint avec l'ordre religieux le plus redoutable et le plus accoutumé à s'immiscer dans les secrets de l'Etat et dans les intérêts temporels.\"",
     "link": "32:412",
-    "key_term": "Pape Jules",
+    "key_term": "Pape Jules II",
     "example_key_term": "Jamais"
   },
   {
     "id": "u0218",
     "fact": "I do not point out this separation as subject of praise, but as the witness borne by the Venetians against the principles of the Papacy.",
-    "definition": "The Venetians accomplished therein what we ridiculously call a separation of \"Church and State\" (as if the State were not, in all Christendom, necessarily also the Church), but _ought_ to call a separation of lay and clerical officers.",
+    "definition": "The Venetians accomplished therein what we ridiculously call a separation of \"Church and State\" (as if the State were not, in all Christendom, necessarily also the Church[94]), but _ought_ to call a separation of lay and clerical officers.",
     "example": "If they were to blame, in yielding to their fear of the ambitious spirit of Rome so far as to deprive their councils of all religious element, what excuse are we to offer for the state, which, with Lords Spiritual of her own faith already in her senate, permits the polity of Rome to be represented by lay members?",
     "link": "32:413",
     "key_term": "Papacy",
@@ -1859,7 +2075,7 @@
     "definition": "Of these phantasms and grotesques, one of some general importance is that commonly called Ionic, of which the idea was taken (Vitruvius says) from a woman's hair, curled; but its lateral processes look more like rams' horns: be that as it may, it is a mere piece of agreeable extravagance, and if, instead of rams' horns, you put ibex horns, or cows' horns, or an ass's head at once, you will have ibex orders, or ass orders, or any number of other orders, one for every head or horn.",
     "example": "XXVII., and in the passages there referred to; but I should rather desire that these passages might be read in the order in which they occur.",
     "link": "32:418",
-    "key_term": null,
+    "key_term": "XXXVI",
     "example_key_term": null
   },
   {
@@ -1896,7 +2112,7 @@
     "example": "In the \"Seven Lamps,\" Plate VI., I gave a faithful drawing of one of its upper arches, to which I must refer the reader; for there is a marked piece of character in the figure of the horseman on the left of it.",
     "link": "32:426",
     "key_term": "Serchio",
-    "example_key_term": "Seven Lamps"
+    "example_key_term": "Plate VI"
   },
   {
     "id": "u0236",
@@ -1913,7 +2129,7 @@
     "definition": "I do not know a more interesting group of cathedrals than that of Lyons, Vienne, and Valencia: a more interesting indeed, generally, than beautiful; but there is a row of niches on the west front of Lyons, and a course of panelled decoration about its doors, which is, without exception, the most exquisite piece of Northern Gothic I ever beheld, and with which I know nothing that is even comparable, except the work of the north transept of Rouen, described in the \"Seven Lamps,\" p.",
     "example": "It represents the southern side of the lower arcade of the west front; and may convey some idea of the exquisite finish and grace of the whole; but the old plate, in the \"Seven Lamps,\" gives a nearer view of one of the upper arches, and a more faithful impression of the present aspect of the work, and especially of the seats of the horsemen; the limb straight, and well down on the stirrup (the warrior's seat, observe, not the jockey's), with a single pointed spur on the heel.",
     "link": "32:428",
-    "key_term": null,
+    "key_term": "Plate XXI",
     "example_key_term": "Seven Lamps"
   },
   {
@@ -1926,6 +2142,15 @@
     "example_key_term": "Rhone"
   },
   {
+    "id": "u0239",
+    "fact": "159; work of about the same date, and exactly the same plan; quatrefoils filled with grotesques, but somewhat less finished in execution, and somewhat less wild in imagination.",
+    "definition": "I do not know a more interesting group of cathedrals than that of Lyons, Vienne, and Valencia: a more interesting indeed, generally, than beautiful; but there is a row of niches on the west front of Lyons, and a course of panelled decoration about its doors, which is, without exception, the most exquisite piece of Northern Gothic I ever beheld, and with which I know nothing that is even comparable, except the work of the north transept of Rouen, described in the \"Seven Lamps,\" p.",
+    "example": "I wrote down hastily, and in their own course, the subjects of some of the quatrefoils of Lyons; of which I here give the reader the sequence:--",
+    "link": "32:428",
+    "key_term": "159",
+    "example_key_term": "Lyons"
+  },
+  {
     "id": "u0240",
     "fact": "The inside view of the church of Borgund shows the timber construction of one shaft run up through a crossing architrave, and continued into the clerestory; while the church of Urnes is in the exact form of a basilica; but the wall above the arches is formed of planks, with a strong upright above each capital.",
     "definition": "I cannot pledge myself to this theory of the origin of the vaulting shaft, but the reader will find some interesting confirmations of it in Dahl's work on the wooden churches of Norway.",
@@ -1933,6 +2158,15 @@
     "link": "32:431",
     "key_term": "Borgund",
     "example_key_term": "Stephen Eddy's Life of Bishop Wilfrid"
+  },
+  {
+    "id": "u0241",
+    "fact": "86 of Churton's \"Early English Church,\" gives us one of the transformations or petrifactions of the wooden Saxon churches.",
+    "definition": "The passage quoted from Stephen Eddy's Life of Bishop Wilfrid, at p.",
+    "example": "\"At Ripon he built a new church of _polished stone_, with columns variously ornamented, and porches.",
+    "link": "32:431",
+    "key_term": "Early English Church",
+    "example_key_term": "Ripon"
   },
   {
     "id": "u0242",
@@ -2057,7 +2291,7 @@
     "definition": "In this scheme I consider memory a part of understanding, and conscience I leave out, as being the voice of God in the heart, inseparable from the system, yet not an essential part of it.",
     "example": "Now all these parts of the human system have a reciprocal action on one another, so that the true perfection of any of them is not possible without some relative perfection of the others, and yet any one of the parts of the system may be brought into a morbid development, inconsistent with the perfection of the others.",
     "link": "32:449",
-    "key_term": null,
+    "key_term": "Senses",
     "example_key_term": null
   },
   {
@@ -2075,7 +2309,7 @@
     "definition": "War certainly stands first in the general mind, not only as the greatest of the arts which I have called of the second order, but as the greatest of all arts.",
     "example": "I believe, however, that taking into consideration the greatness of the anxieties under which this art must be practised, the multitude of circumstances to be known and regarded in it, and the subtleties both of apprehension and stratagem constantly demanded by it, as well as the multiplicity of disturbing accidents and doubtful contingencies against which it must make provision on the instant, it must indeed rank as far the first of the arts of the second order; and next to this great art of killing, medicine being much like war in its stratagems and watchings against its dark and subtle death-enemy.",
     "link": "32:453",
-    "key_term": "Art",
+    "key_term": "Power",
     "example_key_term": null
   },
   {
@@ -2103,7 +2337,7 @@
     "example": "I should at any rate have noticed the passage quoted above, (Chap.",
     "link": "32:459",
     "key_term": "Garbett's",
-    "example_key_term": null
+    "example_key_term": "Chap"
   },
   {
     "id": "u0261",
@@ -2116,11 +2350,11 @@
   },
   {
     "id": "u0262",
-    "fact": "You do not build a temple and then dress it. You create it in its loveliness, and leave it, as her Maker left Eve.",
+    "fact": "You do not build a temple and then dress it.[101] You create it in its loveliness, and leave it, as her Maker left Eve.",
     "definition": "What right has he to assume that ornament, rightly so called, ever was, or can be, superfluous?",
     "example": "Not unadorned, I believe, but so well adorned as to need no feather crowns.",
     "link": "32:460",
-    "key_term": "Eve",
+    "key_term": "Maker",
     "example_key_term": null
   },
   {
@@ -2147,7 +2381,7 @@
     "definition": "Mr. Garbett cannot get rid of his unfortunate notion that ornament is a thing to be manufactured separately, and fastened on.",
     "example": "We may say of a thing, considered separately, that it is a pretty thing; but before we can say it is a good ornament, we must know what it is to adorn, and how.",
     "link": "32:463",
-    "key_term": null,
+    "key_term": "Once",
     "example_key_term": null
   },
   {
@@ -2156,7 +2390,7 @@
     "definition": "Observe, then, the appearance of labor, that is to say, the evidence of the past industry of man, is always, in the abstract, intensely delightful: man being meant to labor, it is delightful to see that he _has_ labored, and to read the record of his active and worthy existence.",
     "example": "As, for instance, if a man has labored for an hour at what might have been done by another man in a moment, this evidence of his labor is also evidence of his weakness; and this weakness is greater in rank of evil, than his industry is great in rank of good.",
     "link": "32:465",
-    "key_term": null,
+    "key_term": "Good",
     "example_key_term": null
   },
   {
@@ -2183,8 +2417,17 @@
     "definition": "The latter is the one given in Plate XIV.",
     "example": "Every spandril of the lower arcade was intended to have been occupied by an ornament resembling the one given in that plate.",
     "link": "32:473",
-    "key_term": "Ducal Palace",
+    "key_term": "Plate XIV",
     "example_key_term": null
+  },
+  {
+    "id": "u0270",
+    "fact": "I., page 30); that is to say, connecting the 2nd arch with the 3rd, and the 9th with the 10th.",
+    "definition": "The latter is the one given in Plate XIV.",
+    "example": "I may as well connect with these notes respecting the arcades of the Ducal Palace, those which refer to Plate XIV., which represents one of its spandrils.",
+    "link": "32:473",
+    "key_term": "30",
+    "example_key_term": "Plate XIV"
   },
   {
     "id": "u0271",
@@ -2193,7 +2436,7 @@
     "example": "Of the disc decoration, so borrowed, we have already an example in Plate I.",
     "link": "32:475",
     "key_term": "Byzantine Renaissance",
-    "example_key_term": null
+    "example_key_term": "Plate"
   },
   {
     "id": "u0272",
@@ -2221,6 +2464,15 @@
     "link": "32:478",
     "key_term": "Egyptian",
     "example_key_term": "Thebes"
+  },
+  {
+    "id": "u0275",
+    "fact": "177 and 170: the subject of the first of these is an oblong pond, ground-plan and elevation being strangely confused in the design.",
+    "definition": "In Egyptian art the general representation of water is the conventionally imitative.",
+    "example": "In this pond water is represented by parallel zigzag lines, in which fish are swimming about.",
+    "link": "32:478",
+    "key_term": "177",
+    "example_key_term": null
   },
   {
     "id": "u0276",
@@ -2277,13 +2529,22 @@
     "example_key_term": null
   },
   {
+    "id": "u0282",
+    "fact": "27), of which the subject is, Europa crossing the sea on the back of the bull.",
+    "definition": "In the British Museum is a vase, No. 1257, engraved (Lenormant et De Witte, Mon.",
+    "example": "In this design the sea is represented by a variety of expedients.",
+    "link": "32:481",
+    "key_term": "Europa",
+    "example_key_term": null
+  },
+  {
     "id": "u0283",
     "fact": "On a mosaic found at Oudnah in Algeria (Revue Archéol., iii. pl.",
     "definition": "Towards the surface line thus indicated a dolphin is rising; in the middle depth is another dolphin; below a shrimp and a cuttle-fish, and the bottom is indicated by a jagged line of rocks, on which are two echini.",
     "example": "50), we have a representation of the sea, remarkable for the fulness of details with which it is made out.",
     "link": "32:482",
     "key_term": "Revue Arch",
-    "example_key_term": null
+    "example_key_term": "50"
   },
   {
     "id": "u0284",
@@ -2302,6 +2563,15 @@
     "link": "32:483",
     "key_term": "Acropolis of Corinth",
     "example_key_term": "Pirene"
+  },
+  {
+    "id": "u0286",
+    "fact": "16) describes a similar picture of the Isthmus between the two harbors, one of which was in the form of a youth, the other of a nymph.",
+    "definition": "The ancients likened the form of this harbor to a sickle, and on the coins of the town we find a curved object, within the area of which is a dolphin.",
+    "example": "On another coin of Corinth we have one of the harbors in a semicircular form, the whole arc being marked with small equal divisions, to denote the archways under which the ancient galleys were drawn, _subductæ_; at the either horn or extremity of the harbor is a temple; in the centre of the mouth, a statue of Neptune.",
+    "link": "32:483",
+    "key_term": "Isthmus",
+    "example_key_term": "Corinth"
   },
   {
     "id": "u0287",
@@ -2358,6 +2628,15 @@
     "example_key_term": null
   },
   {
+    "id": "u0293",
+    "fact": "38), and the figure of the Tiber in the Louvre, both of which are of the Roman period, we see how in these later types the artist multiplied symbols and accessories, ingrafting them on the original simple type of the river-god, as it was conceived by Phidias in the figure of the Ilissus.",
+    "definition": "His form is youthful, in the folds of the drapery behind him there is a flow like that of waves, but the idea of water is not suggested by any other symbol.",
+    "example": "The Nile is represented as a colossal bearded figure reclining.",
+    "link": "32:487",
+    "key_term": "Louvre",
+    "example_key_term": "Nile"
+  },
+  {
     "id": "u0294",
     "fact": "In the other two compartments are the animals and plants of the river; the bas-reliefs on this basement are, in fact, a kind of abbreviated symbolic panorama of the Nile.",
     "definition": "His form is youthful, in the folds of the drapery behind him there is a flow like that of waves, but the idea of water is not suggested by any other symbol.",
@@ -2385,10 +2664,19 @@
     "example_key_term": null
   },
   {
+    "id": "u0297",
+    "fact": "15) a storm of rain is represented by the head of Jupiter Pluvius, who has a vast outspread beard flowing in long tresses.",
+    "definition": "In the Townley collection, in the British Museum, is a Roman helmet found at Ribchester in Lancashire, with a mask or vizor attached.",
+    "example": "On the column of Antoninus (Bartoli, Colon.",
+    "link": "32:490",
+    "key_term": "Jupiter Pluvius",
+    "example_key_term": "Antoninus"
+  },
+  {
     "id": "u0298",
     "fact": "Antiques) which may be described as a kind of rude panorama of some district of Upper Egypt, a bird's-eye view, half man, half picture, in which the details are neither adjusted to a scale, nor drawn according to perspective, but crowded together, as they would be in an ancient bas-relief.",
     "definition": "One of the latest representations of water in ancient art is the mosaic of Palestrina (Barthélemy, in Bartoli, Peint.",
-    "example": "I do not mean what I have here said of the Inventive power of the Arab to be understood as in the least applying to the detestable ornamentation of the Alhambra. The Alhambra is no more characteristic of Arab work, than Milan Cathedral is of Gothic: it is a late building, a work of the Spanish dynasty in its last decline, and its ornamentation is fit for nothing but to be transferred to patterns of carpets or bindings of books, together with their marbling, and mottling, and other mechanical recommendations.",
+    "example": "I do not mean what I have here said of the Inventive power of the Arab to be understood as in the least applying to the detestable ornamentation of the Alhambra.[105] The Alhambra is no more characteristic of Arab work, than Milan Cathedral is of Gothic: it is a late building, a work of the Spanish dynasty in its last decline, and its ornamentation is fit for nothing but to be transferred to patterns of carpets or bindings of books, together with their marbling, and mottling, and other mechanical recommendations.",
     "link": "32:491",
     "key_term": "Upper Egypt",
     "example_key_term": "Milan Cathedral"
@@ -2397,7 +2685,7 @@
     "id": "u0299",
     "fact": "Its fluted pillars are surrounded each by a wreath, one of vine, another of laurel, another of oak, not indeed arranged with the fantasticism of early Gothic; but, especially the laurel, reminding one strongly of the laurel sprays, powerful as well as beautiful, of Veronese and Tintoret.",
     "definition": "\"The Scuola di San Rocco is one of the most interesting examples of Renaissance work in Venice.",
-    "example": "Their stems are curiously and richly interlaced--the last vestige of the Byzantine wreathed work--and the vine-leaves are ribbed on the surfaces, I think, nearly as finely as those of the Noah, though more injured by time.",
+    "example": "Their stems are curiously and richly interlaced--the last vestige of the Byzantine wreathed work--and the vine-leaves are ribbed on the surfaces, I think, nearly as finely as those of the Noah,[106] though more injured by time.",
     "link": "32:493",
     "key_term": "Tintoret",
     "example_key_term": "Noah"
@@ -2433,18 +2721,45 @@
     "id": "u0303",
     "fact": "Sharpe's \"Architectural Parallels\"--almost a model of what I should like to see done for the Gothic of all Europe.",
     "definition": "Well may our architecture fall from its place among the fine arts, as it is doing rapidly; nearly all our works of value being devoted to the Greek architecture, which is _utterly useless_ to us--or worse. _One_ most noble book, however, has been dedicated to our English abbeys,--Mr. E.",
-    "example": "Except in the single passage \"tell it unto the Church,\" which is simply the _extension_ of what had been commanded before, i.e., tell the fault first \"between thee and him,\" then taking \"with thee one or two more,\" then, to all Christian men capable of hearing the cause: if he refuse to hear their common voice, \"let him be unto thee as a heathen man and publican:\" (But consider how Christ treated both.)",
+    "example": "[98] Except in the single passage \"tell it unto the Church,\" which is simply the _extension_ of what had been commanded before, i.e., tell the fault first \"between thee and him,\" then taking \"with thee one or two more,\" then, to all Christian men capable of hearing the cause: if he refuse to hear their common voice, \"let him be unto thee as a heathen man and publican:\" (But consider how Christ treated both.)",
     "link": "32:497",
     "key_term": "Architectural Parallels",
-    "example_key_term": "Church"
+    "example_key_term": "Except"
+  },
+  {
+    "id": "u0304",
+    "fact": "[100] Not, however, by Johnson's _testimony_: Vide Adventurer, No. 39.",
+    "definition": "[99] One or two remarks on this subject, some of which I had intended to have inserted here, and others in Appendix 5, I have arranged in more consistent order, and published in a separate pamphlet, \"Notes on the Construction of Sheep-folds,\" for the convenience of readers interested in other architecture than that of Venetian palaces.",
+    "example": "\"Such operations as required neither celerity nor strength,--the low drudgery of collating copies, comparing authorities, _digesting dictionaries_, or accumulating compilations.\"",
+    "link": "32:498",
+    "key_term": "Vide Adventurer",
+    "example_key_term": "Such"
   },
   {
     "id": "u0305",
-    "fact": "I cannot suffer this volume to close without also thanking my kind friend, Mr. Rawdon Brown, for help given me in a thousand ways during my stay in Venice: but chiefly for his direction to passages elucidatory of my subject in the MSS. of St. Mark's library.",
-    "definition": "I shall often have occasion to write measures in the current text, therefore the reader will kindly understand that whenever they are thus written, 2 ,, 2, with double commas between, the first figures stand for English feet, the second for English inches.",
-    "example": "I have not seen the building itself, but Mr. Owen Jones's work may, I suppose, be considered as sufficiently representing it for all purposes of criticism.",
+    "fact": "[104] I cannot suffer this volume to close without also thanking my kind friend, Mr. Rawdon Brown, for help given me in a thousand ways during my stay in Venice: but chiefly for his direction to passages elucidatory of my subject in the MSS. of St. Mark's library.",
+    "definition": "[103] I shall often have occasion to write measures in the current text, therefore the reader will kindly understand that whenever they are thus written, 2 ,, 2, with double commas between, the first figures stand for English feet, the second for English inches.",
+    "example": "[105] I have not seen the building itself, but Mr. Owen Jones's work may, I suppose, be considered as sufficiently representing it for all purposes of criticism.",
     "link": "32:499",
     "key_term": "Rawdon Brown",
     "example_key_term": "Owen Jones's"
+  },
+  {
+    "id": "u0306",
+    "fact": "Page 398: 'calld' corrected to 'called' in 'Men engaged in the practice of these are calld artizans'.",
+    "definition": "Page 397: 'bodly' corrected to 'bodily' in 'merely through the channel of the bodly dexterities'.",
+    "example": "Page 401: 'necesary' corrected to 'necessary' in 'as Rubens was of that necesary for his'.",
+    "link": "32:500",
+    "key_term": "398",
+    "example_key_term": "401"
+  },
+  {
+    "id": "u0307",
+    "fact": "Page 406: Space placement corrected in 'I found it a sugly at last' to 'I found it as ugly at last'.",
+    "definition": "Page 401: 'necesary' corrected to 'necessary' in 'as Rubens was of that necesary for his'.",
+    "example": "Page 423: 'Milligen' corrected to 'Millingen' in 'Compare also Milligen, Ancient Coins of Cities and Kings'.",
+    "link": "32:500",
+    "key_term": "Space",
+    "example_key_term": "423"
   }
 ]
