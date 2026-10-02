@@ -441,9 +441,11 @@ def load_model(
                 kwargs["torch_dtype"] = gpu_dtype
                 description = f"GPU ({dtype_name}, device_map=auto, {gpu_total_vram_gb():.0f} GB VRAM)"
             else:
-                # GPU 4-bit mode: try 4-bit quantization if bitsandbytes is available,
+                # GPU 4-bit mode: try 4-bit quantization if bitsandbytes is available AND CUDA is detected,
                 # else fall back to full-precision GPU loading.
-                if _bitsandbytes_available():
+                # Note: transformers requires torch.cuda.is_available() to use load_in_4bit, even if GPU is present
+                cuda_available = torch.cuda.is_available()
+                if _bitsandbytes_available() and cuda_available:
                     # Use native transformers 4-bit loading with bitsandbytes.
                     kwargs["load_in_4bit"] = True
                     kwargs["bnb_4bit_quant_type"] = "nf4"
@@ -456,13 +458,22 @@ def load_model(
                         if not os.environ.get("PILOT_GPU_MODE") else "PILOT_GPU_MODE=4bit")
                     description = f"GPU (4-bit NF4, {reason})"
                 else:
-                    # bitsandbytes not available: load full-precision on GPU instead.
-                    # This uses more VRAM but avoids bitsandbytes CUDA detection issues on Windows.
-                    log.warning("bitsandbytes not installed; loading full-precision on GPU instead of 4-bit. "
-                                "Install bitsandbytes (pip install bitsandbytes) for 4-bit quantization.")
+                    # bitsandbytes not available or CUDA not detected: load full-precision on GPU instead.
+                    # This uses more VRAM but avoids bitsandbytes CUDA detection issues on Windows/DirectML.
+                    reason_parts = []
+                    if not _bitsandbytes_available():
+                        reason_parts.append("bitsandbytes not available")
+                    if not cuda_available:
+                        reason_parts.append("CUDA not detected (e.g., DirectML)")
+                    reason = "; ".join(reason_parts) + "; full-precision fallback" if reason_parts else "full-precision fallback"
+                    if not cuda_available:
+                        log.warning("CUDA not detected; loading full-precision on GPU instead of 4-bit. "
+                                    "This may be DirectML or another non-CUDA GPU backend.")
+                    elif not _bitsandbytes_available():
+                        log.warning("bitsandbytes not available; loading full-precision on GPU instead of 4-bit. "
+                                    "Install bitsandbytes (pip install bitsandbytes) for 4-bit quantization.")
                     kwargs["device_map"] = "auto"
                     kwargs["torch_dtype"] = gpu_dtype
-                    reason = "bitsandbytes not available; full-precision fallback"
                     description = f"GPU ({dtype_name}, device_map=auto, {reason}, {gpu_total_vram_gb():.0f} GB VRAM)"
         log.info("Loading %s on %s ...", model_path, description)
 
