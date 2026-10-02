@@ -393,15 +393,13 @@ def load_model(
                 kwargs["torch_dtype"] = gpu_dtype
                 description = f"GPU ({dtype_name}, device_map=auto, {gpu_total_vram_gb():.0f} GB VRAM)"
             else:
-                from transformers import BitsAndBytesConfig
-
-                kwargs["quantization_config"] = BitsAndBytesConfig(
-                    load_in_4bit=True,
-                    bnb_4bit_quant_type="nf4",
-                    bnb_4bit_use_double_quant=True,
-                    bnb_4bit_compute_dtype=gpu_dtype,
-                )
-                kwargs["device_map"] = {"": 0}
+                # Use native transformers 4-bit loading instead of bitsandbytes config.
+                # This avoids bitsandbytes CUDA detection failures on Windows while GPU is available.
+                kwargs["load_in_4bit"] = True
+                kwargs["bnb_4bit_quant_type"] = "nf4"
+                kwargs["bnb_4bit_use_double_quant"] = True
+                kwargs["bnb_4bit_compute_dtype"] = gpu_dtype
+                kwargs["device_map"] = "auto"
                 kwargs["torch_dtype"] = gpu_dtype
                 reason = "QLoRA training" if for_training else (
                     f"{gpu_total_vram_gb():.0f} GB VRAM < {GPU_16BIT_MIN_VRAM_GB:.0f} GB needed for 16-bit"
