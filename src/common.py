@@ -265,24 +265,39 @@ def select_load_mode(force_cpu: bool = False, for_training: bool = False) -> str
       * GPU with >= 18 GB VRAM      -> gpu-16bit (fastest inference, device_map="auto")
       * smaller GPU                 -> gpu-4bit  (~5 GB VRAM, fits laptop GPUs)
 
-    Set PILOT_GPU_MODE=16bit or PILOT_GPU_MODE=4bit to override the inference choice.
+    Set PILOT_GPU_MODE=16bit or PILOT_GPU_MODE=4bit or PILOT_GPU_MODE=gpu to override the inference choice.
     """
     try:
         import torch
     except ImportError:
         return MODE_CPU_BF16
-    if force_cpu or not torch.cuda.is_available():
+
+    # Check for GPU: CUDA or DirectML-based GPU (even if CUDA detection fails)
+    has_cuda = torch.cuda.is_available()
+    gpu_override = os.environ.get("PILOT_GPU_MODE", "").strip().lower()
+
+    if force_cpu:
         return MODE_CPU_BF16
+
+    # Allow forcing GPU training even if CUDA detection fails (e.g., DirectML)
+    if gpu_override == "gpu" or (not has_cuda and gpu_override in ("16bit", "4bit")):
+        log.info("GPU mode forced via PILOT_GPU_MODE=%r", gpu_override)
+        if for_training:
+            return MODE_GPU_4BIT
+        return MODE_GPU_16BIT if gpu_override == "16bit" else MODE_GPU_4BIT
+
+    if not has_cuda:
+        return MODE_CPU_BF16
+
     if for_training:
         return MODE_GPU_4BIT
 
-    override = os.environ.get("PILOT_GPU_MODE", "").strip().lower()
-    if override in ("16bit", "fp16", "bf16"):
+    if gpu_override in ("16bit", "fp16", "bf16"):
         return MODE_GPU_16BIT
-    if override == "4bit":
+    if gpu_override == "4bit":
         return MODE_GPU_4BIT
-    if override:
-        log.warning("Ignoring unknown PILOT_GPU_MODE=%r (use 16bit or 4bit).", override)
+    if gpu_override:
+        log.warning("Ignoring unknown PILOT_GPU_MODE=%r (use 16bit, 4bit, or gpu).", gpu_override)
     return MODE_GPU_16BIT if gpu_total_vram_gb() >= GPU_16BIT_MIN_VRAM_GB else MODE_GPU_4BIT
 
 
