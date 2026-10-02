@@ -458,23 +458,23 @@ def load_model(
                         if not os.environ.get("PILOT_GPU_MODE") else "PILOT_GPU_MODE=4bit")
                     description = f"GPU (4-bit NF4, {reason})"
                 else:
-                    # bitsandbytes not available or CUDA not detected: load full-precision on GPU instead.
-                    # This uses more VRAM but avoids bitsandbytes CUDA detection issues on Windows/DirectML.
+                    # bitsandbytes not available or CUDA not detected: load full-precision.
+                    # Note: device_map="auto" creates meta tensors that fail without CUDA, so skip it.
                     reason_parts = []
                     if not _bitsandbytes_available():
                         reason_parts.append("bitsandbytes not available")
                     if not cuda_available:
-                        reason_parts.append("CUDA not detected (e.g., DirectML)")
-                    reason = "; ".join(reason_parts) + "; full-precision fallback" if reason_parts else "full-precision fallback"
+                        reason_parts.append("CUDA not detected")
+                    reason = "; ".join(reason_parts) + "; full-precision" if reason_parts else "full-precision"
                     if not cuda_available:
-                        log.warning("CUDA not detected; loading full-precision on GPU instead of 4-bit. "
+                        log.warning("CUDA not detected; loading full-precision without device_map. "
                                     "This may be DirectML or another non-CUDA GPU backend.")
                     elif not _bitsandbytes_available():
-                        log.warning("bitsandbytes not available; loading full-precision on GPU instead of 4-bit. "
+                        log.warning("bitsandbytes not available; loading full-precision without device_map. "
                                     "Install bitsandbytes (pip install bitsandbytes) for 4-bit quantization.")
-                    kwargs["device_map"] = "auto"
+                    # Don't use device_map="auto" without CUDA - it creates meta tensors that break training
                     kwargs["torch_dtype"] = gpu_dtype
-                    description = f"GPU ({dtype_name}, device_map=auto, {reason}, {gpu_total_vram_gb():.0f} GB VRAM)"
+                    description = f"Full-precision ({dtype_name}, {reason})"
         log.info("Loading %s on %s ...", model_path, description)
 
         try:
