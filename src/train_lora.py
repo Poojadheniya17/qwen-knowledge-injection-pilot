@@ -211,9 +211,9 @@ def effective_warmup(requested: int, total_steps: int, allow_large: bool) -> int
 def main() -> None:
     args = parse_args()
 
-    if not cuda_available():
-        die("No CUDA GPU detected. QLoRA training needs an NVIDIA GPU (bitsandbytes 4-bit is GPU-only). "
-            "Run this script on the GPU laptop and copy the adapter/ folder back afterwards.")
+    # Allow GPU training with DirectML or CUDA (fp16 precision)
+    # CPU training is also allowed: full-precision LoRA (slower but works)
+    # Note: CUDA detection may fail even with GPU present, but training will auto-detect device
 
     try:
         import torch
@@ -241,7 +241,12 @@ def main() -> None:
 
     # 2. Model + LoRA ---------------------------------------------------------------
     model, tokenizer = load_model(args.model, for_training=True)
-    model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
+    # prepare_model_for_kbit_training only works with 4-bit quantized models (GPU)
+    # On CPU with full precision, skip it
+    if hasattr(model, 'quantization_config') and model.quantization_config is not None:
+        model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
+    else:
+        log.info("Model not quantized (CPU training). Skipping prepare_model_for_kbit_training.")
     lora_config = LoraConfig(
         r=args.lora_r,
         lora_alpha=args.lora_alpha,
@@ -266,7 +271,12 @@ def main() -> None:
     log.info("Effective batch %d -> %d optimiser steps/epoch, %d total, warmup %d.",
              args.batch_size * args.grad_accum, steps_per_epoch, total_steps, warmup)
 
-    bf16 = torch.cuda.is_bf16_supported()
+    # Use fp16 for GPU training (lower memory, faster), bf16 if supported
+    try:
+        bf16 = torch.cuda.is_bf16_supported()
+    except (AttributeError, RuntimeError):
+        bf16 = False  # CPU or GPU without bf16 support
+
     training_args = TrainingArguments(
         output_dir=str(DATA_DIR / "checkpoints"),
         num_train_epochs=args.epochs,
@@ -275,9 +285,9 @@ def main() -> None:
         gradient_accumulation_steps=args.grad_accum,
         warmup_steps=warmup,
         lr_scheduler_type="cosine",
-        optim="paged_adamw_8bit",
+        optim="adamw_torch",  # Regular AdamW (no bitsandbytes needed)
         bf16=bf16,
-        fp16=not bf16,
+        fp16=not bf16 and torch.cuda.is_available(),  # fp16 only on GPU
         gradient_checkpointing=True,
         logging_steps=1,
         save_strategy="no",           # adapter is saved explicitly at the end
