@@ -356,10 +356,18 @@ def resolve_model_path(model_id: str) -> str:
 
 
 def _bitsandbytes_available() -> bool:
-    """Check if bitsandbytes is installed and working."""
+    """Check if bitsandbytes is installed and working on GPU."""
     try:
         import bitsandbytes  # noqa: F401
-        return True
+        # Check if bitsandbytes was compiled with GPU support
+        # (it can be installed but compiled for CPU only, especially on Windows)
+        try:
+            import bitsandbytes.cuda_setup  # noqa: F401
+            # If cuda_setup imports, it was compiled with GPU support
+            return True
+        except Exception:
+            # bitsandbytes installed but not GPU-capable - treat as unavailable
+            return False
     except ImportError:
         return False
 
