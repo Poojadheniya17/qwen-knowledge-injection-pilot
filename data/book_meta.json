@@ -1,0 +1,10 @@
+{
+  "title": "The Stones of Venice, Volume 1 (of 3)",
+  "source_file": "data\\book_text.txt",
+  "characters": 899115,
+  "chapters": 33,
+  "sentences": 5123,
+  "candidates": 1438,
+  "units": 307,
+  "page_numbering": "estimated_1800_chars_per_page"
+}
