@@ -273,8 +273,8 @@ def main() -> None:
 
     # Use fp16 for GPU training (lower memory, faster), bf16 if supported
     try:
-        bf16 = torch.cuda.is_bf16_supported()
-    except (AttributeError, RuntimeError):
+        bf16 = torch.cuda.is_bf16_supported() if torch.cuda.is_available() else False
+    except (AttributeError, RuntimeError, AssertionError):
         bf16 = False  # CPU or GPU without bf16 support
 
     training_args = TrainingArguments(
